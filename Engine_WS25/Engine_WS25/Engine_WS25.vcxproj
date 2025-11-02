@@ -145,12 +145,15 @@ sfml-system.lib
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="IRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="IRenderComponent.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
