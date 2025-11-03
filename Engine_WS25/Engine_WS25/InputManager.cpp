@@ -9,8 +9,8 @@ InputManager& InputManager::GetInstance()
 void InputManager::Init(sf::Window& window)
 {
 	window.setKeyRepeatEnabled(false);
-	sf::Event::KeyPressed += OnKeyPressed;
-	sf::Event::KeyReleased += OnKeyReleased;
+	//sf::Event::KeyPressed += OnKeyPressed;
+	//sf::Event::KeyReleased += OnKeyReleased;
 
     isKeyDown.insert({ sf::Keyboard::Key::W, false });
     isKeyDown.insert({ sf::Keyboard::Key::A, false });

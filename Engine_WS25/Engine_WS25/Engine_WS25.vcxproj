@@ -140,20 +140,26 @@ sfml-system.lib
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationType.h" />
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="IComponent.h" />
+    <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="IRenderComponent.h" />
+    <ClInclude Include="RenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="IComponent.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="IRenderComponent.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

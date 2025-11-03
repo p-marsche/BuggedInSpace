@@ -28,12 +28,12 @@ void GameObject::Draw(sf::RenderWindow& window)
 }
 
 // add code to check for render-comp
-void GameObject::AddComponent(std::string compType, IComponent* comp)
+void GameObject::AddComponent(std::string compType, std::unique_ptr<IComponent> comp)
 {
 	if (m_components.find(compType) != m_components.end())
 		return;
 
-	m_components.insert({ compType, std::unique_ptr<IComponent>(comp) });
+	m_components.emplace(compType, std::move(comp));
 }
 
 // add code to check for render-comp

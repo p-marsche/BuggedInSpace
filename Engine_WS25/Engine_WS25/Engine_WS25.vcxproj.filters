@@ -31,6 +31,12 @@
     <Filter Include="Source Files\GameObjects">
       <UniqueIdentifier>{eb96c9c3-aec3-4d7f-8549-a26ceb9986a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameObjects\Components">
+      <UniqueIdentifier>{140f3203-5763-4836-8487-a92854c1c003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObjects\Components">
+      <UniqueIdentifier>{356c034c-39ce-4b1a-a286-080db99270c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -45,14 +51,23 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationType.h">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="IRenderComponent.h">
+    <ClInclude Include="IComponent.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectFactory.h">
       <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,10 +87,19 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="IComponent.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="IRenderComponent.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

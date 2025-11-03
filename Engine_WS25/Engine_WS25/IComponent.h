@@ -6,7 +6,7 @@ public:
 	IComponent();
 	virtual ~IComponent() = default;
 	int GetID() const { return m_ID; }
-	void virtual Update(float deltaTime);
+	void virtual Update(float deltaTime) { return; }
 
 private:
 	int m_ID;

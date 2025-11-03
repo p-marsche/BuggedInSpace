@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "IComponent.h"
-#include "IRenderComponent.h"
+#include "RenderComponent.h"
 
 class GameObject : sf::Transformable
 {
@@ -20,7 +20,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	// change to compType-enum templates later
-	void AddComponent(std::string compType, IComponent* comp);
+	void AddComponent(std::string compType, std::unique_ptr<IComponent> comp);
 	void RemoveComponent(std::string compType);
 
 private:
@@ -29,6 +29,6 @@ private:
 	std::map <std::string, std::unique_ptr<IComponent> > m_components;
 
 	// placeholder for now
-	std::vector<IRenderComponent> m_renderComps;
+	std::vector<RenderComponent> m_renderComps;
 };
 
