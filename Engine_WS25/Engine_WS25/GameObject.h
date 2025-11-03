@@ -20,15 +20,12 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	// change to compType-enum templates later
-	void AddComponent(std::string compType, std::unique_ptr<IComponent> comp);
-	void RemoveComponent(std::string compType);
+	void AddComponent(ComponentType compType, std::shared_ptr<IComponent> comp);
+	void RemoveComponent(ComponentType compType);
 
 private:
 	int m_ID;
 	static int m_nextID;
-	std::map <std::string, std::unique_ptr<IComponent> > m_components;
-
-	// placeholder for now
-	std::vector<RenderComponent> m_renderComps;
+	std::map <ComponentType, std::shared_ptr<IComponent> > m_components;
 };
 

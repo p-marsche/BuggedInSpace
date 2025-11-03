@@ -17,18 +17,15 @@ void GameObject::Update(float deltaTime)
 
 void GameObject::Draw(sf::RenderWindow& window)
 {
-	if (m_renderComps.empty())
+	auto rend = m_components.find(ComponentType::Render);
+	if (rend == m_components.end())
 		return;
 
-	for (auto& render : m_renderComps)
-	{
-		render.Draw(window);
-	}
-	// need RenderComponent for useful implementation
+	auto renderComp = std::dynamic_pointer_cast<RenderComponent>(rend->second);
+	renderComp->Draw(window);
 }
 
-// add code to check for render-comp
-void GameObject::AddComponent(std::string compType, std::unique_ptr<IComponent> comp)
+void GameObject::AddComponent(ComponentType compType, std::shared_ptr<IComponent> comp)
 {
 	if (m_components.find(compType) != m_components.end())
 		return;
@@ -36,8 +33,7 @@ void GameObject::AddComponent(std::string compType, std::unique_ptr<IComponent> 
 	m_components.emplace(compType, std::move(comp));
 }
 
-// add code to check for render-comp
-void GameObject::RemoveComponent(std::string compType)
+void GameObject::RemoveComponent(ComponentType compType)
 {
 	if (m_components.find(compType) == m_components.end())
 		return;

@@ -1,9 +1,11 @@
 #pragma once
 
+#include "ComponentTypeEnum.h"
+
 class IComponent
 {
 public:
-	IComponent();
+	IComponent(ComponentType compType);
 	virtual ~IComponent() = default;
 	int GetID() const { return m_ID; }
 	void virtual Update(float deltaTime) { return; }
@@ -11,4 +13,5 @@ public:
 private:
 	int m_ID;
 	static int s_nextID;
+	ComponentType m_compType;
 };

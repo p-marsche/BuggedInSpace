@@ -2,7 +2,8 @@
 
 int IComponent::s_nextID = 0;
 
-IComponent::IComponent()
-	: m_ID(s_nextID++)
+IComponent::IComponent(ComponentType compType)
+	: m_ID(s_nextID++),
+	m_compType(compType)
 {
 }

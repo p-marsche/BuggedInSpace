@@ -1,7 +1,8 @@
 #include "RenderComponent.h"
 
 RenderComponent::RenderComponent(sf::Texture& texture)
-	: m_sprite(texture)
+	: m_sprite(texture),
+	IComponent(ComponentType::Render)
 {
 }
 

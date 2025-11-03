@@ -8,5 +8,6 @@ public:
     ~InputComponent() = default;
 
 private:
+    int m_playerNumber;
 };
 

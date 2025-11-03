@@ -141,6 +141,7 @@ sfml-system.lib
   <ItemGroup>
     <ClInclude Include="AnimationType.h" />
     <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="ComponentTypeEnum.h" />
     <ClInclude Include="DebugDraw.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

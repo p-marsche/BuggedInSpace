@@ -1,4 +1,5 @@
 #include "GameObjectFactory.h"
+#include "ComponentTypeEnum.h"
 
 GameObjectFactory& GameObjectFactory::GetInstance()
 {
@@ -9,7 +10,7 @@ GameObjectFactory& GameObjectFactory::GetInstance()
 std::unique_ptr<GameObject> GameObjectFactory::CreatePlayer(int playerNumber)
 {
 	auto player = std::make_unique<GameObject>();
-	//player->AddComponent("Render", ComponentFactory::GetInstance().CreateRenderComponent(--insert asset here--);
-	player->AddComponent("Input", ComponentFactory::GetInstance().CreateInputComponent(1));
+	//player->AddComponent(ComponentType::Render, ComponentFactory::GetInstance().CreateRenderComponent(--insert asset here--);
+	player->AddComponent(ComponentType::Input, ComponentFactory::GetInstance().CreateInputComponent(1));
 	return player;
 }
