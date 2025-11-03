@@ -17,21 +17,23 @@ class Game
 public:
 	Game();
 	void Run();
+
 private:
 	void CloseGame();
+	void ResizeWindow(int width, int height);
 	void Initialize();
 	void HandleEvents();
 	void Update(float deltaTime);
 	void Draw();
 
-	const int WIDTH = 640;
-	const int HEIGHT = 360;
+	const int WIDTH;
+	const int HEIGHT;
+	const float ASPECTRATIO;
 	const std::string TITLE = "Engine_WS25";
-	sf::Clock clock;
-	std::unique_ptr<sf::VideoMode> mode = std::make_unique<sf::VideoMode>(WIDTH, HEIGHT);
-	std::shared_ptr<sf::RenderWindow> window;
-	std::vector<std::shared_ptr<GameObject> > gameObjects;
-	// replace std::string with an enum of important go's (player(s), etc)
-	std::unordered_map<std::string, int> goToIndex;
+	sf::Clock m_clock;
+	std::unique_ptr<sf::RenderWindow> m_window;
+	std::vector<std::shared_ptr<GameObject> > m_gameObjects;
+	// replace std::string with an enum of important go's (player(s), etc)?
+	std::unordered_map<std::string, int> m_goToIndex;
 };
 
