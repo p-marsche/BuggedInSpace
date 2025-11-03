@@ -2,7 +2,7 @@
 #include <iostream>
 #include <memory>
 
-static int Main()
+int main()
 {
 	std::cout << "Press ESC key to close window" << std::endl;
 	std::unique_ptr<Game> game = std::make_unique<Game>();
