@@ -1,16 +1,18 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "GameObjectFactory.h"
+#include "InputManager.h"
 
 Game::Game()
 	: WIDTH(640)
 	, HEIGHT(360)
-	, ASPECTRATIO(WIDTH/HEIGHT)
 	, TITLE("Engine_WS25")
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
 {
 	m_window->setFramerateLimit(60);
+	m_window->setKeyRepeatEnabled(false);
+	m_aspectRatio = static_cast<float>(WIDTH / HEIGHT);
 }
 
 void Game::Run()
@@ -20,6 +22,7 @@ void Game::Run()
 
 	while (m_window->isOpen())
 	{
+		InputManager::GetInstance().Update();
 		HandleEvents();
 
 		deltaTime = m_clock.restart().asSeconds();
@@ -48,6 +51,13 @@ void Game::HandleEvents()
 				break;
 			case sf::Event::Resized:
 				ResizeWindow(event.size.width, event.size.height);
+				break;
+			case sf::Event::KeyPressed:
+				InputManager::GetInstance().OnKeyPressed(event.key.code);
+				break;
+			case sf::Event::KeyReleased:
+				InputManager::GetInstance().OnKeyReleased(event.key.code);
+				break;
 		}
 	}
 }
@@ -78,7 +88,7 @@ void Game::ResizeWindow(int width, int height)
 {
 	float newRatio = static_cast<float>(width / height);
 
-	if (abs(newRatio - ASPECTRATIO) < 0.05f)
+	if (abs(newRatio - m_aspectRatio) < 0.05f)
 		return;
 
 	float newWidth = 1.f;
@@ -86,14 +96,14 @@ void Game::ResizeWindow(int width, int height)
 	float newViewX = 0.f;
 	float newViewY = 0.f;
 
-	if (ASPECTRATIO > newRatio)
+	if (m_aspectRatio > newRatio)
 	{
-		newHeight = newRatio / ASPECTRATIO;
+		newHeight = newRatio / m_aspectRatio;
 		newViewY = (1.f - newHeight) / 2.f;
 	}
 	else
 	{
-		newWidth = ASPECTRATIO / newRatio;
+		newWidth = m_aspectRatio / newRatio;
 		newViewX = (1.f - newWidth) / 2.f;
 	}
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "InputManager.h"
 
 InputManager& InputManager::GetInstance()
@@ -6,51 +8,126 @@ InputManager& InputManager::GetInstance()
 	return m_instance;
 }
 
+// Refactor to Input-Mapping at some point
+
 void InputManager::Init(sf::Window& window)
 {
-	window.setKeyRepeatEnabled(false);
-	//sf::Event::KeyPressed += OnKeyPressed;
-	//sf::Event::KeyReleased += OnKeyReleased;
+    m_inputsPlayer1.emplace(InputEnum::Up, sf::Keyboard::Key::W);
+    m_inputsPlayer1.emplace(InputEnum::Left, sf::Keyboard::Key::A);
+    m_inputsPlayer1.emplace(InputEnum::Down, sf::Keyboard::Key::S);
+    m_inputsPlayer1.emplace(InputEnum::Right, sf::Keyboard::Key::D);
+    m_inputsPlayer1.emplace(InputEnum::Shoot, sf::Keyboard::Key::Space);
 
-    isKeyDown.insert({ sf::Keyboard::Key::W, false });
-    isKeyDown.insert({ sf::Keyboard::Key::A, false });
-    isKeyDown.insert({ sf::Keyboard::Key::S, false });
-    isKeyDown.insert({ sf::Keyboard::Key::D, false });
+    m_inputsPlayer2.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
+    m_inputsPlayer2.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
+    m_inputsPlayer2.emplace(InputEnum::Down, sf::Keyboard::Key::Down);
+    m_inputsPlayer2.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
+    m_inputsPlayer2.emplace(InputEnum::Shoot, sf::Keyboard::Key::Num0);
 
-    isKeyUp.insert({ sf::Keyboard::Key::W, false });
-    isKeyUp.insert({ sf::Keyboard::Key::A, false });
-    isKeyUp.insert({ sf::Keyboard::Key::S, false });
-    isKeyUp.insert({ sf::Keyboard::Key::D, false });
+    for (auto& [_, key] : m_inputsPlayer1)
+    {
+        m_isKeyDown.emplace(key, false);
+        m_isKeyUp.emplace(key, false);
+        m_isKeyPressed.emplace(key, false);
+    }
 
-    isKeyPressed.insert({ sf::Keyboard::Key::W, false });
-    isKeyPressed.insert({ sf::Keyboard::Key::A, false });
-    isKeyPressed.insert({ sf::Keyboard::Key::S, false });
-    isKeyPressed.insert({ sf::Keyboard::Key::D, false });
+    for (auto& [_, key] : m_inputsPlayer2)
+    {
+        m_isKeyDown.emplace(key, false);
+        m_isKeyUp.emplace(key, false);
+        m_isKeyPressed.emplace(key, false);
+    }
 }
 
 void InputManager::Update()
 {
-    for (auto& [_, flag] : isKeyDown)
-        flag = false;
-
-    for (auto& [_, flag] : isKeyUp)
+    for (auto& [_, flag] : m_isKeyPressed)
         flag = false;
 }
 
-bool InputManager::GetKeyDown(sf::Keyboard::Key key)
+bool InputManager::GetKeyDown(InputEnum input, int player)
 {
-    return (isKeyDown.find(key) != isKeyDown.end()) ? isKeyDown[key] : false;
+    if (player != 1 && player != 2)
+        return false;
+
+    if (player == 1)
+    {
+        auto result = m_inputsPlayer1.find(input);
+        if (result == m_inputsPlayer1.end())
+            return false;
+
+        return m_isKeyDown.at(result->second);
+    }
+    else
+    {
+        auto result = m_inputsPlayer2.find(input);
+        if (result == m_inputsPlayer2.end())
+            return false;
+
+        return m_isKeyDown.at(result->second);
+    }
 }
 
-bool InputManager::GetKeyUp(sf::Keyboard::Key key)
+bool InputManager::GetKeyUp(InputEnum input, int player)
 {
-    return (isKeyUp.find(key) != isKeyUp.end()) ? isKeyUp[key] : false;
+    if (player != 1 && player != 2)
+        return false;
+
+    if (player == 1)
+    {
+        auto result = m_inputsPlayer1.find(input);
+        if (result == m_inputsPlayer1.end())
+            return false;
+
+        return m_isKeyUp.at(result->second);
+    }
+    else
+    {
+        auto result = m_inputsPlayer2.find(input);
+        if (result == m_inputsPlayer2.end())
+            return false;
+
+        return m_isKeyUp.at(result->second);
+    }
 }
 
-bool InputManager::GetKeyPressed(sf::Keyboard::Key key)
+bool InputManager::GetKeyPressed(InputEnum input, int player)
 {
-    return (isKeyPressed.find(key) != isKeyPressed.end()) ? isKeyPressed[key] : false;
+    if (player != 1 && player != 2)
+        return false;
+
+    if (player == 1)
+    {
+        auto result = m_inputsPlayer1.find(input);
+        if (result == m_inputsPlayer1.end())
+            return false;
+
+        return m_isKeyPressed.at(result->second);
+    }
+    else
+    {
+        auto result = m_inputsPlayer2.find(input);
+        if (result == m_inputsPlayer2.end())
+            return false;
+
+        return m_isKeyPressed.at(result->second);
+    }
 }
 
-void InputManager::OnKeyPressed() { }
-void InputManager::OnKeyReleased() { }
+void InputManager::OnKeyPressed(sf::Keyboard::Key key) 
+{ 
+    if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
+        return;
+
+    m_isKeyPressed.at(key) = true;
+    m_isKeyDown.at(key) = true;
+    m_isKeyUp.at(key) = false;
+}
+void InputManager::OnKeyReleased(sf::Keyboard::Key key) 
+{
+    if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
+        return;
+
+    m_isKeyDown.at(key) = false;
+    m_isKeyUp.at(key) = true;
+}

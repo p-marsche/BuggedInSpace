@@ -1,8 +1,11 @@
 #pragma once
 
+#include <map>
+#include <unordered_map>
+
 #include <SFML/Window.hpp>
 
-#include <unordered_map>
+#include "InputEnum.h"
 
 class InputManager
 {
@@ -10,9 +13,11 @@ public:
     static InputManager& GetInstance();
     void Init(sf::Window& window);
     void Update();
-    bool GetKeyDown(sf::Keyboard::Key key);
-    bool GetKeyUp(sf::Keyboard::Key key);
-    bool GetKeyPressed(sf::Keyboard::Key key);
+    void OnKeyPressed(sf::Keyboard::Key);
+    void OnKeyReleased(sf::Keyboard::Key);
+    bool GetKeyDown(InputEnum input, int player);
+    bool GetKeyUp(InputEnum input, int player);
+    bool GetKeyPressed(InputEnum input, int player);
 
 private:
     InputManager() = default;
@@ -20,11 +25,10 @@ private:
     InputManager(const InputManager& rhv) = delete;
     InputManager& operator=(InputManager const&) = delete;
 
-    void OnKeyPressed();
-    void OnKeyReleased();
-
-    std::unordered_map<sf::Keyboard::Key, bool> isKeyDown;
-    std::unordered_map<sf::Keyboard::Key, bool> isKeyUp;
-    std::unordered_map<sf::Keyboard::Key, bool> isKeyPressed;
+    std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer1;
+    std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer2;
+    std::map<sf::Keyboard::Key, bool> m_isKeyDown;
+    std::map<sf::Keyboard::Key, bool> m_isKeyUp;
+    std::map<sf::Keyboard::Key, bool> m_isKeyPressed;
 };
 

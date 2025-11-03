@@ -72,6 +72,9 @@
     <ClInclude Include="ComponentTypeEnum.h">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
+    <ClInclude Include="InputEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">

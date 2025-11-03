@@ -28,7 +28,7 @@ private:
 
 	const int WIDTH;
 	const int HEIGHT;
-	const float ASPECTRATIO;
+	float m_aspectRatio;
 	const std::string TITLE = "Engine_WS25";
 	sf::Clock m_clock;
 	std::unique_ptr<sf::RenderWindow> m_window;

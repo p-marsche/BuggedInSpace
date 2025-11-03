@@ -148,6 +148,7 @@ sfml-system.lib
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputEnum.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="RenderComponent.h" />
   </ItemGroup>
