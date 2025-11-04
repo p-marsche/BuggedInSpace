@@ -14,7 +14,7 @@ struct SpriteSheet
 	const int TILING_Y;
 	const std::vector<int> numberAnimationFrames;
 
-	SpriteSheet(std::shared_ptr<sf::Texture> texture, int x, int y, std::vector<int> numberAnimationFrames)
+	SpriteSheet(const std::shared_ptr<sf::Texture> texture, int x, int y, const std::vector<int>& numberAnimationFrames)
 		: sheetTexture(texture)
 		, TILING_X(x)
 		, TILING_Y(y)
