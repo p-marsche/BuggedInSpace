@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "GameObjectFactory.h"
 #include "InputManager.h"
+#include "AssetManager.h"
 
 Game::Game()
 	: WIDTH(640)
