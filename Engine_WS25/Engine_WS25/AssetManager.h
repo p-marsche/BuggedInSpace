@@ -5,6 +5,11 @@
 #include <vector>
 #include <memory>
 
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+#include "SpriteSheet.h"
+
 // predeclarations for used classes
 namespace sf
 {

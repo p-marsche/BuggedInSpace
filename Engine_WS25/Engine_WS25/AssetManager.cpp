@@ -1,7 +1,4 @@
 #include "AssetManager.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include "SpriteSheet.h"
 
 AssetNotFoundException::AssetNotFoundException() { m_text = ""; }
 AssetNotFoundException::AssetNotFoundException(std::string message) : m_text(message) {}
@@ -52,7 +49,7 @@ void AssetManager::loadImage(std::string name, std::string filename)
 
 sf::Texture& AssetManager::getTexture(std::string name)
 {
-	if (std::find(m_textures.begin(), m_textures.end(), name) != m_textures.end())
+	if (m_textures.find(name) != m_textures.end())
 		return *m_textures[name];
 	else
 		throw new AssetNotFoundException("The texture '{name}' could not be found!");
@@ -60,7 +57,7 @@ sf::Texture& AssetManager::getTexture(std::string name)
 
 sf::SoundBuffer& AssetManager::getSoundBuffer(std::string name)
 {
-	if (std::find(m_soundBuffers.begin(), m_soundBuffers.end(), name) != m_soundBuffers.end())
+	if (m_soundBuffers.find(name) != m_soundBuffers.end())
 		return *m_soundBuffers[name];
 	else
 		throw new AssetNotFoundException("The sound buffer '{name}' could not be found!");
@@ -68,7 +65,7 @@ sf::SoundBuffer& AssetManager::getSoundBuffer(std::string name)
 
 sf::Font& AssetManager::getFont(std::string name)
 {
-	if (std::find(m_fonts.begin(), m_fonts.end(), name) != m_fonts.end())
+	if (m_fonts.find(name) != m_fonts.end())
 		return *m_fonts[name];
 	else
 		throw new AssetNotFoundException("The font '{name}' could not be found!");
@@ -76,7 +73,7 @@ sf::Font& AssetManager::getFont(std::string name)
 
 sf::Music& AssetManager::getMusic(std::string name)
 {
-	if (std::find(m_music.begin(), m_music.end(), name) != m_music.end())
+	if (m_music.find(name) != m_music.end())
 		return *m_music[name];
 	else
 		throw new AssetNotFoundException("The music file '{name}' could not be found!");
@@ -84,7 +81,7 @@ sf::Music& AssetManager::getMusic(std::string name)
 
 sf::Image& AssetManager::getImage(std::string name)
 {
-	if (std::find(m_images.begin(), m_images.end(), name) != m_images.end())
+	if (m_images.find(name) != m_images.end())
 		return *m_images[name];
 	else
 		throw new AssetNotFoundException("The image file '{name}' could not be found!");
@@ -92,7 +89,7 @@ sf::Image& AssetManager::getImage(std::string name)
 
 SpriteSheet& AssetManager::getSpriteSheet(std::string name)
 {
-	if (std::find(m_spriteSheets.begin(), m_spriteSheets.end(), name) != m_spriteSheets.end())
+	if (m_spriteSheets.find(name) != m_spriteSheets.end())
 		return *m_spriteSheets[name];
 	else
 		throw new AssetNotFoundException("The sprite sheet '{name}' could not be found!");
