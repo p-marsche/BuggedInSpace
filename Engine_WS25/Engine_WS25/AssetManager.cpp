@@ -18,25 +18,25 @@ AssetManager& AssetManager::instance()
 
 void AssetManager::loadTexture(std::string name, std::string filename)
 {
-	m_textures.insert({ name, std::make_unique<sf::Texture>() });
+	m_textures.emplace(name, std::make_unique<sf::Texture>());
 	m_textures[name]->loadFromFile("./Assets/Textures/" + filename); //< somehow make more configurable location. config file/class with consts?
 }
 
 void AssetManager::loadSoundBuffer(std::string name, std::string filename)
 {
-	m_soundBuffers.insert({ name, std::make_unique<sf::SoundBuffer>() });
+	m_soundBuffers.emplace(name, std::make_unique<sf::SoundBuffer>());
 	m_soundBuffers[name]->loadFromFile(".Assets/Sounds/" + filename);
 }
 
 void AssetManager::loadFont(std::string name, std::string filename)
 {
-	m_fonts.insert({ name,std::make_unique<sf::Font>() });
+	m_fonts.emplace(name,std::make_unique<sf::Font>());
 	m_fonts[name]->loadFromFile("./Assets/Fonts/" + filename);
 }
 
 void AssetManager::loadMusic(std::string name, std::string filename)
 {
-	m_music.insert({ name, std::make_unique<sf::Music>() });
+	m_music.emplace(name, std::make_unique<sf::Music>());
 	m_music[name]->openFromFile("./Assets/Music" + filename);
 }
 
@@ -44,12 +44,12 @@ void AssetManager::loadSpriteSheet(std::string name, std::string filename, int t
 {
 	auto texture(std::make_shared<sf::Texture>());
 	texture->loadFromFile("./Assets/SpriteSheets/" + filename);
-	m_spriteSheets.insert({ name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames) });
+	m_spriteSheets.emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
 }
 
 void AssetManager::loadImage(std::string name, std::string filename)
 {
-	m_images.insert({ name, std::make_unique<sf::Image>() });
+	m_images.emplace(name, std::make_unique<sf::Image>());
 	m_images[name]->loadFromFile("./Assets/Images/" + filename);
 }
 
