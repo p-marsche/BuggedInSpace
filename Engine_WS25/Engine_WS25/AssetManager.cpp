@@ -10,6 +10,12 @@ const char* AssetNotFoundException::what() const noexcept
 }
 
 
+AssetManager& AssetManager::instance()
+{
+	static AssetManager assetManager;
+	return assetManager;
+}
+
 void AssetManager::loadTexture(std::string name, std::string filename)
 {
 	m_textures.insert({ name, std::make_unique<sf::Texture>() });

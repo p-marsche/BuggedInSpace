@@ -47,11 +47,7 @@ private:
     ~AssetManager() {}
 
 public:
-    static AssetManager& instance()
-    {
-        static AssetManager assetManager;
-        return assetManager;
-    }
+    static AssetManager& instance();
 
     AssetManager(const AssetManager&) = delete;
     AssetManager& operator = (const AssetManager&) = delete;
