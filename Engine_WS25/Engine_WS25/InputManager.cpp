@@ -8,9 +8,7 @@ InputManager& InputManager::GetInstance()
 	return m_instance;
 }
 
-// Refactor to Input-Mapping at some point
-
-void InputManager::Init(sf::Window& window)
+void InputManager::Init()
 {
     m_inputsPlayer1.emplace(InputEnum::Up, sf::Keyboard::Key::W);
     m_inputsPlayer1.emplace(InputEnum::Left, sf::Keyboard::Key::A);

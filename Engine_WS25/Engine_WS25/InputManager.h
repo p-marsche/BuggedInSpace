@@ -11,7 +11,7 @@ class InputManager
 {
 public:
     static InputManager& GetInstance();
-    void Init(sf::Window& window);
+    void Init();
     void Update();
     void OnKeyPressed(sf::Keyboard::Key);
     void OnKeyReleased(sf::Keyboard::Key);

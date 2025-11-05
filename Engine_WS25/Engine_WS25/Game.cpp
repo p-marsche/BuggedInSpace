@@ -33,8 +33,11 @@ void Game::Run()
 
 void Game::Initialize()
 {
+	InputManager::GetInstance().Init();
+
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(1));
+
 	m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));
 }
@@ -110,4 +113,27 @@ void Game::ResizeWindow(int width, int height)
 	sf::View view = m_window->getView();
 	view.setViewport(sf::FloatRect({ newViewX, newViewY }, { newWidth, newHeight }));
 	m_window->setView(view);
+}
+
+void Game::RemoveGameObject(std::string name)
+{
+	auto res = m_goToIndex.find(name);
+	if (res == m_goToIndex.end())
+		return;
+
+	// replace found object with last object in vec, then remove last object
+	m_gameObjects.at(res->second) = m_gameObjects.back();
+	m_gameObjects.pop_back();
+	
+
+	// find former last object, change its index(=value) to the new index(=value of searched object)
+	for (auto& [key, val] : m_goToIndex)
+	{
+		if (val == m_gameObjects.size())
+		{
+			m_goToIndex.at(key) = res->second;
+			m_goToIndex.erase(name);
+			break;
+		}
+	}
 }

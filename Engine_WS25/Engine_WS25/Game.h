@@ -25,6 +25,8 @@ private:
 	void HandleEvents();
 	void Update(float deltaTime);
 	void Draw();
+	void RemoveGameObject(std::string name);
+
 
 	const int WIDTH;
 	const int HEIGHT;

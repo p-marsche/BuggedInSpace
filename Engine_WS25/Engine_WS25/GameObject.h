@@ -19,7 +19,6 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window);
 
-	// change to compType-enum templates later
 	void AddComponent(ComponentType compType, std::shared_ptr<IComponent> comp);
 	void RemoveComponent(ComponentType compType);
 
