@@ -1,6 +1,6 @@
 #pragma once
 
-#include <map> 
+#include <unordered_map> 
 #include <vector>
 #include <string>
 #include <memory>
@@ -9,6 +9,7 @@
 
 #include "IComponent.h"
 #include "RenderComponent.h"
+#include "InputComponent.h"
 
 class GameObject : sf::Transformable
 {
@@ -25,6 +26,6 @@ public:
 private:
 	int m_ID;
 	static int m_nextID;
-	std::map <ComponentType, std::shared_ptr<IComponent> > m_components;
+	std::unordered_map <ComponentType, std::shared_ptr<IComponent> > m_components;
 };
 

@@ -75,6 +75,9 @@
     <ClInclude Include="InputEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="VectorUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -106,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorUtils.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
