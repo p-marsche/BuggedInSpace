@@ -37,6 +37,12 @@
     <Filter Include="Source Files\GameObjects\Components">
       <UniqueIdentifier>{356c034c-39ce-4b1a-a286-080db99270c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{780a3aee-1964-4c81-85e4-5a4703412351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States">
+      <UniqueIdentifier>{592f1bbd-492a-47fc-966d-478c7e9f7bcb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -75,8 +81,22 @@
     <ClInclude Include="InputEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="VectorUtils.h">
       <Filter>Header Files</Filter>
+=======
+    <ClInclude Include="AssetManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteSheet.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ErrorWindow.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Header Files\Managers</Filter>
+>>>>>>> working
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,8 +130,25 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="VectorUtils.cpp">
       <Filter>Source Files</Filter>
+=======
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorWindow.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.h">
+      <Filter>Header Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\States</Filter>
+>>>>>>> working
     </ClCompile>
   </ItemGroup>
 </Project>

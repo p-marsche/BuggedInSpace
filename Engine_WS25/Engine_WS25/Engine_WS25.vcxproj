@@ -140,25 +140,37 @@ sfml-system.lib
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimationType.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentTypeEnum.h" />
     <ClInclude Include="DebugDraw.h" />
+    <ClInclude Include="ErrorWindow.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputEnum.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="RenderComponent.h" />
+<<<<<<< HEAD
     <ClInclude Include="VectorUtils.h" />
+=======
+    <ClInclude Include="SpriteSheet.h" />
+>>>>>>> working
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
+    <ClCompile Include="ErrorWindow.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameState.h" />
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />

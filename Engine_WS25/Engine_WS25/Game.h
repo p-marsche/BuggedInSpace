@@ -37,5 +37,7 @@ private:
 	std::vector<std::shared_ptr<GameObject> > m_gameObjects;
 	// replace std::string with an enum of important go's (player(s), etc)?
 	std::unordered_map<std::string, int> m_goToIndex;
+	// ==> wouldn't it be better to just have important GOs as seperate references?
+	// or could also get rid of the vector and just use a map with strings/enums as key and GO as value
 };
 
