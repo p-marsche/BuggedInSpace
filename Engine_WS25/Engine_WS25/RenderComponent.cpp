@@ -4,6 +4,7 @@ RenderComponent::RenderComponent(sf::Texture& texture)
 	: m_sprite(texture),
 	IComponent(ComponentType::Render)
 {
+	m_sprite.setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
 }
 
 void RenderComponent::Update(float deltaTime) 

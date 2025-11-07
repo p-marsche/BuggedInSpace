@@ -116,7 +116,7 @@ void InputManager::OnKeyPressed(sf::Keyboard::Key key)
 { 
     if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
         return;
-
+    
     m_isKeyPressed.at(key) = true;
     m_isKeyDown.at(key) = true;
     m_isKeyUp.at(key) = false;

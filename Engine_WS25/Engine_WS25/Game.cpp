@@ -4,8 +4,8 @@
 #include "InputManager.h"
 
 Game::Game()
-	: WIDTH(640)
-	, HEIGHT(360)
+	: WIDTH(1280)
+	, HEIGHT(720)
 	, TITLE("Engine_WS25")
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
@@ -38,8 +38,8 @@ void Game::Initialize()
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(1));
 
-	m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));
+	/*m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
+	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));*/
 }
 
 void Game::HandleEvents()

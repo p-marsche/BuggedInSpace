@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include <iostream>
 
 int GameObject::m_nextID = 0;
 
@@ -9,10 +10,18 @@ GameObject::GameObject()
 
 void GameObject::Update(float deltaTime)
 {
-	for (auto& [_, comp] : m_components)
+	for (auto& [ctype, comp] : m_components)
 	{
 		comp->Update(deltaTime);
+		if (ctype == ComponentType::Input)
+		{
+			auto input = std::dynamic_pointer_cast<InputComponent>(comp);
+			sf::Vector2f movement = input->GetMoveInput();
+			movement = { movement.x * 1, movement.y * 1 };
+			this->setPosition(this->getPosition() + movement);
+		}
 	}
+
 }
 
 void GameObject::Draw(sf::RenderWindow& window)
@@ -22,6 +31,7 @@ void GameObject::Draw(sf::RenderWindow& window)
 		return;
 
 	auto renderComp = std::dynamic_pointer_cast<RenderComponent>(rend->second);
+	renderComp->SetSpritePosition(this->getPosition());
 	renderComp->Draw(window);
 }
 
