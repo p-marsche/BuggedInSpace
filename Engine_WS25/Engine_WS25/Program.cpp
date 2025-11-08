@@ -10,7 +10,7 @@ int main()
 	{
 		std::cout << "Press ESC key to close window" << std::endl;
 		std::unique_ptr<Game> game = std::make_unique<Game>();
-		game->Run();
+		game->run();
 		std::cout << "All done" << std::endl;
 	}
 	catch (std::exception e)

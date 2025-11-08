@@ -10,8 +10,8 @@ class InputComponent :
 public:
     InputComponent(int playerNumber);
     ~InputComponent() = default;
-    void Update(float deltaTime) override;
-    sf::Vector2f GetMoveInput() { return m_moveInput; }
+    void update(float deltaTime) override;
+    sf::Vector2f getMoveInput() { return m_moveInput; }
 
 private:
     int m_playerNumber;

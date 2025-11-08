@@ -16,16 +16,16 @@ class Game
 {
 public:
 	Game();
-	void Run();
+	void run();
 
 private:
-	void CloseGame();
-	void ResizeWindow(int width, int height);
-	void Initialize();
-	void HandleEvents();
-	void Update(float deltaTime);
-	void Draw();
-	void RemoveGameObject(std::string name);
+	void closeGame();
+	void resizeWindow(int width, int height);
+	void initialize();
+	void handleEvents();
+	void update(float deltaTime);
+	void draw();
+	void removeGameObject(std::string name);
 
 
 	const int WIDTH;

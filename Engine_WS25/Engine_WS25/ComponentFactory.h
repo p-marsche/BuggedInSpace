@@ -8,9 +8,9 @@
 class ComponentFactory
 {
 public:
-	static ComponentFactory& GetInstance();
-    std::shared_ptr<RenderComponent> CreateRenderComponent(sf::Texture& texture);
-    std::shared_ptr<InputComponent> CreateInputComponent(int playerNumber);
+	static ComponentFactory& getInstance();
+    std::shared_ptr<RenderComponent> createRenderComponent(sf::Texture& texture);
+    std::shared_ptr<InputComponent> createInputComponent(int playerNumber);
 
 private:
     ComponentFactory() = default;

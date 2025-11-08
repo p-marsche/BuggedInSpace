@@ -15,13 +15,11 @@ class GameObject : sf::Transformable
 {
 public:
 	GameObject();
-	int GetID() const { return m_ID; }
-
-	void Update(float deltaTime);
-	void Draw(sf::RenderWindow& window);
-
-	void AddComponent(ComponentType compType, std::shared_ptr<IComponent> comp);
-	void RemoveComponent(ComponentType compType);
+	int getID() const { return m_ID; }
+	void update(float deltaTime);
+	void draw(sf::RenderWindow& window);
+	void addComponent(ComponentType compType, std::shared_ptr<IComponent> comp);
+	void removeComponent(ComponentType compType);
 
 private:
 	int m_ID;

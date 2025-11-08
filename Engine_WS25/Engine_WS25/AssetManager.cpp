@@ -10,7 +10,7 @@ const char* AssetNotFoundException::what() const noexcept
 }
 
 
-AssetManager& AssetManager::instance()
+AssetManager& AssetManager::getInstance()
 {
 	static AssetManager assetManager;
 	return assetManager;

@@ -7,8 +7,8 @@ class IComponent
 public:
 	IComponent(ComponentType compType);
 	virtual ~IComponent() = default;
-	int GetID() const { return m_ID; }
-	void virtual Update(float deltaTime) { return; }
+	int getID() const { return m_ID; }
+	void virtual update(float deltaTime) { return; }
 
 private:
 	int m_ID;

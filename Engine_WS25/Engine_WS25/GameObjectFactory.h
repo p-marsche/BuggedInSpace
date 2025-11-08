@@ -8,8 +8,8 @@
 class GameObjectFactory
 {
 public:
-    static GameObjectFactory& GetInstance();
-    std::unique_ptr<GameObject> CreatePlayer(int playerNumber);
+    static GameObjectFactory& getInstance();
+    std::unique_ptr<GameObject> createPlayer(int playerNumber);
 
 private:
     GameObjectFactory() = default;

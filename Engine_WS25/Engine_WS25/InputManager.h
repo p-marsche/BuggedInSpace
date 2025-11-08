@@ -10,14 +10,14 @@
 class InputManager
 {
 public:
-    static InputManager& GetInstance();
-    void Init();
-    void Update();
-    void OnKeyPressed(sf::Keyboard::Key);
-    void OnKeyReleased(sf::Keyboard::Key);
-    bool GetKeyDown(InputEnum input, int player);
-    bool GetKeyUp(InputEnum input, int player);
-    bool GetKeyPressed(InputEnum input, int player);
+    static InputManager& getInstance();
+    void init();
+    void update();
+    void onKeyPressed(sf::Keyboard::Key);
+    void onKeyReleased(sf::Keyboard::Key);
+    bool getKeyDown(InputEnum input, int player);
+    bool getKeyUp(InputEnum input, int player);
+    bool getKeyPressed(InputEnum input, int player);
 
 private:
     InputManager() = default;

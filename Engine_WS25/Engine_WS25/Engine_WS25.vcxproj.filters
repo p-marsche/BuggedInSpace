@@ -19,9 +19,6 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VectorUtils.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
