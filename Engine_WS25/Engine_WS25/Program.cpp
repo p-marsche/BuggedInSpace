@@ -1,14 +1,12 @@
 #include "Game.h"
 #include <iostream>
 #include <memory>
-<<<<<<< HEAD
 #include "VectorUtils.h"
 
 int main()
 {
 	std::unique_ptr<Game> game = std::make_unique<Game>();
 	game->Run();
-=======
 #include "ErrorWindow.h"	//< idk if we want/need that, but i put it in for now
 
 int main()
@@ -27,5 +25,4 @@ int main()
 	}
 
 	return 0; // only here to shut compiler up for now :D
->>>>>>> working
 };

@@ -81,10 +81,8 @@
     <ClInclude Include="InputEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="VectorUtils.h">
       <Filter>Header Files</Filter>
-=======
     <ClInclude Include="AssetManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -96,7 +94,6 @@
     </ClInclude>
     <ClInclude Include="GameStateManager.h">
       <Filter>Header Files\Managers</Filter>
->>>>>>> working
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,10 +127,8 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="VectorUtils.cpp">
       <Filter>Source Files</Filter>
-=======
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -148,7 +143,6 @@
     </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\States</Filter>
->>>>>>> working
     </ClCompile>
   </ItemGroup>
 </Project>
