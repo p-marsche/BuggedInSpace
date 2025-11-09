@@ -11,7 +11,7 @@ GameObjectFactory& GameObjectFactory::getInstance()
 
 std::unique_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 {
-	if (playerNumber != 1 && playerNumber != 2)
+	if ((playerNumber != 1) && (playerNumber != 2))
 		return nullptr;
 
 	auto player = std::make_unique<GameObject>();

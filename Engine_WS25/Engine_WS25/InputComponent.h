@@ -18,4 +18,3 @@ private:
     sf::Vector2f m_moveInput;
     std::unordered_map<InputEnum, sf::Vector2f> m_moveInputs;
 };
-

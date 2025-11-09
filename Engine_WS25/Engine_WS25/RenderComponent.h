@@ -16,4 +16,3 @@ public:
 private:
     sf::Sprite m_sprite;
 };
-

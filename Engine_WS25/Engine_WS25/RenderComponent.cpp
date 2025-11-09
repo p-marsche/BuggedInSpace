@@ -1,8 +1,9 @@
 #include "RenderComponent.h"
 
+// change to work with shared_ptr<Texture> and/or with Spritesheet instead?
 RenderComponent::RenderComponent(sf::Texture& texture)
-	: m_sprite(texture),
-	IComponent(ComponentType::Render)
+	: m_sprite(texture)
+	, IComponent(ComponentType::Render)
 {
 	m_sprite.setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
 }

@@ -19,9 +19,8 @@ public:
 private:
     DebugDraw() = default;
     ~DebugDraw() = default;
-    DebugDraw(const DebugDraw& rhv) = delete;
+    DebugDraw(const DebugDraw&) = delete;
     DebugDraw& operator=(DebugDraw const&) = delete;
 
     sf::RenderWindow* m_window;
 };
-

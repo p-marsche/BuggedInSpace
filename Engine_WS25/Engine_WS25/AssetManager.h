@@ -50,7 +50,7 @@ public:
     static AssetManager& getInstance();
 
     AssetManager(const AssetManager&) = delete;
-    AssetManager& operator = (const AssetManager&) = delete;
+    AssetManager& operator =(const AssetManager&) = delete;
 
     void loadTexture(std::string name, std::string filename);
     void loadSoundBuffer(std::string name, std::string filename);

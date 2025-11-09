@@ -14,4 +14,3 @@ namespace VecUtils
 		vec = { vec.x / vecLength, vec.y / vecLength };
 	}
 };
-

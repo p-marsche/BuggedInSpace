@@ -5,8 +5,7 @@ int GameObject::s_nextID = 0;
 
 GameObject::GameObject()
 	: m_ID(s_nextID++)
-{
-}
+{ }
 
 void GameObject::update(float deltaTime)
 {

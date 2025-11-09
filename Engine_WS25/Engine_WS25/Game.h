@@ -40,4 +40,3 @@ private:
 	// ==> wouldn't it be better to just have important GOs as seperate references?
 	// or could also get rid of the vector and just use a map with strings/enums as key and GO as value
 };
-

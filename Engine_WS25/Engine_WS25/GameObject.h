@@ -27,4 +27,3 @@ private:
 	int m_ID;
 	std::unordered_map <ComponentType, std::shared_ptr<IComponent> > m_components;
 };
-

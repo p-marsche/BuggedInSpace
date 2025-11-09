@@ -88,6 +88,7 @@ void Game::closeGame()
 	m_window->close();
 }
 
+// revisit, does weird things to shapes/sprites
 void Game::resizeWindow(int width, int height)
 {
 	float newRatio = static_cast<float>(width / height);

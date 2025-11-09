@@ -23,7 +23,7 @@ private:
     InputManager() = default;
     ~InputManager() = default;
     InputManager(const InputManager& rhv) = delete;
-    InputManager& operator=(InputManager const&) = delete;
+    InputManager& operator =(InputManager const&) = delete;
 
     std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer1;
     std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer2;
@@ -31,4 +31,3 @@ private:
     std::map<sf::Keyboard::Key, bool> m_isKeyUp;
     std::map<sf::Keyboard::Key, bool> m_isKeyPressed;
 };
-

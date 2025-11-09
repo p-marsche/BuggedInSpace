@@ -15,7 +15,6 @@ public:
 private:
     ComponentFactory() = default;
     ~ComponentFactory() = default;
-    ComponentFactory(const ComponentFactory& rhv) = delete;
-    ComponentFactory& operator=(ComponentFactory const&) = delete;
+    ComponentFactory(const ComponentFactory&) = delete;
+    ComponentFactory& operator =(const ComponentFactory&) = delete;
 };
-

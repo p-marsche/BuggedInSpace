@@ -14,6 +14,6 @@ public:
 private:
     GameObjectFactory() = default;
     ~GameObjectFactory() = default;
-    GameObjectFactory(const GameObjectFactory& rhv) = delete;
-    GameObjectFactory& operator=(GameObjectFactory const&) = delete;
+    GameObjectFactory(const GameObjectFactory&) = delete;
+    GameObjectFactory& operator =(GameObjectFactory const&) = delete;
 };
