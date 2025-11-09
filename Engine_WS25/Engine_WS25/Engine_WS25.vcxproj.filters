@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameState.h">
+    <ClCompile Include="GameState.hpp">
       <Filter>Header Files\States</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
@@ -48,55 +48,55 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameStateManager.h">
+    <ClInclude Include="GameStateManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
+    <ClInclude Include="InputManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManager.h">
+    <ClInclude Include="AssetManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="DebugDraw.h">
+    <ClInclude Include="DebugDraw.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="GameObject.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationType.h">
+    <ClInclude Include="AnimationType.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentFactory.h">
+    <ClInclude Include="ComponentFactory.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="IComponent.h">
+    <ClInclude Include="IComponent.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="RenderComponent.h">
+    <ClInclude Include="RenderComponent.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectFactory.h">
+    <ClInclude Include="GameObjectFactory.hpp">
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="InputComponent.h">
+    <ClInclude Include="InputComponent.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentTypeEnum.h">
+    <ClInclude Include="ComponentTypeEnum.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
     </ClInclude>
-    <ClInclude Include="VectorUtils.h">
+    <ClInclude Include="VectorUtils.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="InputEnum.h">
+    <ClInclude Include="InputEnum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteSheet.h">
+    <ClInclude Include="SpriteSheet.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorWindow.h">
+    <ClInclude Include="ErrorWindow.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>

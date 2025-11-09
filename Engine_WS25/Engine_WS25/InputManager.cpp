@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "InputManager.h"
+#include "InputManager.hpp"
 
 InputManager& InputManager::getInstance()
 {

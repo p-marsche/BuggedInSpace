@@ -1,4 +1,4 @@
-#include "AssetManager.h"
+#include "AssetManager.hpp"
 
 AssetNotFoundException::AssetNotFoundException() { m_text = ""; }
 AssetNotFoundException::AssetNotFoundException(std::string message) : m_text(message) {}

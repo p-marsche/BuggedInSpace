@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ComponentTypeEnum.h"
+#include "ComponentTypeEnum.hpp"
 
 class IComponent
 {

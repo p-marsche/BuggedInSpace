@@ -1,5 +1,5 @@
-#include "GameObjectFactory.h"
-#include "ComponentTypeEnum.h"
+#include "GameObjectFactory.hpp"
+#include "ComponentTypeEnum.hpp"
 #include <iostream>
 #include <filesystem>
 

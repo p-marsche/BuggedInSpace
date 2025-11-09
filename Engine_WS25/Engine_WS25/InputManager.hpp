@@ -5,7 +5,7 @@
 
 #include <SFML/Window.hpp>
 
-#include "InputEnum.h"
+#include "InputEnum.hpp"
 
 class InputManager
 {

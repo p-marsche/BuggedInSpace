@@ -1,4 +1,4 @@
-#include "DebugDraw.h"
+#include "DebugDraw.hpp"
 
 void DebugDraw::init(sf::RenderWindow* window)
 {

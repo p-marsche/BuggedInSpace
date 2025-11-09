@@ -1,4 +1,4 @@
-#include "ComponentFactory.h"
+#include "ComponentFactory.hpp"
 
 ComponentFactory& ComponentFactory::getInstance()
 {

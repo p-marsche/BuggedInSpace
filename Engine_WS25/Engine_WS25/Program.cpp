@@ -1,8 +1,7 @@
-#include "Game.h"
+#include "Game.hpp"
 #include <iostream>
 #include <memory>
-#include "VectorUtils.h"
-#include "ErrorWindow.h"	//< idk if we want/need that, but i put it in for now
+#include "ErrorWindow.hpp"	//< idk if we want/need that, but i put it in for now
 
 int main()
 {

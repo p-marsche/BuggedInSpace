@@ -2,8 +2,8 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "RenderComponent.h"
-#include "InputComponent.h"
+#include "RenderComponent.hpp"
+#include "InputComponent.hpp"
 
 class ComponentFactory
 {

@@ -2,8 +2,8 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "GameObject.h"
-#include "ComponentFactory.h"
+#include "GameObject.hpp"
+#include "ComponentFactory.hpp"
 
 class GameObjectFactory
 {

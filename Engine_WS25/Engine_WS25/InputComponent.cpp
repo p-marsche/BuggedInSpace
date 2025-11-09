@@ -1,6 +1,6 @@
-#include "InputComponent.h"
-#include "InputManager.h"
-#include "VectorUtils.h"
+#include "InputComponent.hpp"
+#include "InputManager.hpp"
+#include "VectorUtils.hpp"
 #include <iostream>
 
 InputComponent::InputComponent(int playerNumber)

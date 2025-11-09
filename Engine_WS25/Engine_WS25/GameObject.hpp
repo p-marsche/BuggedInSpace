@@ -7,9 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "IComponent.h"
-#include "RenderComponent.h"
-#include "InputComponent.h"
+#include "IComponent.hpp"
+#include "RenderComponent.hpp"
+#include "InputComponent.hpp"
 
 class GameObject : sf::Transformable
 {

@@ -1,4 +1,4 @@
-#include "IComponent.h"
+#include "IComponent.hpp"
 
 int IComponent::s_nextID = 0;
 

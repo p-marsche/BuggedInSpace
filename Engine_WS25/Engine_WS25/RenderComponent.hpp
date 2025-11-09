@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IComponent.h"
+#include "IComponent.hpp"
 #include <SFML/Graphics.hpp>
 
 class RenderComponent :

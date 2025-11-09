@@ -10,7 +10,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "GameObject.h"
+#include "GameObject.hpp"
 
 class Game
 {

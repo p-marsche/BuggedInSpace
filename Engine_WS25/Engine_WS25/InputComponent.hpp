@@ -1,6 +1,6 @@
 #pragma once
-#include "IComponent.h"
-#include "InputEnum.h"
+#include "IComponent.hpp"
+#include "InputEnum.hpp"
 #include "SFML/Graphics.hpp"
 #include <unordered_map>
 
