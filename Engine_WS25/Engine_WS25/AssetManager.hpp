@@ -19,6 +19,7 @@ namespace sf
     class Font;
     class Image;
 }
+
 struct SpriteSheet;
 
 class AssetNotFoundException : std::exception
@@ -35,17 +36,6 @@ public:
 
 class AssetManager
 {
-private:
-    std::map<std::string, std::unique_ptr<sf::Texture>> m_textures = std::map<std::string, std::unique_ptr<sf::Texture>>();
-    std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers = std::map<std::string, std::unique_ptr<sf::SoundBuffer>>();
-    std::map<std::string, std::unique_ptr<sf::Font>> m_fonts = std::map<std::string, std::unique_ptr<sf::Font>>();
-    std::map<std::string, std::unique_ptr<sf::Music>> m_music = std::map<std::string, std::unique_ptr<sf::Music>>();
-    std::map<std::string, std::unique_ptr<sf::Image>> m_images = std::map<std::string, std::unique_ptr<sf::Image>>();
-    std::map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets = std::map<std::string, std::unique_ptr<SpriteSheet>>();
-
-    AssetManager() {}
-    ~AssetManager() {}
-
 public:
     static AssetManager& getInstance();
 
@@ -65,4 +55,15 @@ public:
     sf::Music& getMusic(std::string name);
     sf::Image& getImage(std::string name);
     SpriteSheet& getSpriteSheet(std::string name);
+
+private:
+    std::map<std::string, std::unique_ptr<sf::Texture>> m_textures = std::map<std::string, std::unique_ptr<sf::Texture>>();
+    std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers = std::map<std::string, std::unique_ptr<sf::SoundBuffer>>();
+    std::map<std::string, std::unique_ptr<sf::Font>> m_fonts = std::map<std::string, std::unique_ptr<sf::Font>>();
+    std::map<std::string, std::unique_ptr<sf::Music>> m_music = std::map<std::string, std::unique_ptr<sf::Music>>();
+    std::map<std::string, std::unique_ptr<sf::Image>> m_images = std::map<std::string, std::unique_ptr<sf::Image>>();
+    std::map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets = std::map<std::string, std::unique_ptr<SpriteSheet>>();
+
+    AssetManager() {}
+    ~AssetManager() {}
 };

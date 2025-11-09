@@ -17,10 +17,10 @@ public:
     void drawRectangle(sf::IntRect rect, sf::Color color);
 
 private:
+    sf::RenderWindow* m_window;
+
     DebugDraw() = default;
     ~DebugDraw() = default;
     DebugDraw(const DebugDraw&) = delete;
     DebugDraw& operator=(DebugDraw const&) = delete;
-
-    sf::RenderWindow* m_window;
 };

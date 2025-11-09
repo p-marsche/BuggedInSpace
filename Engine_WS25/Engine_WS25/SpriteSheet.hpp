@@ -9,6 +9,7 @@ namespace sf {
 
 struct SpriteSheet
 {
+public:
 	std::shared_ptr<sf::Texture> m_sheetTexture;
 	const int TILING_X;
 	const int TILING_Y;
