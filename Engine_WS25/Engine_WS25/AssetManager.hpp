@@ -57,12 +57,12 @@ public:
     SpriteSheet& getSpriteSheet(std::string name);
 
 private:
-    std::map<std::string, std::unique_ptr<sf::Texture>> m_textures = std::map<std::string, std::unique_ptr<sf::Texture>>();
-    std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers = std::map<std::string, std::unique_ptr<sf::SoundBuffer>>();
-    std::map<std::string, std::unique_ptr<sf::Font>> m_fonts = std::map<std::string, std::unique_ptr<sf::Font>>();
-    std::map<std::string, std::unique_ptr<sf::Music>> m_music = std::map<std::string, std::unique_ptr<sf::Music>>();
-    std::map<std::string, std::unique_ptr<sf::Image>> m_images = std::map<std::string, std::unique_ptr<sf::Image>>();
-    std::map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets = std::map<std::string, std::unique_ptr<SpriteSheet>>();
+    std::map<std::string, std::unique_ptr<sf::Texture>> m_textures;
+    std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers;
+    std::map<std::string, std::unique_ptr<sf::Font>> m_fonts;
+    std::map<std::string, std::unique_ptr<sf::Music>> m_music;
+    std::map<std::string, std::unique_ptr<sf::Image>> m_images;
+    std::map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets;
 
     AssetManager() {}
     ~AssetManager() {}
