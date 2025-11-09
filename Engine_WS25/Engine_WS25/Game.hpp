@@ -10,24 +10,15 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "GameObject.h"
+#include "GameObject.hpp"
 
 class Game
 {
 public:
 	Game();
-	void Run();
+	void run();
 
 private:
-	void CloseGame();
-	void ResizeWindow(int width, int height);
-	void Initialize();
-	void HandleEvents();
-	void Update(float deltaTime);
-	void Draw();
-	void RemoveGameObject(std::string name);
-
-
 	const int WIDTH;
 	const int HEIGHT;
 	float m_aspectRatio;
@@ -39,5 +30,12 @@ private:
 	std::unordered_map<std::string, int> m_goToIndex;
 	// ==> wouldn't it be better to just have important GOs as seperate references?
 	// or could also get rid of the vector and just use a map with strings/enums as key and GO as value
-};
 
+	void closeGame();
+	void resizeWindow(int width, int height);
+	void initialize();
+	void handleEvents();
+	void update(float deltaTime);
+	void draw();
+	void removeGameObject(std::string name);
+};

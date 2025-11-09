@@ -1,8 +1,7 @@
-#include "Game.h"
+#include "Game.hpp"
 #include <iostream>
 #include <memory>
-#include "VectorUtils.h"
-#include "ErrorWindow.h"	//< idk if we want/need that, but i put it in for now
+#include "ErrorWindow.hpp"	//< idk if we want/need that, but i put it in for now
 
 int main()
 {
@@ -10,7 +9,7 @@ int main()
 	{
 		std::cout << "Press ESC key to close window" << std::endl;
 		std::unique_ptr<Game> game = std::make_unique<Game>();
-		game->Run();
+		game->run();
 		std::cout << "All done" << std::endl;
 	}
 	catch (std::exception e)

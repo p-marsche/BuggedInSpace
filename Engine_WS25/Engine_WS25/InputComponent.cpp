@@ -1,6 +1,6 @@
-#include "InputComponent.h"
-#include "InputManager.h"
-#include "VectorUtils.h"
+#include "InputComponent.hpp"
+#include "InputManager.hpp"
+#include "VectorUtils.hpp"
 #include <iostream>
 
 InputComponent::InputComponent(int playerNumber)
@@ -8,19 +8,19 @@ InputComponent::InputComponent(int playerNumber)
 	, m_playerNumber(playerNumber)
 	, m_moveInput(0.f, 0.f)
 {
-	moveInputs.emplace(InputEnum::Up, sf::Vector2f(0.f, -1.f));
-	moveInputs.emplace(InputEnum::Left, sf::Vector2f(-1.f, 0.f));
-	moveInputs.emplace(InputEnum::Down, sf::Vector2f(0.f, 1.f));
-	moveInputs.emplace(InputEnum::Right, sf::Vector2f(1.f, 0.f));
+	m_moveInputs.emplace(InputEnum::Up, sf::Vector2f(0.f, -1.f));
+	m_moveInputs.emplace(InputEnum::Left, sf::Vector2f(-1.f, 0.f));
+	m_moveInputs.emplace(InputEnum::Down, sf::Vector2f(0.f, 1.f));
+	m_moveInputs.emplace(InputEnum::Right, sf::Vector2f(1.f, 0.f));
 }
 
-void InputComponent::Update(float deltaTime)
+void InputComponent::update(float deltaTime)
 {
 	m_moveInput = { 0.f, 0.f };
-	for (auto& [input, dir] : moveInputs)
+	for (auto& [input, dir] : m_moveInputs)
 	{
-		if (InputManager::GetInstance().GetKeyDown(input, m_playerNumber))
+		if (InputManager::getInstance().getKeyDown(input, m_playerNumber))
 			m_moveInput += dir;
 	}
-	VecUtils::NormalizeVector2f(m_moveInput);
+	VecUtils::normalizeVector2f(m_moveInput);
 }

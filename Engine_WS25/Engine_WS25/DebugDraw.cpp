@@ -1,6 +1,6 @@
-#include "DebugDraw.h"
+#include "DebugDraw.hpp"
 
-void DebugDraw::Init(sf::RenderWindow* window)
+void DebugDraw::init(sf::RenderWindow* window)
 {
 	m_window = window;
 }

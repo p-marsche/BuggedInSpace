@@ -1,4 +1,4 @@
-#include "ErrorWindow.h"
+#include "ErrorWindow.hpp"
 
 ErrorWindow::ErrorWindow(std::string message)
 {

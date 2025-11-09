@@ -1,4 +1,4 @@
-#include "AssetManager.h"
+#include "AssetManager.hpp"
 
 AssetNotFoundException::AssetNotFoundException() { m_text = ""; }
 AssetNotFoundException::AssetNotFoundException(std::string message) : m_text(message) {}
@@ -10,7 +10,7 @@ const char* AssetNotFoundException::what() const noexcept
 }
 
 
-AssetManager& AssetManager::instance()
+AssetManager& AssetManager::getInstance()
 {
 	static AssetManager assetManager;
 	return assetManager;

@@ -1,14 +1,14 @@
 #include <iostream>
 
-#include "InputManager.h"
+#include "InputManager.hpp"
 
-InputManager& InputManager::GetInstance()
+InputManager& InputManager::getInstance()
 {
 	static InputManager m_instance;
 	return m_instance;
 }
 
-void InputManager::Init()
+void InputManager::init()
 {
     m_inputsPlayer1.emplace(InputEnum::Up, sf::Keyboard::Key::W);
     m_inputsPlayer1.emplace(InputEnum::Left, sf::Keyboard::Key::A);
@@ -37,13 +37,13 @@ void InputManager::Init()
     }
 }
 
-void InputManager::Update()
+void InputManager::update()
 {
     for (auto& [_, flag] : m_isKeyPressed)
         flag = false;
 }
 
-bool InputManager::GetKeyDown(InputEnum input, int player)
+bool InputManager::getKeyDown(InputEnum input, int player)
 {
     if (player != 1 && player != 2)
         return false;
@@ -66,7 +66,7 @@ bool InputManager::GetKeyDown(InputEnum input, int player)
     }
 }
 
-bool InputManager::GetKeyUp(InputEnum input, int player)
+bool InputManager::getKeyUp(InputEnum input, int player)
 {
     if (player != 1 && player != 2)
         return false;
@@ -89,7 +89,7 @@ bool InputManager::GetKeyUp(InputEnum input, int player)
     }
 }
 
-bool InputManager::GetKeyPressed(InputEnum input, int player)
+bool InputManager::getKeyPressed(InputEnum input, int player)
 {
     if (player != 1 && player != 2)
         return false;
@@ -112,7 +112,7 @@ bool InputManager::GetKeyPressed(InputEnum input, int player)
     }
 }
 
-void InputManager::OnKeyPressed(sf::Keyboard::Key key) 
+void InputManager::onKeyPressed(sf::Keyboard::Key key) 
 { 
     if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
         return;
@@ -121,7 +121,7 @@ void InputManager::OnKeyPressed(sf::Keyboard::Key key)
     m_isKeyDown.at(key) = true;
     m_isKeyUp.at(key) = false;
 }
-void InputManager::OnKeyReleased(sf::Keyboard::Key key) 
+void InputManager::onKeyReleased(sf::Keyboard::Key key) 
 {
     if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
         return;

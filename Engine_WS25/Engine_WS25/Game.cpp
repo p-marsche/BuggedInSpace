@@ -1,8 +1,8 @@
-#include "Game.h"
-#include "GameObject.h"
-#include "GameObjectFactory.h"
-#include "InputManager.h"
-#include "AssetManager.h"
+#include "Game.hpp"
+#include "GameObject.hpp"
+#include "GameObjectFactory.hpp"
+#include "InputManager.hpp"
+#include "AssetManager.hpp"
 
 Game::Game()
 	: WIDTH(1280)
@@ -16,34 +16,34 @@ Game::Game()
 	m_aspectRatio = static_cast<float>(WIDTH / HEIGHT);
 }
 
-void Game::Run()
+void Game::run()
 {
-	Initialize();
+	initialize();
 	float deltaTime = 0.f;
 
 	while (m_window->isOpen())
 	{
-		InputManager::GetInstance().Update();
-		HandleEvents();
+		InputManager::getInstance().update();
+		handleEvents();
 
 		deltaTime = m_clock.restart().asSeconds();
-		Update(deltaTime);
-		Draw();
+		update(deltaTime);
+		draw();
 	}
 }
 
-void Game::Initialize()
+void Game::initialize()
 {
-	InputManager::GetInstance().Init();
+	InputManager::getInstance().init();
 
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(1));
+	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
 
 	/*m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));*/
 }
 
-void Game::HandleEvents()
+void Game::handleEvents()
 {
 	sf::Event event;
 	while (m_window->pollEvent(event))
@@ -51,44 +51,45 @@ void Game::HandleEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				CloseGame();
+				closeGame();
 				break;
 			case sf::Event::Resized:
-				ResizeWindow(event.size.width, event.size.height);
+				resizeWindow(event.size.width, event.size.height);
 				break;
 			case sf::Event::KeyPressed:
-				InputManager::GetInstance().OnKeyPressed(event.key.code);
+				InputManager::getInstance().onKeyPressed(event.key.code);
 				break;
 			case sf::Event::KeyReleased:
-				InputManager::GetInstance().OnKeyReleased(event.key.code);
+				InputManager::getInstance().onKeyReleased(event.key.code);
 				break;
 		}
 	}
 }
 
-void Game::Update(float deltaTime)
+void Game::update(float deltaTime)
 {
 	for (auto& go : m_gameObjects)
-		go->Update(deltaTime);
+		go->update(deltaTime);
 }
 
-void Game::Draw()
+void Game::draw()
 {
 	m_window->clear(sf::Color::Black);
 
 	for (auto& go : m_gameObjects)
-		go->Draw(*m_window);
+		go->draw(*m_window);
 
 	m_window->display();
 }
 
-void Game::CloseGame()
+void Game::closeGame()
 {
 	// safe shutdown implementation here
 	m_window->close();
 }
 
-void Game::ResizeWindow(int width, int height)
+// revisit, does weird things to shapes/sprites
+void Game::resizeWindow(int width, int height)
 {
 	float newRatio = static_cast<float>(width / height);
 
@@ -116,7 +117,7 @@ void Game::ResizeWindow(int width, int height)
 	m_window->setView(view);
 }
 
-void Game::RemoveGameObject(std::string name)
+void Game::removeGameObject(std::string name)
 {
 	auto res = m_goToIndex.find(name);
 	if (res == m_goToIndex.end())

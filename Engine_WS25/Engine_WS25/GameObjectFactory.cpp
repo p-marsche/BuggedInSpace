@@ -1,17 +1,17 @@
-#include "GameObjectFactory.h"
-#include "ComponentTypeEnum.h"
+#include "GameObjectFactory.hpp"
+#include "ComponentTypeEnum.hpp"
 #include <iostream>
 #include <filesystem>
 
-GameObjectFactory& GameObjectFactory::GetInstance()
+GameObjectFactory& GameObjectFactory::getInstance()
 {
 	static GameObjectFactory m_instance;
 	return m_instance;
 }
 
-std::unique_ptr<GameObject> GameObjectFactory::CreatePlayer(int playerNumber)
+std::unique_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 {
-	if (playerNumber != 1 && playerNumber != 2)
+	if ((playerNumber != 1) && (playerNumber != 2))
 		return nullptr;
 
 	auto player = std::make_unique<GameObject>();
@@ -23,8 +23,8 @@ std::unique_ptr<GameObject> GameObjectFactory::CreatePlayer(int playerNumber)
 		ComponentFactory::GetInstance().CreateRenderComponent(--insert player1 asset here--) :
 		ComponentFactory::GetInstance().CreateRenderComponent(--insert player2 asset here--);*/
 	std::shared_ptr<RenderComponent> render =
-		ComponentFactory::GetInstance().CreateRenderComponent(*player1Tex);
-	player->AddComponent(ComponentType::Render, render);
-	player->AddComponent(ComponentType::Input, ComponentFactory::GetInstance().CreateInputComponent(1));
+		ComponentFactory::getInstance().createRenderComponent(*player1Tex);
+	player->addComponent(ComponentType::Render, render);
+	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(1));
 	return player;
 }
