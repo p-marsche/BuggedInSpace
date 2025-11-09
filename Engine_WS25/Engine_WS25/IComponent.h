@@ -11,7 +11,8 @@ public:
 	void virtual update(float deltaTime) { return; }
 
 private:
-	int m_ID;
 	static int s_nextID;
+
+	int m_ID;
 	ComponentType m_compType;
 };

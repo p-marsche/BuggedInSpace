@@ -22,8 +22,9 @@ public:
 	void removeComponent(ComponentType compType);
 
 private:
+	static int s_nextID;
+
 	int m_ID;
-	static int m_nextID;
 	std::unordered_map <ComponentType, std::shared_ptr<IComponent> > m_components;
 };
 

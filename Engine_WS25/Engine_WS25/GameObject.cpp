@@ -1,10 +1,10 @@
 #include "GameObject.h"
 #include <iostream>
 
-int GameObject::m_nextID = 0;
+int GameObject::s_nextID = 0;
 
 GameObject::GameObject()
-	: m_ID(m_nextID++)
+	: m_ID(s_nextID++)
 {
 }
 
