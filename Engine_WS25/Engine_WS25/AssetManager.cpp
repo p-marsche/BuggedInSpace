@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "AssetManager.hpp"
 
 AssetNotFoundException::AssetNotFoundException() { m_text = ""; }

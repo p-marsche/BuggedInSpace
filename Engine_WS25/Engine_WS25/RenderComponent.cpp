@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "RenderComponent.hpp"
 
 // change to work with shared_ptr<Texture> and/or with Spritesheet instead?

@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "InputComponent.hpp"
 #include "InputManager.hpp"
 #include "VectorUtils.hpp"

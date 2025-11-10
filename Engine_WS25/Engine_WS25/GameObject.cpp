@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "GameObject.hpp"
 
 int GameObject::s_nextID = 0;

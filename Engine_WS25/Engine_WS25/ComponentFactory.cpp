@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "ComponentFactory.hpp"
 
 ComponentFactory& ComponentFactory::getInstance()

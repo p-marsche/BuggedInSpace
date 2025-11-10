@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "ComponentTypeEnum.hpp"
 #include "GameObjectFactory.hpp"
 

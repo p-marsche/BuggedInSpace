@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "InputManager.hpp"
 
 InputManager& InputManager::getInstance()

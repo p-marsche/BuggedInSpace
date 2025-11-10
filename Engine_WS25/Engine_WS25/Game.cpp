@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
 #include "Game.hpp"
