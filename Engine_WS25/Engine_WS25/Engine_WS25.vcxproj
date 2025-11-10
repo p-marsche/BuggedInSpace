@@ -182,6 +182,7 @@ sfml-system.lib
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="VectorUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

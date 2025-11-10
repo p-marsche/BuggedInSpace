@@ -4,10 +4,10 @@
 
 // change to work with shared_ptr<Texture> and/or with Spritesheet instead?
 RenderComponent::RenderComponent(sf::Texture& texture)
-	: m_sprite(texture)
+	: m_sprite(std::make_shared<sf::Sprite>(texture))
 	, IComponent(ComponentType::Render)
 {
-	m_sprite.setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
+	m_sprite->setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
 }
 
 void RenderComponent::update(float deltaTime) 
@@ -18,10 +18,10 @@ void RenderComponent::update(float deltaTime)
 
 void RenderComponent::draw(sf::RenderWindow& window)
 {
-	window.draw(m_sprite);
+	window.draw(*m_sprite);
 }
 
 void RenderComponent::setSpritePosition(sf::Vector2f position)
 {
-	m_sprite.setPosition(position);
+	m_sprite->setPosition(position);
 }

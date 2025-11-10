@@ -5,6 +5,7 @@
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
+#include "VectorUtils.hpp"
 
 Game::Game()
 	: WIDTH(1280)
@@ -12,6 +13,7 @@ Game::Game()
 	, TITLE("Engine_WS25")
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
+	, m_cameraScrollTime(0.f)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
@@ -48,6 +50,7 @@ void Game::initialize()
 
 	m_gameObjects[m_goToIndex["Player1"]]->moveObject(sf::Vector2f(200, 200));
 	m_gameObjects[m_goToIndex["Player2"]]->moveObject(sf::Vector2f(400, 400));
+
 }
 
 void Game::handleEvents()
@@ -75,6 +78,31 @@ void Game::handleEvents()
 
 void Game::update(float deltaTime)
 {
+	float bgWidth = m_background->getSprite()->getGlobalBounds().width;
+	float maxScrollTime = 50.f;
+	//std::cout << bgWidth << std::endl;
+
+	// move that to game-state
+	m_cameraScrollTime += deltaTime;
+	sf::Vector2f start(static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
+
+	sf::Vector2f newViewCenter = 
+		VecUtils::lerp(start, sf::Vector2f(bgWidth - static_cast<float>(WIDTH)/2.f, static_cast<float>(HEIGHT) / 2.f), m_cameraScrollTime/maxScrollTime);
+
+	//std::cout << newViewCenter.x << ", " << newViewCenter.y << std::endl;
+
+	sf::View view = m_window->getView();
+	if (maxScrollTime - m_cameraScrollTime >= 0.1f)
+		view.setCenter(newViewCenter);
+	else
+		view.setCenter(start);
+
+	m_window->setView(view);
+
+	if (m_cameraScrollTime >= maxScrollTime)
+		m_cameraScrollTime = 0.f;
+
+
 	for (auto& go : m_gameObjects)
 		go->update(deltaTime);
 }

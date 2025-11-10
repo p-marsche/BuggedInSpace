@@ -10,6 +10,8 @@ public:
 	GameObject();
 	int getID() const { return m_ID; }
 	void moveObject(sf::Vector2f moveVec);
+	sf::Vector2f getObjectPosition() { return this->getPosition(); }
+	std::shared_ptr<sf::Sprite> getSprite();
 	void update(float deltaTime);
 	void draw(sf::RenderWindow& window);
 	void addComponent(ComponentType compType, std::shared_ptr<IComponent> comp);

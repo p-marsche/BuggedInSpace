@@ -58,3 +58,13 @@ void GameObject::removeComponent(ComponentType compType)
 
 	m_components.erase(compType);
 }
+
+std::shared_ptr<sf::Sprite> GameObject::getSprite()
+{
+	auto rend = m_components.find(ComponentType::Render);
+	if (rend == m_components.end())
+		return nullptr;
+
+	auto render = std::dynamic_pointer_cast<RenderComponent>(rend->second);
+	return render->getSprite();
+}
