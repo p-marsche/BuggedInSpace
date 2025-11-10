@@ -12,7 +12,7 @@ private:
 	const int WIDTH;
 	const int HEIGHT;
 	float m_aspectRatio;
-	float m_cameraScrollTime;
+	float m_cameraScrollTime, m_maxScrollTime;
 	const std::string TITLE = "Engine_WS25";
 	sf::Clock m_clock;
 	std::unique_ptr<sf::RenderWindow> m_window;

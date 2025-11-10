@@ -14,6 +14,7 @@ Game::Game()
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
 	, m_cameraScrollTime(0.f)
+	, m_maxScrollTime(100.f)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
@@ -40,7 +41,7 @@ void Game::initialize()
 {
 	InputManager::getInstance().init();
 
-	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(5.f, 5.f));
+	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(2.f, 3.f));
 
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
@@ -79,27 +80,24 @@ void Game::handleEvents()
 void Game::update(float deltaTime)
 {
 	float bgWidth = m_background->getSprite()->getGlobalBounds().width;
-	float maxScrollTime = 50.f;
-	//std::cout << bgWidth << std::endl;
 
 	// move that to game-state
 	m_cameraScrollTime += deltaTime;
-	sf::Vector2f start(static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
+	sf::Vector2f startPos(static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
+	sf::Vector2f endPos(bgWidth - static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
 
 	sf::Vector2f newViewCenter = 
-		VecUtils::lerp(start, sf::Vector2f(bgWidth - static_cast<float>(WIDTH)/2.f, static_cast<float>(HEIGHT) / 2.f), m_cameraScrollTime/maxScrollTime);
-
-	//std::cout << newViewCenter.x << ", " << newViewCenter.y << std::endl;
+		VecUtils::lerp(startPos, endPos, m_cameraScrollTime/m_maxScrollTime);
 
 	sf::View view = m_window->getView();
-	if (maxScrollTime - m_cameraScrollTime >= 0.1f)
+	if (m_maxScrollTime - m_cameraScrollTime >= 0.1f)
 		view.setCenter(newViewCenter);
 	else
-		view.setCenter(start);
+		view.setCenter(startPos);
 
 	m_window->setView(view);
 
-	if (m_cameraScrollTime >= maxScrollTime)
+	if (m_cameraScrollTime >= m_maxScrollTime + 3)
 		m_cameraScrollTime = 0.f;
 
 
