@@ -1,10 +1,10 @@
 #pragma once
 
-#include "pch.h"
-
 // idk if we need/want this, but i put it in for now
 
+/// <summary>
 /// Displays a simple window with the message of the occured exception
+/// </summary>
 class ErrorWindow
 {
 public:

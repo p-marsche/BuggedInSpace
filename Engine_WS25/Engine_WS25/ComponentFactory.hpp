@@ -3,8 +3,6 @@
 #include "InputComponent.hpp"
 #include "RenderComponent.hpp"
 
-#include "pch.h"
-
 class ComponentFactory
 {
 public:

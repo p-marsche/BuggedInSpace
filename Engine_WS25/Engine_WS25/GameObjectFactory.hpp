@@ -1,9 +1,6 @@
 #pragma once
 
-#include "ComponentFactory.hpp"
-#include "GameObject.hpp"
-
-#include "pch.h"
+class GameObject;
 
 class GameObjectFactory
 {

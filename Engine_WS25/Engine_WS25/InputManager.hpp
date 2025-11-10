@@ -2,8 +2,6 @@
 
 #include "InputEnum.hpp"
 
-#include "pch.h"
-
 class InputManager
 {
 public:

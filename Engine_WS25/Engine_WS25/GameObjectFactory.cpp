@@ -1,6 +1,8 @@
 #include "pch.h"
 
 #include "ComponentTypeEnum.hpp"
+#include "ComponentFactory.hpp"
+#include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
 
 GameObjectFactory& GameObjectFactory::getInstance()

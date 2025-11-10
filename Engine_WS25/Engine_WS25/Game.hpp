@@ -1,8 +1,6 @@
 #pragma once
 
-#include "GameObject.hpp"
-
-#include "pch.h"
+class GameObject;
 
 class Game
 {

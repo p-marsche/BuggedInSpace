@@ -2,8 +2,6 @@
 
 #include "IComponent.hpp"
 
-#include "pch.h"
-
 class RenderComponent :
     public IComponent
 {

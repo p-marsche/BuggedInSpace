@@ -1,10 +1,8 @@
 #pragma once
 
-#include "IComponent.hpp"
-#include "InputComponent.hpp"
-#include "RenderComponent.hpp"
+#include "ComponentTypeEnum.hpp"
 
-#include "pch.h"
+class IComponent;
 
 class GameObject : sf::Transformable
 {

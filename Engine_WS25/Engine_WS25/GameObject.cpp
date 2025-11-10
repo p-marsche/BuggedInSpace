@@ -1,6 +1,9 @@
 #include "pch.h"
 
+#include "IComponent.hpp"
+#include "InputComponent.hpp"
 #include "GameObject.hpp"
+#include "RenderComponent.hpp"
 
 int GameObject::s_nextID = 0;
 

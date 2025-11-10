@@ -2,20 +2,6 @@
 
 #include "SpriteSheet.hpp"
 
-#include "pch.h"
-
-// predeclarations for used classes
-namespace sf
-{
-    class Texture;
-    class SoundBuffer;
-    class Music;
-    class Font;
-    class Image;
-}
-
-struct SpriteSheet;
-
 class AssetNotFoundException : std::exception
 {
 public:

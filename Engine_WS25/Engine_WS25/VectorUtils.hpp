@@ -1,7 +1,5 @@
 #pragma once
 
-#include "pch.h"
-
 namespace VecUtils
 {
 	static void normalizeVector2f(sf::Vector2f& vec)
