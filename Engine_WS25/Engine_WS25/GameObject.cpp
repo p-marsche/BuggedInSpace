@@ -8,6 +8,11 @@ GameObject::GameObject()
 	: m_ID(s_nextID++)
 { }
 
+void GameObject::moveObject(sf::Vector2f moveVec)
+{
+	this->move(moveVec);
+}
+
 void GameObject::update(float deltaTime)
 {
 	for (auto& [ctype, comp] : m_components)
