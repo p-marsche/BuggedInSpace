@@ -12,7 +12,7 @@ GameObjectFactory& GameObjectFactory::getInstance()
 	return m_instance;
 }
 
-std::unique_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
+std::shared_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 {
 	if ((playerNumber != 1) && (playerNumber != 2))
 		//add exception here later?
@@ -40,4 +40,21 @@ std::unique_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 	player->addComponent(ComponentType::Render, render);
 	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(playerNumber));
 	return player;
+}
+
+std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f scale)
+{
+	auto background = std::make_unique<GameObject>();
+	std::string filename = "Background.png";
+	std::string key = "Background";
+
+	AssetManager::getInstance().loadTexture(key, filename);
+	sf::Texture& backgroundTex = AssetManager::getInstance().getTexture(key);
+	std::shared_ptr<RenderComponent> render =
+		ComponentFactory::getInstance().createRenderComponent(backgroundTex);
+	render->getSprite().setScale(scale);
+	sf::Vector2f newPos(render->getSprite().getGlobalBounds().width/2, render->getSprite().getGlobalBounds().height/2);
+	background->addComponent(ComponentType::Render, render);
+	background->moveObject(newPos);
+	return background;
 }

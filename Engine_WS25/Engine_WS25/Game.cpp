@@ -38,6 +38,8 @@ void Game::initialize()
 {
 	InputManager::getInstance().init();
 
+	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(5.f, 5.f));
+
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
 
@@ -80,6 +82,8 @@ void Game::update(float deltaTime)
 void Game::draw()
 {
 	m_window->clear(sf::Color::Black);
+
+	m_background->draw(*m_window);
 
 	for (auto& go : m_gameObjects)
 		go->draw(*m_window);

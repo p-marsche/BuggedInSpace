@@ -15,6 +15,7 @@ private:
 	const std::string TITLE = "Engine_WS25";
 	sf::Clock m_clock;
 	std::unique_ptr<sf::RenderWindow> m_window;
+	std::shared_ptr<GameObject> m_background;
 	std::vector<std::shared_ptr<GameObject> > m_gameObjects;
 	// replace std::string with an enum of important go's (player(s), etc)?
 	std::unordered_map<std::string, int> m_goToIndex;
