@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "InputManager.hpp"
 
 InputManager& InputManager::getInstance()

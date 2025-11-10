@@ -5,8 +5,7 @@ AssetNotFoundException::AssetNotFoundException(std::string message) : m_text(mes
 
 const char* AssetNotFoundException::what() const noexcept
 {
-	std::string output = "An asset could not be found: " + m_text;
-	return output.c_str();
+	return m_text.c_str();
 }
 
 
@@ -18,40 +17,138 @@ AssetManager& AssetManager::getInstance()
 
 void AssetManager::loadTexture(std::string name, std::string filename)
 {
-	m_textures.emplace(name, std::make_unique<sf::Texture>());
+	m_textures.try_emplace(name, std::make_unique<sf::Texture>());
 	m_textures[name]->loadFromFile("./Assets/Textures/" + filename); //< somehow make more configurable location. config file/class with consts?
 }
 
 void AssetManager::loadSoundBuffer(std::string name, std::string filename)
 {
-	m_soundBuffers.emplace(name, std::make_unique<sf::SoundBuffer>());
+	m_soundBuffers.try_emplace(name, std::make_unique<sf::SoundBuffer>());
 	m_soundBuffers[name]->loadFromFile(".Assets/Sounds/" + filename);
 }
 
 void AssetManager::loadFont(std::string name, std::string filename)
 {
-	m_fonts.emplace(name,std::make_unique<sf::Font>());
+	m_fonts.try_emplace(name,std::make_unique<sf::Font>());
 	m_fonts[name]->loadFromFile("./Assets/Fonts/" + filename);
 }
 
 void AssetManager::loadMusic(std::string name, std::string filename)
 {
-	m_music.emplace(name, std::make_unique<sf::Music>());
+	m_music.try_emplace(name, std::make_unique<sf::Music>());
 	m_music[name]->openFromFile("./Assets/Music" + filename);
+}
+
+void AssetManager::loadImage(std::string name, std::string filename)
+{
+	m_images.try_emplace(name, std::make_unique<sf::Image>());
+	m_images[name]->loadFromFile("./Assets/Images/" + filename);
 }
 
 void AssetManager::loadSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames)
 {
 	auto texture(std::make_shared<sf::Texture>());
 	texture->loadFromFile("./Assets/SpriteSheets/" + filename);
-	m_spriteSheets.emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
+	m_spriteSheets.try_emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
 }
 
-void AssetManager::loadImage(std::string name, std::string filename)
+void AssetManager::replaceTexture(std::string name, std::string filename)
 {
+	if (auto it = m_textures.find(name) != m_textures.end())
+	{
+		auto extracted = m_textures.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+	m_textures.emplace(name, std::make_unique<sf::Texture>());
+	m_textures[name]->loadFromFile("./Assets/Textures/" + filename);
+}
+
+void AssetManager::replaceSoundBuffer(std::string name, std::string filename)
+{
+	if (auto it = m_soundBuffers.find(name) != m_soundBuffers.end())
+	{
+		auto extracted = m_soundBuffers.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+	m_soundBuffers.emplace(name, std::make_unique<sf::SoundBuffer>());
+	m_soundBuffers[name]->loadFromFile("./Assets/Sounds/" + filename);
+}
+
+void AssetManager::replaceFont(std::string name, std::string filename)
+{
+	if (auto it = m_fonts.find(name) != m_fonts.end())
+	{
+		auto extracted = m_fonts.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+	m_fonts.emplace(name, std::make_unique<sf::Font>());
+	m_fonts[name]->loadFromFile("./Assets/Fonts/" + filename);
+}
+
+void AssetManager::replaceMusic(std::string name, std::string filename)
+{
+	if (auto it = m_music.find(name) != m_music.end())
+	{
+		auto extracted = m_music.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+	m_music.emplace(name, std::make_unique<sf::Music>());
+	m_music[name]->openFromFile("./Assets/Music" + filename);
+}
+
+void AssetManager::replaceImage(std::string name, std::string filename)
+{
+	if (auto it = m_images.find(name) != m_images.end())
+	{
+		auto extracted = m_images.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
 	m_images.emplace(name, std::make_unique<sf::Image>());
 	m_images[name]->loadFromFile("./Assets/Images/" + filename);
 }
+
+void AssetManager::replaceSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames)
+{
+	if (auto it = m_spriteSheets.find(name) != m_spriteSheets.end())
+	{
+		auto extracted = m_spriteSheets.extract(name);
+		auto ptr = extracted.mapped().release();
+		if (ptr != nullptr)
+		{
+			delete ptr;
+			ptr = nullptr;
+		}
+	}
+	auto texture(std::make_shared<sf::Texture>());
+	texture->loadFromFile("./Assets/SpriteSheets/" + filename);
+	m_spriteSheets.emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
+}
+
 
 sf::Texture& AssetManager::getTexture(std::string name)
 {

@@ -1,16 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
-#include <unordered_map>
-
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-
 #include "GameObject.hpp"
+#include "pch.h"
 
 class Game
 {

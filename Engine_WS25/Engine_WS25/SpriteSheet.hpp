@@ -1,6 +1,6 @@
 #pragma once
-#include <memory>
-#include <vector>
+
+#include "pch.h"
 
 // predecleration for used classes
 namespace sf {

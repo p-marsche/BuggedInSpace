@@ -1,8 +1,8 @@
+#include "AssetManager.hpp"
+#include "InputManager.hpp"
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
-#include "InputManager.hpp"
-#include "AssetManager.hpp"
 
 Game::Game()
 	: WIDTH(1280)

@@ -1,9 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-
-#include <memory>
+#include "pch.h"
 
 class DebugDraw
 {

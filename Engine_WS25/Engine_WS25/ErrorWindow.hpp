@@ -1,6 +1,6 @@
 #pragma once
-#include <exception>
-#include <SFML/Graphics.hpp>
+
+#include "pch.h"
 
 // idk if we need/want this, but i put it in for now
 

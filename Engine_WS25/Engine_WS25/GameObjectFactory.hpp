@@ -1,9 +1,8 @@
 #pragma once
 
-#include <memory>
-#include <SFML/Graphics.hpp>
-#include "GameObject.hpp"
 #include "ComponentFactory.hpp"
+#include "GameObject.hpp"
+#include "pch.h"
 
 class GameObjectFactory
 {

@@ -1,9 +1,8 @@
 #pragma once
 
-#include <memory>
-#include <SFML/Graphics.hpp>
-#include "RenderComponent.hpp"
 #include "InputComponent.hpp"
+#include "RenderComponent.hpp"
+#include "pch.h"
 
 class ComponentFactory
 {
