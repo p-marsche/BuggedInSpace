@@ -1,12 +1,17 @@
 #pragma once
 
+#include "GameState.hpp"
+
 class GameObject;
 
-class Game
+class Game : public GameState
 {
 public:
 	Game();
-	void run();
+	virtual void run() override;
+	virtual void exit() override;
+	virtual void update(float deltaTime) override;
+	virtual void render() override;
 
 private:
 	const int WIDTH;
@@ -21,11 +26,8 @@ private:
 	// ==> wouldn't it be better to just have important GOs as seperate references?
 	// or could also get rid of the vector and just use a map with strings/enums as key and GO as value
 
-	void closeGame();
 	void resizeWindow(int width, int height);
 	void initialize();
 	void handleEvents();
-	void update(float deltaTime);
-	void draw();
 	void removeGameObject(std::string name);
 };

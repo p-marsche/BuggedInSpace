@@ -2,14 +2,23 @@
 
 #include "ErrorWindow.hpp"	//< idk if we want/need that, but i put it in for now
 #include "Game.hpp"
+#include "GameState.hpp"
+#include "GameStateManager.hpp"
+#include "InputManager.hpp"
+#include "TestMenu.hpp"
+
+GameStateManager gameStateManager;
 
 int main()
 {
 	try
 	{
+		InputManager::getInstance().init();
+
 		std::cout << "Press ESC key to close window" << std::endl;
-		std::unique_ptr<Game> game = std::make_unique<Game>();
-		game->run();
+		gameStateManager.registerState(GameStateEnum::Game, new Game());
+		gameStateManager.registerState(GameStateEnum::Menu, new TestMenu());
+		gameStateManager.setState(GameStateEnum::Menu);
 		std::cout << "All done" << std::endl;
 	}
 	catch (std::exception e)

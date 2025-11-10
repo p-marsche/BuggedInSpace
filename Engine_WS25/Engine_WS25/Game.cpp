@@ -30,14 +30,12 @@ void Game::run()
 
 		deltaTime = m_clock.restart().asSeconds();
 		update(deltaTime);
-		draw();
+		render();
 	}
 }
 
 void Game::initialize()
 {
-	InputManager::getInstance().init();
-
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
 
@@ -53,7 +51,7 @@ void Game::handleEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				closeGame();
+				exit();
 				break;
 			case sf::Event::Resized:
 				resizeWindow(event.size.width, event.size.height);
@@ -72,9 +70,14 @@ void Game::update(float deltaTime)
 {
 	for (auto& go : m_gameObjects)
 		go->update(deltaTime);
+
+	if (InputManager::getInstance().getKeyPressed(InputEnum::Exit, 1))
+		exit();
+	if (InputManager::getInstance().getKeyPressed(InputEnum::MenuTest, 1))
+		changeState(GameStateEnum::Menu);
 }
 
-void Game::draw()
+void Game::render()
 {
 	m_window->clear(sf::Color::Black);
 
@@ -84,7 +87,7 @@ void Game::draw()
 	m_window->display();
 }
 
-void Game::closeGame()
+void Game::exit()
 {
 	// safe shutdown implementation here
 	m_window->close();
@@ -141,3 +144,4 @@ void Game::removeGameObject(std::string name)
 		}
 	}
 }
+

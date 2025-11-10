@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameState.hpp">
-      <Filter>Header Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -12,9 +9,6 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
@@ -47,11 +41,14 @@
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="TestMenu.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameStateManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
@@ -102,6 +99,15 @@
     </ClInclude>
     <ClInclude Include="pch.h" />
     <ClInclude Include="GameStateEnum.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMenu.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
