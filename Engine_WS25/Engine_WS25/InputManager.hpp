@@ -1,11 +1,7 @@
 #pragma once
 
-#include <map>
-#include <unordered_map>
-
-#include <SFML/Window.hpp>
-
 #include "InputEnum.hpp"
+#include "pch.h"
 
 class InputManager
 {

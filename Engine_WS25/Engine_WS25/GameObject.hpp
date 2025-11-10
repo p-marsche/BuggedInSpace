@@ -1,15 +1,9 @@
 #pragma once
 
-#include <unordered_map> 
-#include <vector>
-#include <string>
-#include <memory>
-
-#include <SFML/Graphics.hpp>
-
 #include "IComponent.hpp"
-#include "RenderComponent.hpp"
 #include "InputComponent.hpp"
+#include "RenderComponent.hpp"
+#include "pch.h"
 
 class GameObject : sf::Transformable
 {

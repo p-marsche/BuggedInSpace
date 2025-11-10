@@ -1,7 +1,6 @@
 #include "InputComponent.hpp"
 #include "InputManager.hpp"
 #include "VectorUtils.hpp"
-#include <iostream>
 
 InputComponent::InputComponent(int playerNumber)
 	: IComponent(ComponentType::Input)

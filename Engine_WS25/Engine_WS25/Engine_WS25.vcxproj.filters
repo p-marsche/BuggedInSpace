@@ -46,6 +46,7 @@
     <ClCompile Include="GameObjectFactory.cpp">
       <Filter>Source Files\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -99,6 +100,7 @@
     <ClInclude Include="ErrorWindow.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
