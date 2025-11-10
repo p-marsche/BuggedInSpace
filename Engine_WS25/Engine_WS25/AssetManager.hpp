@@ -1,7 +1,8 @@
 #pragma once
 
-#include "pch.h"
 #include "SpriteSheet.hpp"
+
+#include "pch.h"
 
 // predeclarations for used classes
 namespace sf

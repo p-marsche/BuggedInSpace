@@ -3,6 +3,7 @@
 #include "pch.h"
 
 // predecleration for used classes
+// ==> still needed after adding precompiled headers?
 namespace sf {
 	class Texture;
 }
