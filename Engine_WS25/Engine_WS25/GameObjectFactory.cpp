@@ -1,5 +1,6 @@
 #include "pch.h"
 
+#include "AssetManager.hpp"
 #include "ComponentTypeEnum.hpp"
 #include "ComponentFactory.hpp"
 #include "GameObject.hpp"
@@ -11,22 +12,51 @@ GameObjectFactory& GameObjectFactory::getInstance()
 	return m_instance;
 }
 
-std::unique_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
+std::shared_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 {
 	if ((playerNumber != 1) && (playerNumber != 2))
+		//add exception here later?
 		return nullptr;
 
 	auto player = std::make_unique<GameObject>();
-	std::string filename = "Player1_Ship.png";
-	std::unique_ptr<sf::Texture> player1Tex = std::make_unique<sf::Texture>();
-	player1Tex->loadFromFile("../Engine_WS25/Assets/Textures/" + filename);
+	std::string filename;
+	std::string key;
 
-	/*std::shared_ptr<RenderComponent> render = (playerNumber == 1) ?
-		ComponentFactory::GetInstance().CreateRenderComponent(--insert player1 asset here--) :
-		ComponentFactory::GetInstance().CreateRenderComponent(--insert player2 asset here--);*/
+	if (playerNumber == 1)
+	{
+		key = "Player1";
+		filename = "Player_Ship1.png";
+	}
+	else
+	{
+		key = "Player2";
+		filename = "Player_Ship2.png";
+	}
+
+	AssetManager::getInstance().loadTexture(key, filename);
+	sf::Texture& player1Tex = AssetManager::getInstance().getTexture(key);
 	std::shared_ptr<RenderComponent> render =
-		ComponentFactory::getInstance().createRenderComponent(*player1Tex);
+		ComponentFactory::getInstance().createRenderComponent(player1Tex);
 	player->addComponent(ComponentType::Render, render);
-	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(1));
+	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(playerNumber));
 	return player;
+}
+
+std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f scale)
+{
+	auto background = std::make_unique<GameObject>();
+	std::string filename = "Background.png";
+	std::string key = "Background";
+
+	AssetManager::getInstance().loadTexture(key, filename);
+	sf::Texture& backgroundTex = AssetManager::getInstance().getTexture(key);
+	std::shared_ptr<RenderComponent> render =
+		ComponentFactory::getInstance().createRenderComponent(backgroundTex);
+	std::cout << render->getSprite()->getScale().x << std::endl;
+	render->getSprite()->setScale(scale);
+	std::cout << render->getSprite()->getScale().x << std::endl;
+	sf::Vector2f newPos(render->getSprite()->getGlobalBounds().width/2.f, render->getSprite()->getGlobalBounds().height/2.f);
+	background->addComponent(ComponentType::Render, render);
+	background->moveObject(newPos);
+	return background;
 }

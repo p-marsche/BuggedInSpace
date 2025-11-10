@@ -2,12 +2,6 @@
 
 namespace VecUtils
 {
-	static void normalizeVector2f(sf::Vector2f& vec)
-	{
-		float vecLength = std::sqrtf(vec.x * vec.x + vec.y * vec.y);
-		if (std::abs(vecLength) < 0.05f)
-			return;
-
-		vec = { vec.x / vecLength, vec.y / vecLength };
-	}
+	void normalizeVector2f(sf::Vector2f& vec);
+	sf::Vector2f lerp(sf::Vector2f a, sf::Vector2f b, float t);
 };

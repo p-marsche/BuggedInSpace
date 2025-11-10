@@ -11,6 +11,11 @@ GameObject::GameObject()
 	: m_ID(s_nextID++)
 { }
 
+void GameObject::moveObject(sf::Vector2f moveVec)
+{
+	this->move(moveVec);
+}
+
 void GameObject::update(float deltaTime)
 {
 	for (auto& [ctype, comp] : m_components)
@@ -52,4 +57,14 @@ void GameObject::removeComponent(ComponentType compType)
 		return;
 
 	m_components.erase(compType);
+}
+
+std::shared_ptr<sf::Sprite> GameObject::getSprite()
+{
+	auto rend = m_components.find(ComponentType::Render);
+	if (rend == m_components.end())
+		return nullptr;
+
+	auto render = std::dynamic_pointer_cast<RenderComponent>(rend->second);
+	return render->getSprite();
 }

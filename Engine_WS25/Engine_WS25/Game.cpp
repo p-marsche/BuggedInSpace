@@ -5,6 +5,7 @@
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
+#include "VectorUtils.hpp"
 
 Game::Game()
 	: WIDTH(1280)
@@ -12,6 +13,8 @@ Game::Game()
 	, TITLE("Engine_WS25")
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
+	, m_cameraScrollTime(0.f)
+	, m_maxScrollTime(100.f)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
@@ -38,11 +41,17 @@ void Game::initialize()
 {
 	InputManager::getInstance().init();
 
+	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(2.f, 3.f));
+
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
 
-	/*m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));*/
+	m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
+	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(2));
+
+	m_gameObjects[m_goToIndex["Player1"]]->moveObject(sf::Vector2f(200, 200));
+	m_gameObjects[m_goToIndex["Player2"]]->moveObject(sf::Vector2f(400, 400));
+
 }
 
 void Game::handleEvents()
@@ -70,6 +79,21 @@ void Game::handleEvents()
 
 void Game::update(float deltaTime)
 {
+	// move that to game-state
+	m_cameraScrollTime += deltaTime;
+	moveCamera();
+
+	if (m_cameraScrollTime >= m_maxScrollTime + 3)
+		m_cameraScrollTime = 0.f;
+
+	float leftBorder = m_window->getView().getCenter().x - (m_window->getView().getSize().x / 2.f);
+	float rightBorder = m_window->getView().getCenter().x + (m_window->getView().getSize().x / 2.f);
+	float topBorder = m_window->getView().getCenter().y - (m_window->getView().getSize().y / 2.f);
+	float bottomBorder = m_window->getView().getCenter().y + (m_window->getView().getSize().y / 2.f);
+	sf::Vector2f viewSize(m_window->getView().getSize().x, m_window->getView().getSize().y);
+	keepObjectInView("Player1", sf::Vector2f(leftBorder, topBorder), viewSize);
+	keepObjectInView("Player2", sf::Vector2f(leftBorder, topBorder), viewSize);
+
 	for (auto& go : m_gameObjects)
 		go->update(deltaTime);
 }
@@ -77,6 +101,8 @@ void Game::update(float deltaTime)
 void Game::draw()
 {
 	m_window->clear(sf::Color::Black);
+
+	m_background->draw(*m_window);
 
 	for (auto& go : m_gameObjects)
 		go->draw(*m_window);
@@ -140,4 +166,47 @@ void Game::removeGameObject(std::string name)
 			break;
 		}
 	}
+}
+
+void Game::moveCamera()
+{
+	float bgWidth = m_background->getSprite()->getGlobalBounds().width;
+
+	sf::Vector2f startPos(static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
+	sf::Vector2f endPos(bgWidth - static_cast<float>(WIDTH) / 2.f, static_cast<float>(HEIGHT) / 2.f);
+
+	sf::Vector2f newViewCenter =
+		VecUtils::lerp(startPos, endPos, m_cameraScrollTime / m_maxScrollTime);
+
+	sf::View view = m_window->getView();
+	if (m_maxScrollTime - m_cameraScrollTime >= 0.1f)
+		view.setCenter(newViewCenter);
+	else
+		view.setCenter(startPos);
+
+	m_window->setView(view);
+}
+
+
+// drags Gameobject along if camera would scroll past it
+void Game::keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size)
+{
+	std::shared_ptr<GameObject> go = m_gameObjects[m_goToIndex[key]];
+	auto position = go->getObjectPosition();
+	float width = go->getSprite()->getGlobalBounds().width / 2.f;
+	float height = go->getSprite()->getGlobalBounds().height / 2.f;
+	float xMove = 0;
+	float yMove = 0;
+
+	if (position.x - width <= topLeft.x)
+		xMove = (topLeft.x - (position.x - width));
+	else if (position.x >= topLeft.x + size.x + width)
+		xMove = (topLeft.x + size.x - position.x) + width;
+
+	if (position.y - height <= topLeft.y)
+		yMove = (topLeft.y - (position.y - height));
+	else if (position.y + height >= topLeft.y + size.y)
+		yMove = (topLeft.y +size.y - (position.y + height));
+
+	go->moveObject(sf::Vector2f(xMove, yMove));
 }
