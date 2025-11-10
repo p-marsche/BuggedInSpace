@@ -13,7 +13,7 @@ Game::Game()
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
-	m_aspectRatio = static_cast<float>(WIDTH / HEIGHT);
+	m_aspectRatio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
 }
 
 void Game::run()
@@ -91,7 +91,7 @@ void Game::closeGame()
 // revisit, does weird things to shapes/sprites
 void Game::resizeWindow(int width, int height)
 {
-	float newRatio = static_cast<float>(width / height);
+	float newRatio = static_cast<float>(width) / static_cast<float>(height);
 
 	if (abs(newRatio - m_aspectRatio) < 0.05f)
 		return;
