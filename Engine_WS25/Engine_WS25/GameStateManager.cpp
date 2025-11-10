@@ -3,20 +3,24 @@
 #include "GameState.hpp"
 #include "GameStateManager.hpp"
 
-void GameStateManager::setState(std::string name)
+GameStateManager::GameStateManager() : m_currentState(nullptr) {}
+
+void GameStateManager::setState(GameStateEnum name)
 {
-	if (states.find(name) != states.end())	// check if state exists
+	if (m_states.find(name) != m_states.end())	//< check if state already exists
 	{
-		GameState* state = states[name];
-		if (state != currentState)
-			currentState->exit();
-		currentState = state;
-		currentState->init(this);
+		GameState* state = m_states[name];
+		if (state != m_currentState)
+		{
+			if (m_currentState != nullptr)
+				m_currentState->exit();
+			m_currentState = state;
+			m_currentState->init(this);
+		}
 	}
 }
 
-void GameStateManager::registerState(std::string name, GameState* state)
+void GameStateManager::registerState(GameStateEnum name, GameState* state)
 {
-	if(states.find(name) == states.end())
-		states.emplace(name, state);
+	m_states.try_emplace(name, state);
 }
