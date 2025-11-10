@@ -41,8 +41,11 @@ void Game::initialize()
 	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
 	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
 
-	/*m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::GetInstance().CreatePlayer(2));*/
+	m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
+	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(2));
+
+	m_gameObjects[m_goToIndex["Player1"]]->moveObject(sf::Vector2f(200, 200));
+	m_gameObjects[m_goToIndex["Player2"]]->moveObject(sf::Vector2f(400, 400));
 }
 
 void Game::handleEvents()

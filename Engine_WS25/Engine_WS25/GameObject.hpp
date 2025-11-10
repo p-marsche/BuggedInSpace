@@ -9,6 +9,7 @@ class GameObject : sf::Transformable
 public:
 	GameObject();
 	int getID() const { return m_ID; }
+	void moveObject(sf::Vector2f moveVec);
 	void update(float deltaTime);
 	void draw(sf::RenderWindow& window);
 	void addComponent(ComponentType compType, std::shared_ptr<IComponent> comp);
