@@ -152,6 +152,7 @@ sfml-system.lib
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectFactory.hpp" />
+    <ClInclude Include="GameStateEnum.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="IComponent.hpp" />
     <ClInclude Include="InputComponent.hpp" />
