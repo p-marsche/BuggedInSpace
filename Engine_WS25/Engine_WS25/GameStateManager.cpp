@@ -1,5 +1,5 @@
-#include "GameStateManager.hpp"
 #include "GameState.hpp"
+#include "GameStateManager.hpp"
 
 void GameStateManager::setState(std::string name)
 {

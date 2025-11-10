@@ -1,7 +1,5 @@
-#include "GameObjectFactory.hpp"
 #include "ComponentTypeEnum.hpp"
-#include <iostream>
-#include <filesystem>
+#include "GameObjectFactory.hpp"
 
 GameObjectFactory& GameObjectFactory::getInstance()
 {

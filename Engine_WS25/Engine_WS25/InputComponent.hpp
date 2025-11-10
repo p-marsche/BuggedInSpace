@@ -1,8 +1,8 @@
 #pragma once
+
 #include "IComponent.hpp"
 #include "InputEnum.hpp"
-#include "SFML/Graphics.hpp"
-#include <unordered_map>
+#include "pch.h"
 
 class InputComponent :
     public IComponent

@@ -1,5 +1,4 @@
 #include "GameObject.hpp"
-#include <iostream>
 
 int GameObject::s_nextID = 0;
 

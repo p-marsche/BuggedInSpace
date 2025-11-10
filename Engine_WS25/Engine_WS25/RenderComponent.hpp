@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IComponent.hpp"
-#include <SFML/Graphics.hpp>
+#include "pch.h"
 
 class RenderComponent :
     public IComponent

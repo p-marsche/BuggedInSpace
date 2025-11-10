@@ -1,13 +1,6 @@
 #pragma once
-#include <exception>
-#include <string>
-#include <map>
-#include <vector>
-#include <memory>
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-
+#include "pch.h"
 #include "SpriteSheet.hpp"
 
 // predeclarations for used classes
@@ -24,14 +17,14 @@ struct SpriteSheet;
 
 class AssetNotFoundException : std::exception
 {
-private:
-    std::string m_text;
-
 public:
     AssetNotFoundException();
     AssetNotFoundException(std::string message);
 
     const char* what() const noexcept override;
+
+private:
+    std::string m_text;
 };
 
 class AssetManager
@@ -42,12 +35,21 @@ public:
     AssetManager(const AssetManager&) = delete;
     AssetManager& operator =(const AssetManager&) = delete;
 
+    // if using duplicate key does nothing
     void loadTexture(std::string name, std::string filename);
     void loadSoundBuffer(std::string name, std::string filename);
     void loadFont(std::string name, std::string filename);
     void loadMusic(std::string name, std::string filename);
     void loadImage(std::string name, std::string filename);
     void loadSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames);
+
+    // explicit replace functions
+    void replaceTexture(std::string name, std::string filename);
+    void replaceSoundBuffer(std::string name, std::string filename);
+    void replaceFont(std::string name, std::string filename);
+    void replaceMusic(std::string name, std::string filename);
+    void replaceImage(std::string name, std::string filename);
+    void replaceSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames);
 
     sf::Texture& getTexture(std::string name);
     sf::SoundBuffer& getSoundBuffer(std::string name);
@@ -57,12 +59,12 @@ public:
     SpriteSheet& getSpriteSheet(std::string name);
 
 private:
-    std::map<std::string, std::unique_ptr<sf::Texture>> m_textures;
-    std::map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers;
-    std::map<std::string, std::unique_ptr<sf::Font>> m_fonts;
-    std::map<std::string, std::unique_ptr<sf::Music>> m_music;
-    std::map<std::string, std::unique_ptr<sf::Image>> m_images;
-    std::map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets;
+    std::unordered_map<std::string, std::unique_ptr<sf::Texture>> m_textures;
+    std::unordered_map<std::string, std::unique_ptr<sf::SoundBuffer>> m_soundBuffers;
+    std::unordered_map<std::string, std::unique_ptr<sf::Font>> m_fonts;
+    std::unordered_map<std::string, std::unique_ptr<sf::Music>> m_music;
+    std::unordered_map<std::string, std::unique_ptr<sf::Image>> m_images;
+    std::unordered_map<std::string, std::unique_ptr<SpriteSheet>> m_spriteSheets;
 
     AssetManager() {}
     ~AssetManager() {}
