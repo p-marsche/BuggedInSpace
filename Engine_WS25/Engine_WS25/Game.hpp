@@ -30,4 +30,6 @@ private:
 	void update(float deltaTime);
 	void draw();
 	void removeGameObject(std::string name);
+	void moveCamera();
+	void keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size);
 };
