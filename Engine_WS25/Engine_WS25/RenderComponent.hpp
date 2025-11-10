@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IComponent.hpp"
+
 #include "pch.h"
 
 class RenderComponent :

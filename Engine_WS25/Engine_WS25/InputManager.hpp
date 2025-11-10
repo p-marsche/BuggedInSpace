@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InputEnum.hpp"
+
 #include "pch.h"
 
 class InputManager

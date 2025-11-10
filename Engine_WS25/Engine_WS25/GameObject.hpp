@@ -3,6 +3,7 @@
 #include "IComponent.hpp"
 #include "InputComponent.hpp"
 #include "RenderComponent.hpp"
+
 #include "pch.h"
 
 class GameObject : sf::Transformable

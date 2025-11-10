@@ -2,6 +2,7 @@
 
 #include "IComponent.hpp"
 #include "InputEnum.hpp"
+
 #include "pch.h"
 
 class InputComponent :
