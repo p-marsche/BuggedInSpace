@@ -58,7 +58,7 @@ void AssetManager::replaceTexture(std::string name, std::string filename)
 	{
 		auto extracted = m_textures.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
@@ -74,7 +74,7 @@ void AssetManager::replaceSoundBuffer(std::string name, std::string filename)
 	{
 		auto extracted = m_soundBuffers.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
@@ -90,7 +90,7 @@ void AssetManager::replaceFont(std::string name, std::string filename)
 	{
 		auto extracted = m_fonts.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
@@ -106,7 +106,7 @@ void AssetManager::replaceMusic(std::string name, std::string filename)
 	{
 		auto extracted = m_music.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
@@ -122,7 +122,7 @@ void AssetManager::replaceImage(std::string name, std::string filename)
 	{
 		auto extracted = m_images.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
@@ -138,7 +138,7 @@ void AssetManager::replaceSpriteSheet(std::string name, std::string filename, in
 	{
 		auto extracted = m_spriteSheets.extract(name);
 		auto ptr = extracted.mapped().release();
-		if (ptr != nullptr)
+		if (ptr)
 		{
 			delete ptr;
 			ptr = nullptr;
