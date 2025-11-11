@@ -61,5 +61,22 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f sca
 
 std::shared_ptr<GameObject> GameObjectFactory::createProjectile()
 {
+	auto projectile = std::make_unique<GameObject>();
+	std::string filename = "Player_Projectile1.png";
+	std::string key = "Projectile1";
+	AssetManager::getInstance().loadTexture(key, filename);
 	
+	filename = "Player_Projectile2.png";
+	key = "Projectile2";
+	AssetManager::getInstance().loadTexture(key, filename);
+	// loading both Textures in one go, so we can always swap them as we need later
+
+	sf::Texture& projectileTex = AssetManager::getInstance().getTexture(key);
+	std::shared_ptr<RenderComponent> render =
+		ComponentFactory::getInstance().createRenderComponent(projectileTex);
+	//render->getSprite()->setScale();
+	projectile->addComponent(ComponentType::Render, render);
+	projectile->addComponent(ComponentType::Input, ComponentFactory::getInstance().createAiInputComponent());
+
+	return projectile;
 }

@@ -43,14 +43,11 @@ void Game::initialize()
 
 	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(2.f, 3.f));
 
-	m_goToIndex.emplace("Player1", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(1));
+	m_gameObjects.emplace("Player1", GameObjectFactory::getInstance().createPlayer(1));
+	m_gameObjects.emplace("Player2", GameObjectFactory::getInstance().createPlayer(1));
 
-	m_goToIndex.emplace("Player2", static_cast<int>(m_gameObjects.size()));
-	m_gameObjects.emplace_back(GameObjectFactory::getInstance().createPlayer(2));
-
-	m_gameObjects[m_goToIndex["Player1"]]->moveObject(sf::Vector2f(200, 200));
-	m_gameObjects[m_goToIndex["Player2"]]->moveObject(sf::Vector2f(400, 400));
+	m_gameObjects["Player1"]->moveObject(sf::Vector2f(200, 200));
+	m_gameObjects["Player2"]->moveObject(sf::Vector2f(400, 400));
 
 }
 
@@ -94,7 +91,7 @@ void Game::update(float deltaTime)
 	keepObjectInView("Player1", sf::Vector2f(leftBorder, topBorder), viewSize);
 	keepObjectInView("Player2", sf::Vector2f(leftBorder, topBorder), viewSize);
 
-	for (auto& go : m_gameObjects)
+	for (auto& [_, go] : m_gameObjects)
 		go->update(deltaTime);
 }
 
@@ -104,7 +101,7 @@ void Game::draw()
 
 	m_background->draw(*m_window);
 
-	for (auto& go : m_gameObjects)
+	for (auto& [_, go] : m_gameObjects)
 		go->draw(*m_window);
 
 	m_window->display();
@@ -147,25 +144,11 @@ void Game::resizeWindow(int width, int height)
 
 void Game::removeGameObject(std::string name)
 {
-	auto res = m_goToIndex.find(name);
-	if (res == m_goToIndex.end())
+	auto res = m_gameObjects.find(name);
+	if (res == m_gameObjects.end())
 		return;
 
-	// replace found object with last object in vec, then remove last object
-	m_gameObjects.at(res->second) = m_gameObjects.back();
-	m_gameObjects.pop_back();
-	
-
-	// find former last object, change its index(=value) to the new index(=value of searched object)
-	for (auto& [key, val] : m_goToIndex)
-	{
-		if (val == m_gameObjects.size())
-		{
-			m_goToIndex.at(key) = res->second;
-			m_goToIndex.erase(name);
-			break;
-		}
-	}
+	m_gameObjects.erase(name);
 }
 
 void Game::moveCamera()
@@ -191,7 +174,7 @@ void Game::moveCamera()
 // drags Gameobject along if camera would scroll past it
 void Game::keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size)
 {
-	std::shared_ptr<GameObject> go = m_gameObjects[m_goToIndex[key]];
+	std::shared_ptr<GameObject> go = m_gameObjects[key];
 	auto position = go->getObjectPosition();
 	float width = go->getSprite()->getGlobalBounds().width / 2.f;
 	float height = go->getSprite()->getGlobalBounds().height / 2.f;

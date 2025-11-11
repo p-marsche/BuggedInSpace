@@ -17,11 +17,7 @@ private:
 	sf::Clock m_clock;
 	std::unique_ptr<sf::RenderWindow> m_window;
 	std::shared_ptr<GameObject> m_background;
-	std::vector<std::shared_ptr<GameObject> > m_gameObjects;
-	// replace std::string with an enum of important go's (player(s), etc)?
-	std::unordered_map<std::string, int> m_goToIndex;
-	// ==> wouldn't it be better to just have important GOs as seperate references?
-	// or could also get rid of the vector and just use a map with strings/enums as key and GO as value
+	std::unordered_map<std::string, std::shared_ptr<GameObject> > m_gameObjects;
 
 	void closeGame();
 	void resizeWindow(int width, int height);

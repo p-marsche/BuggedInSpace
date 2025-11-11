@@ -1,9 +1,11 @@
 #include "pch.h"
 
+#include "AiInputComponent.hpp"
 #include "IComponent.hpp"
 #include "InputComponent.hpp"
 #include "GameObject.hpp"
 #include "RenderComponent.hpp"
+#include "VectorUtils.hpp"
 
 int GameObject::s_nextID = 0;
 
@@ -67,4 +69,15 @@ std::shared_ptr<sf::Sprite> GameObject::getSprite()
 
 	auto render = std::dynamic_pointer_cast<RenderComponent>(rend->second);
 	return render->getSprite();
+}
+
+void GameObject::SetMoveDirection(sf::Vector2f direction)
+{
+	auto input = m_components.find(ComponentType::Input);
+	if (input == m_components.end())
+		return;
+
+	auto inputComp = std::dynamic_pointer_cast<AiInputComponent>(input->second);
+	VecUtils::normalizeVector2f(direction);
+	inputComp->SetMoveDirection(direction);
 }
