@@ -56,6 +56,9 @@
     <ClCompile Include="AiInputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="AiInputComponent.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

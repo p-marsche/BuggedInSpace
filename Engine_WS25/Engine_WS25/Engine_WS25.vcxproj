@@ -148,6 +148,7 @@ sfml-system.lib
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="ComponentFactory.hpp" />
     <ClInclude Include="ComponentTypeEnum.hpp" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="ErrorWindow.hpp" />
     <ClInclude Include="Game.hpp" />
@@ -168,6 +169,7 @@ sfml-system.lib
     <ClCompile Include="AiInputComponent.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="Config.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="ErrorWindow.cpp" />
     <ClCompile Include="Game.cpp" />
