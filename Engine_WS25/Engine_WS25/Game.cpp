@@ -94,22 +94,13 @@ void Game::update(float deltaTime)
 	for (auto& [_, go] : m_gameObjects)
 		go->update(deltaTime);
 
-	if (m_gameObjects["Player1"]->isShooting())
-	{
-		if (m_projectileCount > 100)
-			m_projectileCount = 0;
+	if (m_projectileCount > 100)
+		m_projectileCount = 0;
 
-		std::string newKey = "Projectile" + m_projectileCount;
-		std::shared_ptr<GameObject> newProjectile = GameObjectFactory::getInstance().createProjectile(sf::Vector2f(1.f, 0.f));
-		newProjectile->getSprite()->setTexture(AssetManager::getInstance().getTexture("Projectile1"));
-		sf::Vector2f currPos = newProjectile->getObjectPosition();
-		sf::Vector2f playerPos = m_gameObjects["Player1"]->getObjectPosition();
-		float offset =
-			m_gameObjects["Player1"]->getSprite()->getGlobalBounds().width / 2.f + newProjectile->getSprite()->getGlobalBounds().width;
-		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
-		m_gameObjects.emplace(newKey, newProjectile);
-		m_projectileCount++;
-	}
+	
+
+	CheckPlayerShooting(1);
+	CheckPlayerShooting(2);
 }
 
 void Game::draw()
@@ -217,4 +208,26 @@ void Game::keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f 
 		yMove = (topLeft.y +size.y - (position.y + height));
 
 	go->moveObject(sf::Vector2f(xMove, yMove));
+}
+
+void Game::CheckPlayerShooting(int playerNumber)
+{
+	if (playerNumber != 1 && playerNumber != 2)
+		return;
+
+	std::string key = "Player" + std::to_string(playerNumber);
+	if (m_gameObjects[key]->isShooting())
+	{
+
+		std::string newKey = "Projectile" + std::to_string(m_projectileCount);
+		std::shared_ptr<GameObject> newProjectile = GameObjectFactory::getInstance().createProjectile(sf::Vector2f(1.f, 0.f));
+		newProjectile->getSprite()->setTexture(AssetManager::getInstance().getTexture("Projectile" + std::to_string(playerNumber)));
+		sf::Vector2f currPos = newProjectile->getObjectPosition();
+		sf::Vector2f playerPos = m_gameObjects[key]->getObjectPosition();
+		float offset =
+			m_gameObjects[key]->getSprite()->getGlobalBounds().width / 2.f + newProjectile->getSprite()->getGlobalBounds().width;
+		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
+		m_gameObjects.emplace(newKey, newProjectile);
+		m_projectileCount++;
+	}
 }

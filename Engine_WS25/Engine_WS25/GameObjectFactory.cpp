@@ -22,16 +22,9 @@ std::shared_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 	std::string filename;
 	std::string key;
 
-	if (playerNumber == 1)
-	{
-		key = "Player1";
-		filename = "Player_Ship1.png";
-	}
-	else
-	{
-		key = "Player2";
-		filename = "Player_Ship2.png";
-	}
+	std::string num = std::to_string(playerNumber);
+	key = "Player" + num;
+	filename = "Player_Ship" + num + ".png";
 
 	AssetManager::getInstance().loadTexture(key, filename);
 	sf::Texture& player1Tex = AssetManager::getInstance().getTexture(key);
