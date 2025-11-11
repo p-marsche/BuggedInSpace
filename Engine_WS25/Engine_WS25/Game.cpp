@@ -14,7 +14,7 @@ Game::Game()
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
 	, m_cameraScrollTime(0.f)
-	, m_maxScrollTime(100.f)
+	, m_maxScrollTime(10.f)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
@@ -181,7 +181,7 @@ void Game::moveCamera()
 	sf::View view = m_window->getView();
 	if (m_maxScrollTime - m_cameraScrollTime >= 0.1f)
 		view.setCenter(newViewCenter);
-	else
+	else if (m_cameraScrollTime == 0)
 		view.setCenter(startPos);
 
 	m_window->setView(view);
@@ -197,6 +197,14 @@ void Game::keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f 
 	float height = go->getSprite()->getGlobalBounds().height / 2.f;
 	float xMove = 0;
 	float yMove = 0;
+
+	// set players back to start on background-looping
+	if (m_cameraScrollTime == 0)
+		if (key == "Player1" || key == "Player2")
+		{
+			go->moveObject(sf::Vector2f(-1 * (position.x - width), 0.f));
+			return;
+		}
 
 	if (position.x - width <= topLeft.x)
 		xMove = (topLeft.x - (position.x - width));
