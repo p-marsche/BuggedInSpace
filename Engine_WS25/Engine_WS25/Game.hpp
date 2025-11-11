@@ -30,4 +30,5 @@ private:
 	void moveCamera();
 	void keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size);
 	void CheckPlayerShooting(int playerNumber);
+	void CheckProjectilesInView(float xMax);
 };

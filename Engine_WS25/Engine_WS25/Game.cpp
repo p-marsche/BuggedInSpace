@@ -97,8 +97,7 @@ void Game::update(float deltaTime)
 	if (m_projectileCount > 100)
 		m_projectileCount = 0;
 
-	
-
+	CheckProjectilesInView(rightBorder);
 	CheckPlayerShooting(1);
 	CheckPlayerShooting(2);
 }
@@ -229,5 +228,18 @@ void Game::CheckPlayerShooting(int playerNumber)
 		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
 		m_gameObjects.emplace(newKey, newProjectile);
 		m_projectileCount++;
+	}
+}
+
+void Game::CheckProjectilesInView(float xMax)
+{
+	std::string projectile = "Projectile";
+	for (auto& [key, go] : m_gameObjects)
+	{
+		if (key.compare(0, projectile.length(), projectile) == 0)
+		{
+			if (m_gameObjects[key]->getObjectPosition().x > xMax + 200.f)
+				m_gameObjects.erase(key);
+		}
 	}
 }
