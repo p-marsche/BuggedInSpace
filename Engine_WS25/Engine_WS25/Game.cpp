@@ -5,6 +5,7 @@
 #include "Game.hpp"
 #include "GameObject.hpp"
 #include "GameObjectFactory.hpp"
+#include "GameObjectManager.hpp"
 #include "VectorUtils.hpp"
 
 Game::Game()
@@ -41,6 +42,7 @@ void Game::run()
 void Game::initialize()
 {
 	InputManager::getInstance().init();
+	GameObjectManager::getInstance().init();
 
 	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(2.f, 3.f));
 
@@ -49,6 +51,9 @@ void Game::initialize()
 
 	m_gameObjects["Player1"]->moveObject(sf::Vector2f(200, 200));
 	m_gameObjects["Player2"]->moveObject(sf::Vector2f(400, 400));
+
+	GameObjectManager::getInstance().registerPlayer("Player1", m_gameObjects["Player1"]);
+	GameObjectManager::getInstance().registerPlayer("Player2", m_gameObjects["Player2"]);
 }
 
 void Game::handleEvents()
@@ -97,7 +102,8 @@ void Game::update(float deltaTime)
 	if (m_projectileCount > 100)
 		m_projectileCount = 0;
 
-	CheckProjectilesInView(rightBorder);
+	//CheckProjectilesInView(rightBorder);
+	GameObjectManager::getInstance().update(deltaTime);
 	CheckPlayerShooting(1);
 	CheckPlayerShooting(2);
 }
@@ -108,8 +114,13 @@ void Game::draw()
 
 	m_background->draw(*m_window);
 
-	for (auto& [_, go] : m_gameObjects)
-		go->draw(*m_window);
+	/*for (auto& [_, go] : m_gameObjects)
+		go->draw(*m_window);*/
+
+	m_gameObjects["Player1"]->draw(*m_window);
+	m_gameObjects["Player2"]->draw(*m_window);
+
+	GameObjectManager::getInstance().draw(*m_window);
 
 	m_window->display();
 }
@@ -216,6 +227,10 @@ void Game::CheckPlayerShooting(int playerNumber)
 
 	std::string key = "Player" + std::to_string(playerNumber);
 	if (m_gameObjects[key]->isShooting())
+		GameObjectManager::getInstance().activateProjectile(playerNumber);
+
+	/*std::string key = "Player" + std::to_string(playerNumber);
+	if (m_gameObjects[key]->isShooting())
 	{
 
 		std::string newKey = "Projectile" + std::to_string(m_projectileCount);
@@ -228,18 +243,19 @@ void Game::CheckPlayerShooting(int playerNumber)
 		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
 		m_gameObjects.emplace(newKey, newProjectile);
 		m_projectileCount++;
-	}
+	}*/
 }
 
-void Game::CheckProjectilesInView(float xMax)
-{
-	std::string projectile = "Projectile";
-	for (auto& [key, go] : m_gameObjects)
-	{
-		if (key.compare(0, projectile.length(), projectile) == 0)
-		{
-			if (m_gameObjects[key]->getObjectPosition().x > xMax + 200.f)
-				m_gameObjects.erase(key);
-		}
-	}
-}
+//void Game::CheckProjectilesInView(float xMax)
+//{
+//	std::string projectile = "Projectile";
+//	for (auto& [key, go] : m_gameObjects)
+//	{
+//		// checks if key starts with "Projectile"
+//		if (key.compare(0, projectile.length(), projectile) == 0)
+//		{
+//			if (m_gameObjects[key]->getObjectPosition().x > xMax + 200.f)
+//				m_gameObjects.erase(key);
+//		}
+//	}
+//}

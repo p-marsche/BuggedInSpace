@@ -8,22 +8,22 @@
 
 class GameObject;
 
-class GameobjectManager
+class GameObjectManager
 {
 public:
-	static GameobjectManager& getInstance();
+	static GameObjectManager& getInstance();
     void init();
     void update(float deltaTime);
     void draw(sf::RenderWindow& window);
     void registerPlayer(std::string key, std::shared_ptr<GameObject> go);
-    void activateProjectile(sf::Vector2f direction, int playerNumber);
+    void activateProjectile(int playerNumber);
 
 private:
     std::unordered_map<std::string, std::shared_ptr<GameObject> > m_playerObjects;
     std::unordered_map<std::shared_ptr<GameObject>, bool> m_projectilePool;
 
-    GameobjectManager() = default;
-    ~GameobjectManager() = default;
-    GameobjectManager(const GameobjectManager& rhv) = delete;
-    GameobjectManager& operator =(GameobjectManager const&) = delete;
+    GameObjectManager() = default;
+    ~GameObjectManager() = default;
+    GameObjectManager(const GameObjectManager& rhv) = delete;
+    GameObjectManager& operator =(GameObjectManager const&) = delete;
 };

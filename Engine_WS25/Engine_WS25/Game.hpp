@@ -11,7 +11,7 @@ public:
 private:
 	const int WIDTH;
 	const int HEIGHT;
-	const std::string TITLE = "Engine_WS25";
+	const std::string TITLE;
 	float m_aspectRatio;
 	float m_cameraScrollTime, m_maxScrollTime;
 	int m_projectileCount;
