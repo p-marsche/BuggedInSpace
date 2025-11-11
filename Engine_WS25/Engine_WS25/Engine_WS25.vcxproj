@@ -154,6 +154,7 @@ sfml-system.lib
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectFactory.hpp" />
+    <ClInclude Include="GameobjectManager.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="IComponent.hpp" />
     <ClInclude Include="InputComponent.hpp" />
@@ -175,6 +176,7 @@ sfml-system.lib
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameobjectManager.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameState.hpp" />
     <ClCompile Include="GameStateManager.cpp" />
