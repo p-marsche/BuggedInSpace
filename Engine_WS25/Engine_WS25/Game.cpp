@@ -14,7 +14,7 @@ Game::Game()
 	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
 	, m_clock()
 	, m_cameraScrollTime(0.f)
-	, m_maxScrollTime(10.f)
+	, m_maxScrollTime(100.f)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
