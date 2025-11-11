@@ -18,7 +18,9 @@ std::shared_ptr<PlayerInputComponent> ComponentFactory::createPlayerInputCompone
 	return std::make_shared<PlayerInputComponent>(playerNumber);
 }
 
-std::shared_ptr<AiInputComponent> ComponentFactory::createAiInputComponent()
+std::shared_ptr<AiInputComponent> ComponentFactory::createAiInputComponent(sf::Vector2f direction)
 {
-	return std::make_shared<AiInputComponent>();
+	auto comp = std::make_shared<AiInputComponent>();
+	comp->SetMoveDirection(direction);
+	return comp;
 }

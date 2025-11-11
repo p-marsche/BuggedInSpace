@@ -59,7 +59,7 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f sca
 	return background;
 }
 
-std::shared_ptr<GameObject> GameObjectFactory::createProjectile()
+std::shared_ptr<GameObject> GameObjectFactory::createProjectile(sf::Vector2f moveDirection)
 {
 	auto projectile = std::make_unique<GameObject>();
 	std::string filename = "Player_Projectile1.png";
@@ -76,7 +76,8 @@ std::shared_ptr<GameObject> GameObjectFactory::createProjectile()
 		ComponentFactory::getInstance().createRenderComponent(projectileTex);
 	//render->getSprite()->setScale();
 	projectile->addComponent(ComponentType::Render, render);
-	projectile->addComponent(ComponentType::Input, ComponentFactory::getInstance().createAiInputComponent());
+	projectile->addComponent(ComponentType::Input, ComponentFactory::getInstance().createAiInputComponent(moveDirection));
+	projectile->setMovespeed(5.f);
 
 	return projectile;
 }

@@ -11,9 +11,10 @@ public:
 private:
 	const int WIDTH;
 	const int HEIGHT;
+	const std::string TITLE = "Engine_WS25";
 	float m_aspectRatio;
 	float m_cameraScrollTime, m_maxScrollTime;
-	const std::string TITLE = "Engine_WS25";
+	int m_projectileCount;
 	sf::Clock m_clock;
 	std::unique_ptr<sf::RenderWindow> m_window;
 	std::shared_ptr<GameObject> m_background;

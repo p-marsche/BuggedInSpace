@@ -15,6 +15,7 @@ Game::Game()
 	, m_clock()
 	, m_cameraScrollTime(0.f)
 	, m_maxScrollTime(100.f)
+	, m_projectileCount(0)
 {
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
@@ -44,11 +45,10 @@ void Game::initialize()
 	m_background = GameObjectFactory::getInstance().createBackground(sf::Vector2f(2.f, 3.f));
 
 	m_gameObjects.emplace("Player1", GameObjectFactory::getInstance().createPlayer(1));
-	m_gameObjects.emplace("Player2", GameObjectFactory::getInstance().createPlayer(1));
+	m_gameObjects.emplace("Player2", GameObjectFactory::getInstance().createPlayer(2));
 
 	m_gameObjects["Player1"]->moveObject(sf::Vector2f(200, 200));
 	m_gameObjects["Player2"]->moveObject(sf::Vector2f(400, 400));
-
 }
 
 void Game::handleEvents()
@@ -93,6 +93,23 @@ void Game::update(float deltaTime)
 
 	for (auto& [_, go] : m_gameObjects)
 		go->update(deltaTime);
+
+	if (m_gameObjects["Player1"]->isShooting())
+	{
+		if (m_projectileCount > 100)
+			m_projectileCount = 0;
+
+		std::string newKey = "Projectile" + m_projectileCount;
+		std::shared_ptr<GameObject> newProjectile = GameObjectFactory::getInstance().createProjectile(sf::Vector2f(1.f, 0.f));
+		newProjectile->getSprite()->setTexture(AssetManager::getInstance().getTexture("Projectile1"));
+		sf::Vector2f currPos = newProjectile->getObjectPosition();
+		sf::Vector2f playerPos = m_gameObjects["Player1"]->getObjectPosition();
+		float offset =
+			m_gameObjects["Player1"]->getSprite()->getGlobalBounds().width / 2.f + newProjectile->getSprite()->getGlobalBounds().width;
+		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
+		m_gameObjects.emplace(newKey, newProjectile);
+		m_projectileCount++;
+	}
 }
 
 void Game::draw()

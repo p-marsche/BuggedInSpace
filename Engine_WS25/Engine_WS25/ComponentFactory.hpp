@@ -10,7 +10,7 @@ public:
 	static ComponentFactory& getInstance();
     std::shared_ptr<RenderComponent> createRenderComponent(sf::Texture& texture);
     std::shared_ptr<PlayerInputComponent> createPlayerInputComponent(int playerNumber);
-    std::shared_ptr<AiInputComponent> createAiInputComponent();
+    std::shared_ptr<AiInputComponent> createAiInputComponent(sf::Vector2f moveDirection);
 
 private:
     ComponentFactory() = default;
