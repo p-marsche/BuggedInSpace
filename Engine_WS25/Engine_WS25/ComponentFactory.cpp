@@ -10,10 +10,15 @@ ComponentFactory& ComponentFactory::getInstance()
 
 std::shared_ptr<RenderComponent> ComponentFactory::createRenderComponent(sf::Texture& texture)
 {
-	return std::make_unique<RenderComponent>(texture);
+	return std::make_shared<RenderComponent>(texture);
 }
 
-std::shared_ptr<InputComponent> ComponentFactory::createInputComponent(int playerNumber)
+std::shared_ptr<PlayerInputComponent> ComponentFactory::createPlayerInputComponent(int playerNumber)
 {
-	return std::make_unique<InputComponent>(playerNumber);
+	return std::make_shared<PlayerInputComponent>(playerNumber);
+}
+
+std::shared_ptr<AiInputComponent> ComponentFactory::createAiInputComponent()
+{
+	return std::make_shared<AiInputComponent>();
 }

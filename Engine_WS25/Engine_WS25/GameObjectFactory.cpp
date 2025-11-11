@@ -38,7 +38,7 @@ std::shared_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 	std::shared_ptr<RenderComponent> render =
 		ComponentFactory::getInstance().createRenderComponent(player1Tex);
 	player->addComponent(ComponentType::Render, render);
-	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(playerNumber));
+	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createPlayerInputComponent(playerNumber));
 	return player;
 }
 
@@ -52,11 +52,14 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f sca
 	sf::Texture& backgroundTex = AssetManager::getInstance().getTexture(key);
 	std::shared_ptr<RenderComponent> render =
 		ComponentFactory::getInstance().createRenderComponent(backgroundTex);
-	std::cout << render->getSprite()->getScale().x << std::endl;
 	render->getSprite()->setScale(scale);
-	std::cout << render->getSprite()->getScale().x << std::endl;
 	sf::Vector2f newPos(render->getSprite()->getGlobalBounds().width/2.f, render->getSprite()->getGlobalBounds().height/2.f);
 	background->addComponent(ComponentType::Render, render);
 	background->moveObject(newPos);
 	return background;
+}
+
+std::shared_ptr<GameObject> GameObjectFactory::createProjectile()
+{
+	
 }
