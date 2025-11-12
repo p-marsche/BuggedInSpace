@@ -16,9 +16,13 @@ int main()
 		InputManager::getInstance().init();
 
 		std::cout << "Press ESC key to close window" << std::endl;
-		gameStateManager.registerState(GameStateEnum::Game, new Game());
+		// disabled for now cause causes memory leak
+		/*gameStateManager.registerState(GameStateEnum::Game, new Game());
 		gameStateManager.registerState(GameStateEnum::Menu, new TestMenu());
-		gameStateManager.setState(GameStateEnum::Menu);
+		gameStateManager.setState(GameStateEnum::Menu);*/
+		//instead just run Game
+		Game game = Game();
+		game.run();
 		std::cout << "All done" << std::endl;
 	}
 	catch (std::exception e)
