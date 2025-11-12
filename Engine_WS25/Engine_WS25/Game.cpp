@@ -104,8 +104,8 @@ void Game::update(float deltaTime)
 
 	//CheckProjectilesInView(rightBorder);
 	GameObjectManager::getInstance().update(deltaTime);
-	CheckPlayerShooting(1);
-	CheckPlayerShooting(2);
+	checkPlayerShooting(1);
+	checkPlayerShooting(2);
 }
 
 void Game::draw()
@@ -220,7 +220,7 @@ void Game::keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f 
 	go->moveObject(sf::Vector2f(xMove, yMove));
 }
 
-void Game::CheckPlayerShooting(int playerNumber)
+void Game::checkPlayerShooting(int playerNumber)
 {
 	if (playerNumber != 1 && playerNumber != 2)
 		return;
@@ -228,34 +228,4 @@ void Game::CheckPlayerShooting(int playerNumber)
 	std::string key = "Player" + std::to_string(playerNumber);
 	if (m_gameObjects[key]->isShooting())
 		GameObjectManager::getInstance().activateProjectile(playerNumber);
-
-	/*std::string key = "Player" + std::to_string(playerNumber);
-	if (m_gameObjects[key]->isShooting())
-	{
-
-		std::string newKey = "Projectile" + std::to_string(m_projectileCount);
-		std::shared_ptr<GameObject> newProjectile = GameObjectFactory::getInstance().createProjectile(sf::Vector2f(1.f, 0.f));
-		newProjectile->getSprite()->setTexture(AssetManager::getInstance().getTexture("Projectile" + std::to_string(playerNumber)));
-		sf::Vector2f currPos = newProjectile->getObjectPosition();
-		sf::Vector2f playerPos = m_gameObjects[key]->getObjectPosition();
-		float offset =
-			m_gameObjects[key]->getSprite()->getGlobalBounds().width / 2.f + newProjectile->getSprite()->getGlobalBounds().width;
-		newProjectile->moveObject(playerPos - currPos + sf::Vector2f(offset, 0.f));
-		m_gameObjects.emplace(newKey, newProjectile);
-		m_projectileCount++;
-	}*/
 }
-
-//void Game::CheckProjectilesInView(float xMax)
-//{
-//	std::string projectile = "Projectile";
-//	for (auto& [key, go] : m_gameObjects)
-//	{
-//		// checks if key starts with "Projectile"
-//		if (key.compare(0, projectile.length(), projectile) == 0)
-//		{
-//			if (m_gameObjects[key]->getObjectPosition().x > xMax + 200.f)
-//				m_gameObjects.erase(key);
-//		}
-//	}
-//}
