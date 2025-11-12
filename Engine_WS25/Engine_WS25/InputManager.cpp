@@ -15,6 +15,8 @@ void InputManager::init()
     m_inputsPlayer1.emplace(InputEnum::Down, sf::Keyboard::Key::S);
     m_inputsPlayer1.emplace(InputEnum::Right, sf::Keyboard::Key::D);
     m_inputsPlayer1.emplace(InputEnum::Shoot, sf::Keyboard::Key::Space);
+    m_inputsPlayer1.emplace(InputEnum::Exit, sf::Keyboard::Key::Escape);
+    m_inputsPlayer1.emplace(InputEnum::MenuTest, sf::Keyboard::Key::Enter);
 
     m_inputsPlayer2.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
     m_inputsPlayer2.emplace(InputEnum::Left, sf::Keyboard::Key::Left);

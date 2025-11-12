@@ -7,6 +7,8 @@ enum class InputEnum
 	Down,
 	Right,
 	Shoot,
+	Exit,
+	MenuTest,
 
 	LAST
 };

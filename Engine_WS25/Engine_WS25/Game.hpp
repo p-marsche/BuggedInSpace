@@ -1,12 +1,17 @@
 #pragma once
 
+#include "GameState.hpp"
+
 class GameObject;
 
-class Game
+class Game : public GameState
 {
 public:
 	Game();
-	void run();
+	virtual void run() override;
+	virtual void exit() override;
+	virtual void update(float deltaTime) override;
+	virtual void render() override;
 
 private:
 	const int WIDTH;
@@ -20,12 +25,9 @@ private:
 	std::shared_ptr<GameObject> m_background;
 	std::unordered_map<std::string, std::shared_ptr<GameObject> > m_gameObjects;
 
-	void closeGame();
 	void resizeWindow(int width, int height);
 	void initialize();
 	void handleEvents();
-	void update(float deltaTime);
-	void draw();
 	void removeGameObject(std::string name);
 	void moveCamera();
 	void keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size);
