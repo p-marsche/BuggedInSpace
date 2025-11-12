@@ -13,5 +13,6 @@ void GameState::init(GameStateManager* manager)
 
 void GameState::changeState(GameStateEnum state) const
 {
-	m_manager->setState(state);
+	if(m_manager)
+		m_manager->setState(state);
 }
