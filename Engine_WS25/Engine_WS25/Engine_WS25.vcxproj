@@ -143,6 +143,7 @@ sfml-system.lib
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AiInputComponent.hpp" />
     <ClInclude Include="AnimationType.hpp" />
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="ComponentFactory.hpp" />
@@ -153,17 +154,20 @@ sfml-system.lib
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectFactory.hpp" />
+    <ClInclude Include="GameobjectManager.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="IComponent.hpp" />
     <ClInclude Include="InputComponent.hpp" />
     <ClInclude Include="InputEnum.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PlayerInputComponent.hpp" />
     <ClInclude Include="RenderComponent.hpp" />
     <ClInclude Include="VectorUtils.hpp" />
     <ClInclude Include="SpriteSheet.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AiInputComponent.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -172,6 +176,7 @@ sfml-system.lib
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="GameobjectManager.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameState.hpp" />
     <ClCompile Include="GameStateManager.cpp" />
@@ -182,6 +187,7 @@ sfml-system.lib
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PlayerInputComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="VectorUtils.cpp" />

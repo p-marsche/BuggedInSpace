@@ -56,12 +56,6 @@
     <ClCompile Include="AiInputComponent.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameobjectManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.hpp">
@@ -121,12 +115,6 @@
     </ClInclude>
     <ClInclude Include="AiInputComponent.hpp">
       <Filter>Header Files\GameObjects\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameobjectManager.hpp">
-      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

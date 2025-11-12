@@ -8,6 +8,7 @@ public:
     static GameObjectFactory& getInstance();
     std::shared_ptr<GameObject> createPlayer(int playerNumber);
     std::shared_ptr<GameObject> createBackground(sf::Vector2f scale);
+    std::shared_ptr<GameObject> createProjectile(sf::Vector2f moveDirection);
 
 private:
     GameObjectFactory() = default;

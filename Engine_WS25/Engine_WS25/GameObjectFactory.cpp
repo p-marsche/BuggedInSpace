@@ -22,23 +22,16 @@ std::shared_ptr<GameObject> GameObjectFactory::createPlayer(int playerNumber)
 	std::string filename;
 	std::string key;
 
-	if (playerNumber == 1)
-	{
-		key = "Player1";
-		filename = "Player_Ship1.png";
-	}
-	else
-	{
-		key = "Player2";
-		filename = "Player_Ship2.png";
-	}
+	std::string num = std::to_string(playerNumber);
+	key = "Player" + num;
+	filename = "Player_Ship" + num + ".png";
 
 	AssetManager::getInstance().loadTexture(key, filename);
 	sf::Texture& player1Tex = AssetManager::getInstance().getTexture(key);
 	std::shared_ptr<RenderComponent> render =
 		ComponentFactory::getInstance().createRenderComponent(player1Tex);
 	player->addComponent(ComponentType::Render, render);
-	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createInputComponent(playerNumber));
+	player->addComponent(ComponentType::Input, ComponentFactory::getInstance().createPlayerInputComponent(playerNumber));
 	return player;
 }
 
@@ -52,11 +45,32 @@ std::shared_ptr<GameObject> GameObjectFactory::createBackground(sf::Vector2f sca
 	sf::Texture& backgroundTex = AssetManager::getInstance().getTexture(key);
 	std::shared_ptr<RenderComponent> render =
 		ComponentFactory::getInstance().createRenderComponent(backgroundTex);
-	std::cout << render->getSprite()->getScale().x << std::endl;
 	render->getSprite()->setScale(scale);
-	std::cout << render->getSprite()->getScale().x << std::endl;
 	sf::Vector2f newPos(render->getSprite()->getGlobalBounds().width/2.f, render->getSprite()->getGlobalBounds().height/2.f);
 	background->addComponent(ComponentType::Render, render);
 	background->moveObject(newPos);
 	return background;
+}
+
+std::shared_ptr<GameObject> GameObjectFactory::createProjectile(sf::Vector2f moveDirection)
+{
+	auto projectile = std::make_unique<GameObject>();
+	std::string filename = "Player_Projectile1.png";
+	std::string key = "Projectile1";
+	AssetManager::getInstance().loadTexture(key, filename);
+	
+	filename = "Player_Projectile2.png";
+	key = "Projectile2";
+	AssetManager::getInstance().loadTexture(key, filename);
+	// loading both Textures in one go, so we can always swap them as we need later
+
+	sf::Texture& projectileTex = AssetManager::getInstance().getTexture(key);
+	std::shared_ptr<RenderComponent> render =
+		ComponentFactory::getInstance().createRenderComponent(projectileTex);
+	//render->getSprite()->setScale();
+	projectile->addComponent(ComponentType::Render, render);
+	projectile->addComponent(ComponentType::Input, ComponentFactory::getInstance().createAiInputComponent(moveDirection));
+	projectile->setMovespeed(5.f);
+
+	return projectile;
 }

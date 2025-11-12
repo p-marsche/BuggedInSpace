@@ -7,13 +7,12 @@ class InputComponent :
     public IComponent
 {
 public:
-    InputComponent(int playerNumber);
-    ~InputComponent() = default;
-    void update(float deltaTime) override;
-    sf::Vector2f getMoveInput() { return m_moveInput; }
+    InputComponent();
+    virtual ~InputComponent() = default;
+    void virtual update(float deltaTime) override { return; }
+    sf::Vector2f getMoveInput() const { return m_moveInput; }
 
-private:
-    int m_playerNumber;
+protected:
     sf::Vector2f m_moveInput;
     std::unordered_map<InputEnum, sf::Vector2f> m_moveInputs;
 };
