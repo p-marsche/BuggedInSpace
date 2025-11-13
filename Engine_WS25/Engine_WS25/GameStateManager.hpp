@@ -1,15 +1,17 @@
 #pragma once
 
+#include "GameStateEnum.hpp"
+
 class GameState;
 
 class GameStateManager
 {
 public:
-	GameStateManager() : currentState(nullptr) {}
-	void setState(std::string name);
-	void registerState(std::string name, GameState* state);
+	GameStateManager();
+	void setState(GameStateEnum name);
+	void registerState(GameStateEnum name, GameState* state);
 
 private:
-	std::map<std::string, GameState*> states;
-	GameState* currentState;
+	std::map<GameStateEnum, GameState*> m_states;
+	GameState* m_currentState;
 };

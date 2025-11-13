@@ -154,6 +154,7 @@ sfml-system.lib
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="GameObjectFactory.hpp" />
+    <ClInclude Include="GameStateEnum.hpp" />
     <ClInclude Include="GameobjectManager.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="IComponent.hpp" />
@@ -163,6 +164,7 @@ sfml-system.lib
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerInputComponent.hpp" />
     <ClInclude Include="RenderComponent.hpp" />
+    <ClInclude Include="TestMenu.hpp" />
     <ClInclude Include="VectorUtils.hpp" />
     <ClInclude Include="SpriteSheet.hpp" />
   </ItemGroup>
@@ -178,7 +180,8 @@ sfml-system.lib
     <ClCompile Include="GameObjectFactory.cpp" />
     <ClCompile Include="GameobjectManager.cpp" />
     <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="GameState.hpp" />
+    <ClCompile Include="TestMenu.cpp" />
+    <ClInclude Include="GameState.hpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
