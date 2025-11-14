@@ -10,7 +10,8 @@ public:
 	IComponentBlock(int reserveCount) { m_entities.reserve(reserveCount); }
 	virtual ~IComponentBlock() = default;
 
-	virtual void remove(int ID) { return; }
+	virtual bool remove(int ID) { return false; }
+	bool hasID(int id) { return (m_entityToIndex.find(id) != m_entityToIndex.end()); }
 
 	std::vector<int> m_entities; // storing entitiy-IDs
 	std::unordered_map<int, int> m_entityToIndex; // key = entityID, value = index
@@ -29,9 +30,9 @@ public:
 	}
 
 	// swap & pop, to keep order intact as much as possible upon deletion
-	void remove(int ID) override
+	bool remove(int ID) override
 	{
-		if (m_entityToIndex.find(ID) == m_entityToIndex.end()) { return; }
+		if (m_entityToIndex.find(ID) == m_entityToIndex.end()) { return false; }
 
 		int index = m_entityToIndex[ID];
 		m_components[index] = std::move(m_components.back());
@@ -42,6 +43,8 @@ public:
 		int changedID = m_entities[index];
 		m_entityToIndex.at(changedID) = index;
 		m_entityToIndex.erase(ID);
+
+		return true;
 	}
 
 	std::vector<T> m_components;

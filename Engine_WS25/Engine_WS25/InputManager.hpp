@@ -6,17 +6,16 @@ class InputManager
 {
 public:
     static InputManager& getInstance();
-    void init();
+    void init(int playerID);
     void update();
     void onKeyPressed(sf::Keyboard::Key);
     void onKeyReleased(sf::Keyboard::Key);
-    bool getKeyDown(InputEnum input, int player);
-    bool getKeyUp(InputEnum input, int player);
-    bool getKeyPressed(InputEnum input, int player);
+    bool getKeyDown(InputEnum input);
+    bool getKeyUp(InputEnum input);
+    bool getKeyPressed(InputEnum input);
 
 private:
-    std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer1;
-    std::unordered_map<InputEnum, sf::Keyboard::Key> m_inputsPlayer2;
+    std::unordered_map<InputEnum, sf::Keyboard::Key> m_playerInputs;
     std::map<sf::Keyboard::Key, bool> m_isKeyDown;
     std::map<sf::Keyboard::Key, bool> m_isKeyUp;
     std::map<sf::Keyboard::Key, bool> m_isKeyPressed;

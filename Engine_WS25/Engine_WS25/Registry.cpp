@@ -1,6 +1,13 @@
 #include "pch.h"
 
+#include "ECSView.hpp"
+#include "HealthComponent.hpp"
+#include "PhysicsComponent.hpp"
+#include "PlayerInputComponent.hpp"
 #include "Registry.hpp"
+#include "RenderComponent.hpp"
+#include "StatusComponent.hpp"
+#include "TransformComponent.hpp"
 
 Registry& Registry::getInstance()
 {
@@ -25,6 +32,12 @@ void Registry::init(int reserveCount)
 	m_blockIsDirty.emplace(ComponentType::Transform, false);
 }
 
+void Registry::update()
+{
+	for (auto& [type, flag] : m_blockIsDirty)
+		flag = false;
+}
+
 int Registry::addEntity()
 {
 	std::shared_ptr<Entity> newEntity = std::make_shared<Entity>();
@@ -41,6 +54,16 @@ void Registry::createHealthComponent(int entityID, int maxHealth, float regenRat
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
 	block->m_components.emplace_back(entityID, maxHealth, regenRate);
+}
+
+void Registry::removeEntity(int ID)
+{
+	for (auto& [type, block] : m_componentBlocks)
+	{
+		bool wasRemoved = block->remove(ID);
+		if (wasRemoved)
+			m_blockIsDirty.at(type) = true;
+	}
 }
 
 void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRate, float radiusFactor)
@@ -98,4 +121,52 @@ void Registry::createTransformComponent(int entityID, sf::Vector2f position,
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
 	block->m_components.emplace_back(entityID, position, scale, forward);
+}
+
+void Registry::removeComponent(int entityID, ComponentType type)
+{
+	m_componentBlocks.at(type)->remove(entityID);
+}
+
+ComponentType Registry::getShortest(std::vector<ComponentType> types)
+{
+	ComponentType shortest = types[0];
+	unsigned int minLength = m_componentBlocks[types[0]]->m_entities.size();
+	for (auto& t : types)
+	{
+		if (m_componentBlocks[t]->m_entities.size() < minLength)
+		{
+			shortest = t;
+			minLength = m_componentBlocks[t]->m_entities.size();
+		}
+	}
+	return shortest;
+}
+
+// create something akin to "Sparse set"
+std::shared_ptr<ECSView> Registry::getView(const std::vector<ComponentType> types)
+{
+	std::shared_ptr<ECSView> result;
+	ComponentType shortest = getShortest(types);
+
+	for (auto i : m_componentBlocks[shortest]->m_entities)
+	{
+		bool hasAll = true;
+		for (auto& t : types)
+		{
+			hasAll = (hasAll && m_componentBlocks[t]->hasID(i));
+		}
+		if (hasAll)
+			result->m_entities.push_back(i);
+	}
+
+	for (auto& t : types)
+	{
+		for (int i : result->m_entities)
+		{
+			result->m_componentVecs[t].push_back(m_componentBlocks[t]->m_entityToIndex[i]);
+		}
+	}
+
+	return result;
 }

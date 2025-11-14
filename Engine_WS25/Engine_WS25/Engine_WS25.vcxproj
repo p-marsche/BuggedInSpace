@@ -147,6 +147,7 @@ sfml-system.lib
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="ComponentBlock.hpp" />
     <ClInclude Include="ComponentType.hpp" />
+    <ClInclude Include="ECSView.hpp" />
     <ClInclude Include="Registry.hpp" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DebugDraw.hpp" />
