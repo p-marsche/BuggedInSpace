@@ -2,12 +2,15 @@
 
 #include "SystemManager.hpp"
 
-SystemManager::SystemManager()
-{ }
+SystemManager& SystemManager::getInstance()
+{ 
+	static SystemManager assetManager;
+	return assetManager;
+}
 
 void SystemManager::init()
 {
-	m_systems.emplace(SystemType::Health, )
+	
 }
 
 void SystemManager::update(float deltaTime)

@@ -8,7 +8,7 @@ struct PhysicsComponent :
     public IComponent
 {
 public:
-    PhysicsComponent(int entityID, float maxVel, float acellRate, float radius);
+    PhysicsComponent(int entityID, float maxVel, float acellRate, float radius, float turnRate);
 
     virtual ComponentType GetType() override { return m_type; }
 
@@ -19,7 +19,7 @@ public:
     float m_maxVelocity;
     float m_accelerationRate;
     float m_colliderRadius;
-    // float m_turnRate;
+    float m_turnRate;
     // float m_bounciness;
 };
 

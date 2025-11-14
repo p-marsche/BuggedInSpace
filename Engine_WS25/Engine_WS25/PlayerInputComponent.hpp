@@ -9,7 +9,8 @@ class PlayerInputComponent :
     public IComponent
 {
 public:
-    PlayerInputComponent(int entityID, std::unordered_map<sf::Keyboard::Key, InputEnum> inputMap);
+    PlayerInputComponent(int entityID, 
+        std::unordered_map<sf::Keyboard::Key, InputEnum> inputMap);
 
     virtual ComponentType GetType() override { return m_type; }
 

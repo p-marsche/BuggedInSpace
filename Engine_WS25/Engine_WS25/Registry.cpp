@@ -66,7 +66,8 @@ void Registry::removeEntity(int ID)
 	}
 }
 
-void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRate, float radiusFactor)
+void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRate, 
+		float radiusFactor, float turnRate)
 {
 	std::shared_ptr block = 
 		std::dynamic_pointer_cast<ComponentBlock<PhysicsComponent>>(m_componentBlocks.at(ComponentType::Physics));
@@ -74,7 +75,7 @@ void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRat
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
-	block->m_components.emplace_back(entityID, maxVel, acellRate, radiusFactor);
+	block->m_components.emplace_back(entityID, maxVel, acellRate, radiusFactor, turnRate);
 }
 
 void Registry::createPlayerInputComponent(int entityID, 
