@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+
+#include "ComponentBlock.hpp"
 #include "HealthComponent.hpp"
 #include "PhysicsComponent.hpp"
 #include "PlayerInputComponent.hpp"
@@ -11,7 +14,7 @@ class Registry
 {
 public:
 	static Registry& getInstance();
-    void Init(int reserveCount);
+    void init(int reserveCount);
 
     int addEntity();
     void createHealthComponent(int entityID, int maxHealth, float regenRate);
@@ -26,4 +29,13 @@ private:
     ~Registry() = default;
     Registry(const Registry&) = delete;
     Registry& operator =(const Registry&) = delete;
+
+    std::unordered_map<ComponentType, std::shared_ptr<IComponentBlock>> m_componentBlocks;
+    /*ComponentBlock<HealthComponent> m_healthBlock;
+    ComponentBlock<PhysicsComponent> m_physicsBlock;
+    ComponentBlock<PlayerInputComponent> m_playerInputBlock;
+    ComponentBlock<RenderComponent> m_renderBlock;
+    ComponentBlock<StatusComponent> m_statusBlock;
+    ComponentBlock<TransformComponent> m_transformBlock;*/
+    std::unordered_map<ComponentType, bool> m_blockIsDirty;
 };

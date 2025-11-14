@@ -8,5 +8,9 @@ struct StatusComponent :
 public:
     StatusComponent(int entityID, bool destructible);
 
+    virtual ComponentType GetType() override { return m_type; }
+
+    static constexpr ComponentType m_type = ComponentType::Status;
+
     bool m_isDestructible;
 };

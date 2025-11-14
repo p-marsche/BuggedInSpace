@@ -10,6 +10,10 @@ struct PhysicsComponent :
 public:
     PhysicsComponent(int entityID, float maxVel, float acellRate, float radius);
 
+    virtual ComponentType GetType() override { return m_type; }
+
+    static constexpr ComponentType m_type = ComponentType::Physics;
+
     sf::Vector2f m_velocity;
     sf::Vector2f m_acceleration;
     float m_maxVelocity;

@@ -63,7 +63,7 @@
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
     <ClCompile Include="Registry.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\ECS\Registry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,13 @@
       <Filter>Header Files\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="Registry.hpp">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\ECS\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentBlock.hpp">
+      <Filter>Header Files\ECS\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentType.hpp">
+      <Filter>Header Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +183,12 @@
     </Filter>
     <Filter Include="Source Files\ECS\Components">
       <UniqueIdentifier>{32fcb8a2-2cb1-4612-8386-b53afb9e123a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ECS\Registry">
+      <UniqueIdentifier>{a2267948-e44d-4db6-b2bc-b80a658f60d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS\Registry">
+      <UniqueIdentifier>{9bd4d0ff-8945-47db-8410-ca886282814c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

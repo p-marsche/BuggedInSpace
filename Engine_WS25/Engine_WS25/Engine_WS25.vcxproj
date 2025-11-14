@@ -145,6 +145,8 @@ sfml-system.lib
   <ItemGroup>
     <ClInclude Include="AnimationType.hpp" />
     <ClInclude Include="AssetManager.hpp" />
+    <ClInclude Include="ComponentBlock.hpp" />
+    <ClInclude Include="ComponentType.hpp" />
     <ClInclude Include="Registry.hpp" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DebugDraw.hpp" />
