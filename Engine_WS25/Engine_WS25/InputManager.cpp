@@ -8,10 +8,9 @@ InputManager& InputManager::getInstance()
 	return m_instance;
 }
 
-void InputManager::init(int playerOneID)
+void InputManager::init(int playerOneID, const std::unordered_map<InputEnum, sf::Keyboard::Key> playerInputs)
 {
-    
-
+    m_playerInputs = playerInputs;
     for (auto& [_, key] : m_playerInputs)
     {
         m_isKeyDown.emplace(key, false);

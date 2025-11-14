@@ -6,7 +6,7 @@ class InputManager
 {
 public:
     static InputManager& getInstance();
-    void init(int playerID);
+    void init(int playerID, const std::unordered_map<InputEnum, sf::Keyboard::Key> playerInputs);
     void update();
     void onKeyPressed(sf::Keyboard::Key);
     void onKeyReleased(sf::Keyboard::Key);

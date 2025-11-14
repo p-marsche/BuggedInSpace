@@ -6,7 +6,7 @@
 #include "ComponentBlock.hpp"
 #include "InputEnum.hpp"
 
-class ECSView;
+struct ECSView;
 
 class Registry
 {

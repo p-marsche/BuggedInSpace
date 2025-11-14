@@ -13,7 +13,7 @@ int main()
 {
 	try
 	{
-		InputManager::getInstance().init();
+		//InputManager::getInstance().init();
 
 		std::cout << "Press ESC key to close window" << std::endl;
 		// disabled for now cause causes memory leak

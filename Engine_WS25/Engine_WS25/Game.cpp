@@ -41,7 +41,7 @@ void Game::run()
 
 void Game::initialize()
 {
-	InputManager::getInstance().init();
+	//InputManager::getInstance().init();
 }
 
 void Game::handleEvents()

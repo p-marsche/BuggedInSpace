@@ -32,9 +32,9 @@ void TestMenu::run()
 
 void TestMenu::update(float deltaTime)
 {
-	if (InputManager::getInstance().getKeyPressed(InputEnum::Exit, 1))
+	if (InputManager::getInstance().getKeyPressed(InputEnum::Exit))
 		exit();
-	if (InputManager::getInstance().getKeyPressed(InputEnum::MenuTest, 1))
+	if (InputManager::getInstance().getKeyPressed(InputEnum::MenuTest))
 		changeState(GameStateEnum::Game);
 }
 
