@@ -193,5 +193,11 @@
     <Filter Include="Source Files\ECS\Registry">
       <UniqueIdentifier>{9bd4d0ff-8945-47db-8410-ca886282814c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ECS\Systems">
+      <UniqueIdentifier>{dc7ed781-4aab-4077-8f2c-efe34041f726}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ECS\Systems">
+      <UniqueIdentifier>{0252fe4f-b1b9-4ac6-89c0-38eb5bb5f757}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
