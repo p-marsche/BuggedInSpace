@@ -28,8 +28,4 @@ private:
 	void resizeWindow(int width, int height);
 	void initialize();
 	void handleEvents();
-	void removeGameObject(std::string name);
-	void moveCamera();
-	void keepObjectInView(std::string key, sf::Vector2f topLeft, sf::Vector2f size);
-	void checkPlayerShooting(int playerNumber);
 };

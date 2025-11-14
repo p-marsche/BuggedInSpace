@@ -3,25 +3,11 @@
 #include "RenderComponent.hpp"
 
 // change to work with shared_ptr<Texture> and/or with Spritesheet instead?
-RenderComponent::RenderComponent(sf::Texture& texture)
-	: m_sprite(std::make_shared<sf::Sprite>(texture))
-	, IComponent(ComponentType::Render)
+RenderComponent::RenderComponent(int entityID, sf::Texture& texture, bool visible)
+	: IComponent(entityID)
+	, m_texture(texture)
+	, m_isVisible(visible)
 {
-	m_sprite->setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
-}
-
-void RenderComponent::update(float deltaTime) 
-{
-	// animation stuff here?
-	return;
-}
-
-void RenderComponent::draw(sf::RenderWindow& window)
-{
-	window.draw(*m_sprite);
-}
-
-void RenderComponent::setSpritePosition(sf::Vector2f position)
-{
-	m_sprite->setPosition(position);
+	m_sprite = sf::Sprite(texture);
+	m_sprite.setOrigin(texture.getSize().x / 2.f, texture.getSize().y / 2.f);
 }

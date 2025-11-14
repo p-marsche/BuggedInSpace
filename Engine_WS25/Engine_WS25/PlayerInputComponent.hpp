@@ -1,24 +1,16 @@
 #pragma once
 
-#include "InputComponent.hpp"
+#include "IComponent.hpp"
 #include "InputEnum.hpp"
-
-#include <SFML/Graphics.hpp>
-
+#include "SFML/Window.hpp"
 #include <unordered_map>
 
 class PlayerInputComponent :
-    public InputComponent
+    public IComponent
 {
 public:
-    PlayerInputComponent(int playerNumber);
-    ~PlayerInputComponent() = default;
-    bool isPlayerShooting() const { return m_shooting; }
-    void update(float deltaTime) override;
+    PlayerInputComponent(int entityID, std::unordered_map<sf::Keyboard::Key, InputEnum> inputMap);
 
-private:
-    int m_playerNumber;
-    bool m_shooting;
-    float m_fireCooldown, m_timeSinceShot;
+    std::unordered_map<sf::Keyboard::Key, InputEnum> m_inputMap;
 };
 

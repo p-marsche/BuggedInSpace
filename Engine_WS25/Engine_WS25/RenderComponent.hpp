@@ -1,18 +1,19 @@
 #pragma once
 
 #include "IComponent.hpp"
+#include <memory>
 
-class RenderComponent :
+class Texture;
+class Sprite;
+
+struct RenderComponent :
     public IComponent
 {
 public:
-    RenderComponent(sf::Texture& texture);
+    RenderComponent(int entityID, sf::Texture& texture, bool visible);
     virtual ~RenderComponent() = default;
-    std::shared_ptr<sf::Sprite> getSprite() { return m_sprite; }
-    void virtual update(float deltaTime) override;
-    void draw(sf::RenderWindow& window);
-    void setSpritePosition(sf::Vector2f position);
 
-private:
-    std::shared_ptr<sf::Sprite> m_sprite;
+    sf::Texture& m_texture;
+    sf::Sprite m_sprite;
+    bool m_isVisible;
 };

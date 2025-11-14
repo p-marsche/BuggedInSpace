@@ -143,56 +143,57 @@ sfml-system.lib
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AiInputComponent.hpp" />
     <ClInclude Include="AnimationType.hpp" />
     <ClInclude Include="AssetManager.hpp" />
-    <ClInclude Include="ComponentFactory.hpp" />
-    <ClInclude Include="ComponentTypeEnum.hpp" />
+    <ClInclude Include="Registry.hpp" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="ErrorWindow.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GameObject.hpp" />
-    <ClInclude Include="GameObjectFactory.hpp" />
+    <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="EntityFactory.hpp" />
     <ClInclude Include="GameStateEnum.hpp" />
-    <ClInclude Include="GameobjectManager.hpp" />
     <ClInclude Include="GameStateManager.hpp" />
+    <ClInclude Include="HealthComponent.hpp" />
     <ClInclude Include="IComponent.hpp" />
-    <ClInclude Include="InputComponent.hpp" />
     <ClInclude Include="InputEnum.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PhysicsComponent.hpp" />
     <ClInclude Include="PlayerInputComponent.hpp" />
     <ClInclude Include="RenderComponent.hpp" />
+    <ClInclude Include="StatusComponent.hpp" />
     <ClInclude Include="TestMenu.hpp" />
+    <ClInclude Include="TransformComponent.hpp" />
     <ClInclude Include="VectorUtils.hpp" />
     <ClInclude Include="SpriteSheet.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AiInputComponent.cpp" />
     <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="Registry.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="ErrorWindow.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObjectFactory.cpp" />
-    <ClCompile Include="GameobjectManager.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
+    <ClCompile Include="PlayerInputComponent.cpp" />
+    <ClCompile Include="StatusComponent.cpp" />
     <ClCompile Include="TestMenu.cpp" />
     <ClInclude Include="GameState.hpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="PlayerInputComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="VectorUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

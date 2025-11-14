@@ -1,18 +1,10 @@
 #pragma once
 
-#include "ComponentTypeEnum.hpp"
-
-class IComponent
+struct IComponent
 {
 public:
-	IComponent(ComponentType compType);
+	IComponent(int entity_ID);
 	virtual ~IComponent() = default;
-	int getID() const { return m_ID; }
-	void virtual update(float deltaTime) { return; }
 
-private:
-	static int s_nextID;
-
-	int m_ID;
-	ComponentType m_compType;
+	int m_entityID;
 };
