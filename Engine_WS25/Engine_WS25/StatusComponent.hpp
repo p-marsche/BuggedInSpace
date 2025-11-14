@@ -13,4 +13,5 @@ public:
     static constexpr ComponentType m_type = ComponentType::Status;
 
     bool m_isDestructible;
+    bool m_collided;
 };
