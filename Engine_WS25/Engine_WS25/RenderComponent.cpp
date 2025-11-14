@@ -5,7 +5,6 @@
 // change to work with shared_ptr<Texture> and/or with Spritesheet instead?
 RenderComponent::RenderComponent(int entityID, sf::Texture& texture, bool visible)
 	: IComponent(entityID)
-	, m_texture(texture)
 	, m_isVisible(visible)
 {
 	m_sprite = sf::Sprite(texture);

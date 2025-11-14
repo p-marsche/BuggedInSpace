@@ -17,7 +17,6 @@ public:
 
     static constexpr ComponentType m_type = ComponentType::Render;
 
-    sf::Texture& m_texture;
     sf::Sprite m_sprite;
     bool m_isVisible;
 };

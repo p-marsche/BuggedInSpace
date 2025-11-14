@@ -17,4 +17,3 @@ public:
     float m_regenRate;
     float m_regenAccumulator;
 };
-
