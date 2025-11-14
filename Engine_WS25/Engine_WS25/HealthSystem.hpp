@@ -9,8 +9,5 @@ class HealthSystem :
 public:
     HealthSystem();
     void update(float deltaTime) override;
-
-private:
-    std::shared_ptr<ECSView> m_view;
 };
 

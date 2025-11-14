@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "SystemType.hpp"
-#include ""
 
 class System;
 
