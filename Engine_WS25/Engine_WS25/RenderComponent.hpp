@@ -10,7 +10,7 @@ struct RenderComponent :
     public IComponent
 {
 public:
-    RenderComponent(int entityID, sf::Texture& texture, bool visible);
+    RenderComponent(int entityID, sf::Texture& texture, bool visible, int zIndex);
     virtual ~RenderComponent() = default;
 
     virtual ComponentType GetType() override { return m_type; }
@@ -19,4 +19,5 @@ public:
 
     sf::Sprite m_sprite;
     bool m_isVisible;
+    int m_zIndex;
 };

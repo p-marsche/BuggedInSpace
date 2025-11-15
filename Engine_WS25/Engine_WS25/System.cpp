@@ -3,7 +3,7 @@
 #include "Registry.hpp"
 #include "System.hpp"
 
-void System::checkView()
+bool System::checkView()
 {
 	bool areBlocksDirty = false;
 	for (auto& type : m_requiredComponents)
@@ -17,4 +17,6 @@ void System::checkView()
 
 	if (areBlocksDirty)
 		m_view = Registry::getInstance().getView(m_requiredComponents);
+
+	return areBlocksDirty;
 }

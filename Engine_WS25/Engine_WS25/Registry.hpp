@@ -23,7 +23,7 @@ public:
         float radiusFactor, float turnRate);
     void createPlayerInputComponent(int entityID, 
         std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap);
-    void createRenderComponent(int entityID, sf::Texture& texture, bool visible);
+    void createRenderComponent(int entityID, sf::Texture& texture, bool visible, int zIndex);
     void createStatusComponent(int entityID, bool destructible);
     void createTransformComponent(int entityID, sf::Vector2f position, sf::Vector2f scale, 
         sf::Vector2f forward);

@@ -90,15 +90,17 @@ void Registry::createPlayerInputComponent(int entityID,
 	block->m_components.emplace_back(entityID, inputMap);
 }
 
-void Registry::createRenderComponent(int entityID, sf::Texture& texture, bool visible)
+void Registry::createRenderComponent(int entityID, sf::Texture& texture, 
+	bool visible, int zIndex)
 {
 	std::shared_ptr block = 
-		std::dynamic_pointer_cast<ComponentBlock<RenderComponent>>(m_componentBlocks.at(ComponentType::Render));
+		std::dynamic_pointer_cast<ComponentBlock<RenderComponent>>
+		(m_componentBlocks.at(ComponentType::Render));
 
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
-	block->m_components.emplace_back(entityID, texture, visible);
+	block->m_components.emplace_back(entityID, texture, visible, zIndex);
 }
 
 void Registry::createStatusComponent(int entityID, bool destructible)

@@ -13,6 +13,7 @@ class RenderSystem :
     RenderSystem();
     void update(float deltaTime) override;
     void render(sf::RenderWindow& window);
+    void sortView();
 
 private:
     std::shared_ptr<ComponentBlock<RenderComponent>> m_renderPtr;

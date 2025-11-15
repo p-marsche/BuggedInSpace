@@ -11,7 +11,7 @@ public:
 	virtual ~System() = default;
 
 	void virtual update(float dT) { return; }
-	void checkView();
+	bool checkView();
 
 protected:
 	std::shared_ptr<ECSView> m_view;

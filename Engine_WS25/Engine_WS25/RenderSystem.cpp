@@ -17,11 +17,13 @@ RenderSystem::RenderSystem()
 		(Registry::getInstance().m_componentBlocks.at(ComponentType::Transform));
 
 	m_view = Registry::getInstance().getView(m_requiredComponents);
+	sortView();
 }
 
 void RenderSystem::update(float dT)
 {
-	checkView();
+	if (checkView())
+		sortView();
 
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
@@ -43,4 +45,23 @@ void RenderSystem::render(sf::RenderWindow& window)
 		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];
 		window.draw(m_renderPtr->m_components[rIndex].m_sprite);
 	}
+}
+
+void RenderSystem::sortView()
+{
+	auto sortZIndex = [](const RenderComponent& a, const RenderComponent& b)
+		{
+			return a.m_zIndex < b.m_zIndex;
+		};
+
+	std::sort(m_renderPtr->m_components.begin(), m_renderPtr->m_components.end(), sortZIndex);
+
+	m_renderPtr->m_entities.clear();
+	for (auto& rend : m_renderPtr->m_components)
+	{
+		m_renderPtr->m_entityToIndex.at(rend.m_entityID) = m_renderPtr->m_entities.size();
+		m_renderPtr->m_entities.push_back(rend.m_entityID);
+	}
+
+	m_view = Registry::getInstance().getView(m_requiredComponents);
 }
