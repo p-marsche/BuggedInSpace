@@ -48,13 +48,6 @@ void AssetManager::loadImage(std::string name, std::string filename)
 	m_images[name]->loadFromFile(Config::imagesPath + filename);
 }
 
-void AssetManager::loadSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames)
-{
-	auto texture(std::make_shared<sf::Texture>());
-	texture->loadFromFile(Config::spriteSheetPath + filename);
-	m_spriteSheets.try_emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
-}
-
 void AssetManager::replaceTexture(std::string name, std::string filename)
 {
 	if (auto it = m_textures.find(name) != m_textures.end())
@@ -135,24 +128,6 @@ void AssetManager::replaceImage(std::string name, std::string filename)
 	m_images[name]->loadFromFile(Config::imagesPath + filename);
 }
 
-void AssetManager::replaceSpriteSheet(std::string name, std::string filename, int tilingX, int tilingY, std::vector<int> numberAnimationFrames)
-{
-	if (auto it = m_spriteSheets.find(name) != m_spriteSheets.end())
-	{
-		auto extracted = m_spriteSheets.extract(name);
-		auto ptr = extracted.mapped().release();
-		if (ptr)
-		{
-			delete ptr;
-			ptr = nullptr;
-		}
-	}
-	auto texture(std::make_shared<sf::Texture>());
-	texture->loadFromFile(Config::spriteSheetPath + filename);
-	m_spriteSheets.emplace(name, std::make_unique<SpriteSheet>(texture, tilingX, tilingY, numberAnimationFrames));
-}
-
-
 sf::Texture& AssetManager::getTexture(std::string name)
 {
 	if (m_textures.find(name) != m_textures.end())
@@ -191,12 +166,4 @@ sf::Image& AssetManager::getImage(std::string name)
 		return *m_images[name];
 	else
 		throw new AssetNotFoundException("The image file '{name}' could not be found!");
-}
-
-SpriteSheet& AssetManager::getSpriteSheet(std::string name)
-{
-	if (m_spriteSheets.find(name) != m_spriteSheets.end())
-		return *m_spriteSheets[name];
-	else
-		throw new AssetNotFoundException("The sprite sheet '{name}' could not be found!");
 }

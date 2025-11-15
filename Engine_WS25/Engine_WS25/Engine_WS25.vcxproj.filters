@@ -4,9 +4,6 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Source Files\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
@@ -19,14 +16,8 @@
     <ClCompile Include="IComponent.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
-    <ClCompile Include="DebugDraw.cpp">
-      <Filter>Source Files\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="ErrorWindow.cpp">
       <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\ECS</Filter>
@@ -35,9 +26,6 @@
       <Filter>Source Files\ECS</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="TestMenu.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -85,22 +73,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameStateManager.hpp">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.hpp">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="DebugDraw.hpp">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.hpp">
-      <Filter>Header Files\ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationType.hpp">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
     <ClInclude Include="IComponent.hpp">
@@ -118,23 +97,11 @@
     <ClInclude Include="InputEnum.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteSheet.hpp">
-      <Filter>Header Files\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="ErrorWindow.hpp">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="GameStateEnum.hpp">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.hpp">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
     <ClInclude Include="Game.hpp">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="TestMenu.hpp">
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">

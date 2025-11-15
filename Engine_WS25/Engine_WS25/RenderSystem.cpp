@@ -40,6 +40,7 @@ void RenderSystem::update(float dT)
 
 void RenderSystem::render(sf::RenderWindow& window)
 {
+
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
 		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];

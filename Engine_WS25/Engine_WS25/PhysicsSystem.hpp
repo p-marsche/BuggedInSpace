@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ComponentBlock.hpp"
 #include "ECSView.hpp"
 #include "System.hpp"
 #include "PhysicsComponent.hpp"

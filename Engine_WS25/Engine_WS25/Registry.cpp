@@ -24,12 +24,12 @@ void Registry::init(int reserveCount)
 	m_componentBlocks.emplace(ComponentType::Status, std::make_shared<ComponentBlock<StatusComponent>>(reserveCount));
 	m_componentBlocks.emplace(ComponentType::Transform, std::make_shared<ComponentBlock<TransformComponent>>(reserveCount));
 
-	m_blockIsDirty.emplace(ComponentType::Health, false);
-	m_blockIsDirty.emplace(ComponentType::Physics, false);
-	m_blockIsDirty.emplace(ComponentType::PlayerInput, false);
-	m_blockIsDirty.emplace(ComponentType::Render, false);
-	m_blockIsDirty.emplace(ComponentType::Status, false);
-	m_blockIsDirty.emplace(ComponentType::Transform, false);
+	m_blockIsDirty.emplace(ComponentType::Health, true);
+	m_blockIsDirty.emplace(ComponentType::Physics, true);
+	m_blockIsDirty.emplace(ComponentType::PlayerInput, true);
+	m_blockIsDirty.emplace(ComponentType::Render, true);
+	m_blockIsDirty.emplace(ComponentType::Status, true);
+	m_blockIsDirty.emplace(ComponentType::Transform, true);
 }
 
 void Registry::update()
@@ -149,13 +149,13 @@ ComponentType Registry::getShortest(std::vector<ComponentType> types)
 // create something akin to "Sparse set"
 std::shared_ptr<ECSView> Registry::getView(const std::vector<ComponentType> types)
 {
-	std::shared_ptr<ECSView> result;
+	auto result = std::make_shared<ECSView>();
 	ComponentType shortest = getShortest(types);
 
 	for (auto i : m_componentBlocks[shortest]->m_entities)
 	{
 		bool hasAll = true;
-		for (auto& t : types)
+		for (auto t : types)
 		{
 			hasAll = (hasAll && m_componentBlocks[t]->hasID(i));
 		}
@@ -163,7 +163,11 @@ std::shared_ptr<ECSView> Registry::getView(const std::vector<ComponentType> type
 			result->m_entities.push_back(i);
 	}
 
-	for (auto& t : types)
+	//necessary to create empty vecs to push_back elements onto in next loop
+	for (auto t : types)
+		result->m_componentVecs[t];
+
+	for (auto t : types)
 	{
 		for (int i : result->m_entities)
 		{

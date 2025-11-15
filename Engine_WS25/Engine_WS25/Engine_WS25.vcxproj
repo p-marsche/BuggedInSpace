@@ -85,11 +85,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SFMLROOT)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio-d.lib;
-sfml-graphics-d.lib;
-sfml-network-d.lib;
-sfml-system-d.lib
-;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio-d.lib;sfml-graphics-d.lib;sfml-network-d.lib;sfml-system-d.lib;sfml-window-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,11 +105,7 @@ sfml-system-d.lib
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SFMLROOT)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-audio.lib;
-sfml-graphics.lib;
-sfml-network.lib;
-sfml-system.lib
-;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,7 +135,6 @@ sfml-system.lib
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationType.hpp" />
     <ClInclude Include="AssetManager.hpp" />
     <ClInclude Include="ComponentBlock.hpp" />
     <ClInclude Include="ComponentType.hpp" />
@@ -153,13 +144,10 @@ sfml-system.lib
     <ClInclude Include="PlayerInputSystem.hpp" />
     <ClInclude Include="Registry.hpp" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="ErrorWindow.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="EntityFactory.hpp" />
-    <ClInclude Include="GameStateEnum.hpp" />
-    <ClInclude Include="GameStateManager.hpp" />
     <ClInclude Include="HealthComponent.hpp" />
     <ClInclude Include="IComponent.hpp" />
     <ClInclude Include="InputEnum.hpp" />
@@ -173,10 +161,8 @@ sfml-system.lib
     <ClInclude Include="System.hpp" />
     <ClInclude Include="SystemManager.hpp" />
     <ClInclude Include="SystemType.hpp" />
-    <ClInclude Include="TestMenu.hpp" />
     <ClInclude Include="TransformComponent.hpp" />
     <ClInclude Include="VectorUtils.hpp" />
-    <ClInclude Include="SpriteSheet.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
@@ -185,12 +171,10 @@ sfml-system.lib
     <ClCompile Include="PlayerInputSystem.cpp" />
     <ClCompile Include="Registry.cpp" />
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="ErrorWindow.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="PlayerInputComponent.cpp" />
@@ -198,9 +182,6 @@ sfml-system.lib
     <ClCompile Include="StatusComponent.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemManager.cpp" />
-    <ClCompile Include="TestMenu.cpp" />
-    <ClInclude Include="GameState.hpp" />
-    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="pch.cpp">

@@ -1,29 +1,23 @@
 #pragma once
 
-#include "GameState.hpp"
+#include <SFML/Graphics.hpp>
 
-class GameObject;
-
-class Game : public GameState
+class Game
 {
 public:
 	Game();
-	virtual void run() override;
-	virtual void exit() override;
-	virtual void update(float deltaTime) override;
-	virtual void render() override;
+	void run();
+	void exit();
+	void update(float deltaTime);
+	void render();
 
 private:
 	const int WIDTH;
 	const int HEIGHT;
 	const std::string TITLE;
 	float m_aspectRatio;
-	float m_cameraScrollTime, m_maxScrollTime;
-	int m_projectileCount;
 	sf::Clock m_clock;
-	std::unique_ptr<sf::RenderWindow> m_window;
-	std::shared_ptr<GameObject> m_background;
-	std::unordered_map<std::string, std::shared_ptr<GameObject> > m_gameObjects;
+	std::shared_ptr<sf::RenderWindow> m_window;
 
 	void resizeWindow(int width, int height);
 	void initialize();

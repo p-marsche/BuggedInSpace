@@ -11,9 +11,9 @@ InputManager& InputManager::getInstance()
 void InputManager::init()
 {
     //SFML supports 100 keys
-    m_isKeyDown.reserve(101);
-    m_isKeyPressed.reserve(101);
-    m_isKeyUp.reserve(101);
+    m_isKeyDown.reserve(100);
+    m_isKeyPressed.reserve(100);
+    m_isKeyUp.reserve(100);
 }
 
 void InputManager::clearKeyPressed()
@@ -40,12 +40,12 @@ bool InputManager::getKeyPressed(sf::Keyboard::Key key)
 }
 
 void InputManager::onKeyPressed(sf::Keyboard::Key key) 
-{ 
+{
     m_isKeyDown.push_back(key);
     m_isKeyPressed.push_back(key);
     
     auto it = std::find(m_isKeyUp.cbegin(), m_isKeyUp.cend(), key);
-    if (it == m_isKeyUp.end())
+    if (it != m_isKeyUp.end())
         m_isKeyUp.erase(it);
 
     return;

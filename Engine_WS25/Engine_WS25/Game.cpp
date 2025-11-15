@@ -2,8 +2,8 @@
 
 #include "AssetManager.hpp"
 #include "InputManager.hpp"
+#include "SystemManager.hpp"
 #include "Game.hpp"
-#include "Entity.hpp"
 #include "EntityFactory.hpp"
 #include "Registry.hpp"
 #include "VectorUtils.hpp"
@@ -12,15 +12,15 @@ Game::Game()
 	: WIDTH(1280)
 	, HEIGHT(720)
 	, TITLE("Engine_WS25")
-	, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE))
-	, m_clock()
-	, m_cameraScrollTime(0.f)
-	, m_maxScrollTime(100.f)
-	, m_projectileCount(0)
 {
+	m_clock = sf::Clock();
+	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE);
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
 	m_aspectRatio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
+	sf::View startView = sf::View(sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(static_cast<float>(WIDTH), static_cast<float>(HEIGHT)));
+	m_window->setView(startView);
 }
 
 void Game::run()
@@ -41,7 +41,30 @@ void Game::run()
 
 void Game::initialize()
 {
-	//InputManager::getInstance().init();
+	InputManager::getInstance().init();
+	Registry::getInstance().init(100);
+
+	AssetManager::getInstance().loadTexture("Player", "Player_Ship1.png");
+	AssetManager::getInstance().loadTexture("Background", "Background.png");
+
+	auto inputMap = std::unordered_map<InputEnum, sf::Keyboard::Key>();
+	inputMap.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
+	inputMap.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
+	inputMap.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
+
+	int playerID = 
+		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f), 
+			sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 20.f,
+			inputMap);
+
+	int bgID =
+		EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
+			sf::Vector2f(4.f, 2.f), "Background");
+
+	std::cout << "Player ID:" << playerID << std::endl;
+	std::cout << "Background ID:" << bgID << std::endl;
+
+	SystemManager::getInstance().init();
 }
 
 void Game::handleEvents()
@@ -69,12 +92,17 @@ void Game::handleEvents()
 
 void Game::update(float deltaTime)
 {
-
+	SystemManager::getInstance().update(deltaTime);
+	Registry::getInstance().update();
 }
 
 void Game::render()
 {
+	m_window->clear(sf::Color::Black);
 
+	SystemManager::getInstance().render(*m_window);
+
+	m_window->display();
 }
 
 void Game::exit()
@@ -83,7 +111,6 @@ void Game::exit()
 	m_window->close();
 }
 
-// revisit, does weird things to shapes/sprites
 void Game::resizeWindow(int width, int height)
 {
 	float newRatio = static_cast<float>(width) / static_cast<float>(height);
