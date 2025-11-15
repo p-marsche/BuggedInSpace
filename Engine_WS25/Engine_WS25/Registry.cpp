@@ -79,7 +79,7 @@ void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRat
 }
 
 void Registry::createPlayerInputComponent(int entityID, 
-	std::unordered_map<sf::Keyboard::Key, InputEnum> inputMap)
+	std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap)
 {
 	std::shared_ptr block = 
 		std::dynamic_pointer_cast<ComponentBlock<PlayerInputComponent>>(m_componentBlocks.at(ComponentType::PlayerInput));

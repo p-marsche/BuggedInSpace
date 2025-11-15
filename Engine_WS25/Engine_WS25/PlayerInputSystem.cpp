@@ -1,8 +1,9 @@
 #include "pch.h"
 
 #include "ComponentType.hpp"
-#include "Registry.hpp"
+#include "InputManager.hpp"
 #include "PlayerInputSystem.hpp"
+#include "Registry.hpp"
 
 PlayerInputSystem::PlayerInputSystem()
 {
@@ -25,8 +26,24 @@ PlayerInputSystem::PlayerInputSystem()
 
 void PlayerInputSystem::update(float dT)
 {
-	for (int index : m_view->m_componentVecs.at(ComponentType::PlayerInput))
+	checkView();
+
+	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
-		
+		int iIndex = m_view->m_componentVecs.at(ComponentType::PlayerInput)[i];
+		int pIndex = m_view->m_componentVecs.at(ComponentType::Physics)[i];
+		int tIndex = m_view->m_componentVecs.at(ComponentType::Transform)[i];
+
+		sf::Keyboard::Key leftKey =
+			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Left);
+
+		sf::Keyboard::Key rightKey =
+			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Right);
+
+		sf::Keyboard::Key forwardKey =
+			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Up);
+
+		if (InputManager::getInstance().getKeyDown(leftKey))
+			return;
 	}
 }

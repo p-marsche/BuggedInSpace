@@ -21,20 +21,9 @@ RenderSystem::RenderSystem()
 
 void RenderSystem::update(float dT)
 {
-	bool areBlocksDirty = false;
-	for (auto& type : m_requiredComponents)
-	{
-		auto flagPtr = Registry::getInstance().m_blockIsDirty.find(type);
-		if (flagPtr == Registry::getInstance().m_blockIsDirty.end())
-			continue;
+	checkView();
 
-		areBlocksDirty = areBlocksDirty || flagPtr->second;
-	}
-
-	if (areBlocksDirty)
-		m_view = Registry::getInstance().getView(m_requiredComponents);
-
-	for (int i = 0; i < m_view->m_entities.size(); i++)
+	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
 		int tIndex = m_view->m_componentVecs.at(ComponentType::Transform)[i];
 		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];
@@ -49,7 +38,7 @@ void RenderSystem::update(float dT)
 
 void RenderSystem::render(sf::RenderWindow& window)
 {
-	for (int i = 0; i < m_view->m_entities.size(); i++)
+	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
 		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];
 		window.draw(m_renderPtr->m_components[rIndex].m_sprite);

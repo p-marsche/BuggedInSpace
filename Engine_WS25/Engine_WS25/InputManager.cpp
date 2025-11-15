@@ -8,64 +8,42 @@ InputManager& InputManager::getInstance()
 	return m_instance;
 }
 
-void InputManager::init(int playerOneID, const std::unordered_map<InputEnum, sf::Keyboard::Key> playerInputs)
+void InputManager::init()
 {
-    m_playerInputs = playerInputs;
-    for (auto& [_, key] : m_playerInputs)
-    {
-        m_isKeyDown.emplace(key, false);
-        m_isKeyUp.emplace(key, false);
-        m_isKeyPressed.emplace(key, false);
-    }
+    //SFML supports 100 keys
+    m_isKeyDown.reserve(101);
+    m_isKeyPressed.reserve(101);
+    m_isKeyUp.reserve(101);
 }
 
-void InputManager::update()
+void InputManager::clearKeyPressed()
 {
-    for (auto& [_, flag] : m_isKeyPressed)
-        flag = false;
+    m_isKeyPressed.clear();
 }
 
-bool InputManager::getKeyDown(InputEnum input)
+bool InputManager::getKeyDown(sf::Keyboard::Key key)
 {
-        auto result = m_playerInputs.find(input);
-        if (result == m_playerInputs.end())
-            return false;
-
-        return m_isKeyDown.at(result->second);
+    auto it = std::find(m_isKeyDown.cbegin(), m_isKeyDown.cend(), key);
+    return (it != m_isKeyDown.cend());
 }
 
-bool InputManager::getKeyUp(InputEnum input)
+bool InputManager::getKeyUp(sf::Keyboard::Key key)
 {
-        auto result = m_playerInputs.find(input);
-        if (result == m_playerInputs.end())
-            return false;
-
-        return m_isKeyUp.at(result->second);
+    auto it = std::find(m_isKeyUp.cbegin(), m_isKeyUp.cend(), key);
+    return (it != m_isKeyUp.cend());
 }
 
-bool InputManager::getKeyPressed(InputEnum input)
+bool InputManager::getKeyPressed(sf::Keyboard::Key key)
 {
-        auto result = m_playerInputs.find(input);
-        if (result == m_playerInputs.end())
-            return false;
-
-        return m_isKeyPressed.at(result->second);
+    auto it = std::find(m_isKeyPressed.cbegin(), m_isKeyPressed.cend(), key);
+    return (it != m_isKeyPressed.cend());
 }
 
 void InputManager::onKeyPressed(sf::Keyboard::Key key) 
 { 
-    if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
-        return;
     
-    m_isKeyPressed.at(key) = true;
-    m_isKeyDown.at(key) = true;
-    m_isKeyUp.at(key) = false;
 }
 void InputManager::onKeyReleased(sf::Keyboard::Key key) 
 {
-    if (m_isKeyPressed.find(key) == m_isKeyPressed.end())
-        return;
-
-    m_isKeyDown.at(key) = false;
-    m_isKeyUp.at(key) = true;
+    
 }

@@ -30,12 +30,12 @@ void Game::run()
 
 	while (m_window->isOpen())
 	{
-		InputManager::getInstance().update();
 		handleEvents();
 
 		deltaTime = m_clock.restart().asSeconds();
 		update(deltaTime);
 		render();
+		InputManager::getInstance().clearKeyPressed();
 	}
 }
 

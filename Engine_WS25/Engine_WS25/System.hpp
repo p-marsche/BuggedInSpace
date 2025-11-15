@@ -2,6 +2,8 @@
 
 #include "ComponentType.hpp"
 
+struct ECSView;
+
 class System
 {
 public:
@@ -9,7 +11,7 @@ public:
 	virtual ~System() = default;
 
 	void virtual update(float dT) { return; }
-	//void virtual checkView() = 0;
+	void checkView();
 
 protected:
 	std::shared_ptr<ECSView> m_view;

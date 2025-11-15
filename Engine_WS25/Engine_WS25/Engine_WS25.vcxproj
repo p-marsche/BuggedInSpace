@@ -196,6 +196,7 @@ sfml-system.lib
     <ClCompile Include="PlayerInputComponent.cpp" />
     <ClCompile Include="RenderSystem.cpp" />
     <ClCompile Include="StatusComponent.cpp" />
+    <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemManager.cpp" />
     <ClCompile Include="TestMenu.cpp" />
     <ClInclude Include="GameState.hpp" />

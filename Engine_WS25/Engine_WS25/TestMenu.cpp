@@ -22,19 +22,19 @@ void TestMenu::run()
 {
 	while (m_window->isOpen())
 	{
-		InputManager::getInstance().update();
 		handleEvents();
 
 		update(0);
 		render();
+		InputManager::getInstance().clearKeyPressed();
 	}
 }
 
 void TestMenu::update(float deltaTime)
 {
-	if (InputManager::getInstance().getKeyPressed(InputEnum::Exit))
+	if (InputManager::getInstance().getKeyPressed(sf::Keyboard::Key::Escape))
 		exit();
-	if (InputManager::getInstance().getKeyPressed(InputEnum::MenuTest))
+	if (InputManager::getInstance().getKeyPressed(sf::Keyboard::Key::Space))
 		changeState(GameStateEnum::Game);
 }
 

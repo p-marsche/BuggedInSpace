@@ -21,8 +21,8 @@ public:
     void createHealthComponent(int entityID, int maxHealth, float regenRate);
     void createPhysicsComponent(int entityID, float maxVel, float acellRate, 
         float radiusFactor, float turnRate);
-    void createPlayerInputComponent(int entityID, std::unordered_map<sf::Keyboard::Key, 
-        InputEnum> inputMap);
+    void createPlayerInputComponent(int entityID, 
+        std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap);
     void createRenderComponent(int entityID, sf::Texture& texture, bool visible);
     void createStatusComponent(int entityID, bool destructible);
     void createTransformComponent(int entityID, sf::Vector2f position, sf::Vector2f scale, 

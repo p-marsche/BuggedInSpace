@@ -2,7 +2,10 @@
 
 #include "PlayerInputComponent.hpp"
 
-PlayerInputComponent::PlayerInputComponent(int entityID, std::unordered_map<sf::Keyboard::Key, InputEnum> inputMap)
+PlayerInputComponent::PlayerInputComponent(int entityID,
+	std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap)
 	: IComponent(entityID)
-	, m_inputMap(inputMap)
-{ }
+{ 
+	for (auto& [key, val] : inputMap)
+		m_inputMap.emplace(key, val);
+}

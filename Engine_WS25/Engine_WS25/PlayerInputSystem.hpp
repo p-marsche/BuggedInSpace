@@ -1,9 +1,10 @@
 #pragma once
 
+#include "ComponentBlock.hpp"
 #include "ECSView.hpp"
-#include "System.hpp"
 #include "PhysicsComponent.hpp"
 #include "PlayerInputComponent.hpp"
+#include "System.hpp"
 #include "TransformComponent.hpp"
 
 class PlayerInputSystem :
