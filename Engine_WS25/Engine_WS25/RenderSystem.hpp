@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SFML/Graphics.hpp"
+
 #include "ECSView.hpp"
 #include "System.hpp"
 #include "RenderComponent.hpp"
@@ -10,11 +12,10 @@ class RenderSystem :
 {
     RenderSystem();
     void update(float deltaTime) override;
+    void render(sf::RenderWindow& window);
 
 private:
     std::shared_ptr<ComponentBlock<RenderComponent>> m_renderPtr;
     std::shared_ptr<ComponentBlock<TransformComponent>> m_transformPtr;
-
-
 };
 
