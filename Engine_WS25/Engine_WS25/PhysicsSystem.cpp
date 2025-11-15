@@ -2,6 +2,7 @@
 
 #include "Registry.hpp"
 #include "PhysicsSystem.hpp"
+#include "VectorUtils.hpp"
 
 PhysicsSystem::PhysicsSystem()
 {
@@ -23,6 +24,31 @@ PhysicsSystem::PhysicsSystem()
 }
 
 void PhysicsSystem::update(float dT)
+{
+	checkView();
+
+	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
+		processAcelleration(i, dT);
+
+	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
+		processColissions(i, dT);
+}
+
+void PhysicsSystem::processAcelleration(unsigned int index, float dT)
+{
+	int pIndex = m_view->m_componentVecs.at(ComponentType::Physics)[index];
+	int sIndex = m_view->m_componentVecs.at(ComponentType::Status)[index];
+	int tIndex = m_view->m_componentVecs.at(ComponentType::Transform)[index];
+
+	sf::Vector2f newVel = m_physicsPtr->m_components[pIndex].m_velocity;
+	sf::Vector2f currAcell = m_physicsPtr->m_components[pIndex].m_acceleration;
+	float acellRate = m_physicsPtr->m_components[pIndex].m_accelerationRate;
+	float maxVel = m_physicsPtr->m_components[pIndex].m_maxVelocity;
+	newVel = newVel + (currAcell * acellRate * dT);
+	newVel = VecUtils::clamp(newVel, maxVel);
+}
+
+void PhysicsSystem::processColissions(unsigned int index, float dT)
 {
 
 }

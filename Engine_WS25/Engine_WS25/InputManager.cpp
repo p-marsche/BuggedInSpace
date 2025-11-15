@@ -41,9 +41,20 @@ bool InputManager::getKeyPressed(sf::Keyboard::Key key)
 
 void InputManager::onKeyPressed(sf::Keyboard::Key key) 
 { 
+    m_isKeyDown.push_back(key);
+    m_isKeyPressed.push_back(key);
     
+    auto it = std::find(m_isKeyUp.cbegin(), m_isKeyUp.cend(), key);
+    if (it == m_isKeyUp.end())
+        m_isKeyUp.erase(it);
+
+    return;
 }
 void InputManager::onKeyReleased(sf::Keyboard::Key key) 
 {
-    
+    m_isKeyUp.push_back(key);
+
+    auto it = std::find(m_isKeyDown.cbegin(), m_isKeyDown.cend(), key);
+    if (it != m_isKeyDown.end())
+        m_isKeyDown.erase(it);
 }

@@ -13,8 +13,12 @@ public:
     PhysicsSystem();
     void update(float deltaTime) override;
 
+private:
     std::shared_ptr<ComponentBlock<PhysicsComponent>> m_physicsPtr;
     std::shared_ptr<ComponentBlock<StatusComponent>> m_statusPtr;
     std::shared_ptr<ComponentBlock<TransformComponent>> m_transformPtr;
+
+    void processAcelleration(unsigned int index, float dT);
+    void processColissions(unsigned int index, float dT);
 };
 

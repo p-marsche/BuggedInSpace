@@ -4,6 +4,7 @@
 #include "InputManager.hpp"
 #include "PlayerInputSystem.hpp"
 #include "Registry.hpp"
+#include "VectorUtils.hpp"
 
 PlayerInputSystem::PlayerInputSystem()
 {
@@ -36,14 +37,24 @@ void PlayerInputSystem::update(float dT)
 
 		sf::Keyboard::Key leftKey =
 			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Left);
-
 		sf::Keyboard::Key rightKey =
 			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Right);
-
 		sf::Keyboard::Key forwardKey =
 			m_inputPtr->m_components[iIndex].m_inputMap.at(InputEnum::Up);
 
+		sf::Vector2f newFwd = m_transformPtr->m_components[tIndex].m_forward;
+		float turnRate = m_physicsPtr->m_components[pIndex].m_turnRate;
+		int turnDirection = 0;
 		if (InputManager::getInstance().getKeyDown(leftKey))
-			return;
+			turnDirection -= 1;
+		if (InputManager::getInstance().getKeyDown(rightKey))
+			turnDirection += 1;
+		newFwd = VecUtils::rotate(newFwd, turnDirection * turnRate * dT);
+		m_transformPtr->m_components[tIndex].m_forward = newFwd;
+
+		if (InputManager::getInstance().getKeyDown(forwardKey))
+			m_physicsPtr->m_components[pIndex].m_acceleration = newFwd;
+		else
+			m_physicsPtr->m_components[pIndex].m_acceleration = sf::Vector2f(0.f, 0.f);
 	}
 }
