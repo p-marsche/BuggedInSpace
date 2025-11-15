@@ -17,12 +17,18 @@ Registry& Registry::getInstance()
 
 void Registry::init(int reserveCount)
 {
-	m_componentBlocks.emplace(ComponentType::Health, std::make_shared<ComponentBlock<HealthComponent>>(reserveCount));
-	m_componentBlocks.emplace(ComponentType::Physics, std::make_shared<ComponentBlock<PhysicsComponent>>(reserveCount));
-	m_componentBlocks.emplace(ComponentType::PlayerInput, std::make_shared<ComponentBlock<PlayerInputComponent>>(reserveCount));
-	m_componentBlocks.emplace(ComponentType::Render, std::make_shared<ComponentBlock<RenderComponent>>(reserveCount));
-	m_componentBlocks.emplace(ComponentType::Status, std::make_shared<ComponentBlock<StatusComponent>>(reserveCount));
-	m_componentBlocks.emplace(ComponentType::Transform, std::make_shared<ComponentBlock<TransformComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::Health, 
+		std::make_shared<ComponentBlock<HealthComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::Physics, 
+		std::make_shared<ComponentBlock<PhysicsComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::PlayerInput, 
+		std::make_shared<ComponentBlock<PlayerInputComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::Render, 
+		std::make_shared<ComponentBlock<RenderComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::Status, 
+		std::make_shared<ComponentBlock<StatusComponent>>(reserveCount));
+	m_componentBlocks.emplace(ComponentType::Transform, 
+		std::make_shared<ComponentBlock<TransformComponent>>(reserveCount));
 
 	m_blockIsDirty.emplace(ComponentType::Health, true);
 	m_blockIsDirty.emplace(ComponentType::Physics, true);
@@ -45,6 +51,16 @@ int Registry::addEntity()
 	return newEntity->m_ID;
 }
 
+void Registry::removeEntity(int ID)
+{
+	for (auto& [type, block] : m_componentBlocks)
+	{
+		bool wasRemoved = block->remove(ID);
+		if (wasRemoved)
+			m_blockIsDirty.at(type) = true;
+	}
+}
+
 void Registry::createHealthComponent(int entityID, int maxHealth, float regenRate)
 {
 	std::shared_ptr block = 
@@ -54,16 +70,6 @@ void Registry::createHealthComponent(int entityID, int maxHealth, float regenRat
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
 	block->m_components.emplace_back(entityID, maxHealth, regenRate);
-}
-
-void Registry::removeEntity(int ID)
-{
-	for (auto& [type, block] : m_componentBlocks)
-	{
-		bool wasRemoved = block->remove(ID);
-		if (wasRemoved)
-			m_blockIsDirty.at(type) = true;
-	}
 }
 
 void Registry::createPhysicsComponent(int entityID, float maxVel, float acellRate, 
@@ -82,7 +88,8 @@ void Registry::createPlayerInputComponent(int entityID,
 	std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap)
 {
 	std::shared_ptr block = 
-		std::dynamic_pointer_cast<ComponentBlock<PlayerInputComponent>>(m_componentBlocks.at(ComponentType::PlayerInput));
+		std::dynamic_pointer_cast<ComponentBlock<PlayerInputComponent>>
+		(m_componentBlocks.at(ComponentType::PlayerInput));
 
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);

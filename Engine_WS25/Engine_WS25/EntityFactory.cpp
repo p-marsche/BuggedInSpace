@@ -31,6 +31,7 @@ int EntityFactory::createPlayer(sf::Vector2f position, sf::Vector2f scale,
 	Registry::getInstance().createPhysicsComponent(entityID, 30, 10, colliderRadius, turnRate);
 	Registry::getInstance().createStatusComponent(entityID, false);
 	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
+	Registry::getInstance().createPlayerInputComponent(entityID, inputMap);
 
 	return entityID;
 }

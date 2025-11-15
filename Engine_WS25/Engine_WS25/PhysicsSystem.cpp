@@ -28,13 +28,13 @@ void PhysicsSystem::update(float dT)
 	checkView();
 
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
-		processAcelleration(i, dT);
+		processMovement(i, dT);
 
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 		processColissions(i, dT);
 }
 
-void PhysicsSystem::processAcelleration(unsigned int index, float dT)
+void PhysicsSystem::processMovement(unsigned int index, float dT)
 {
 	int pIndex = m_view->m_componentVecs.at(ComponentType::Physics)[index];
 	int sIndex = m_view->m_componentVecs.at(ComponentType::Status)[index];
@@ -46,6 +46,10 @@ void PhysicsSystem::processAcelleration(unsigned int index, float dT)
 	float maxVel = m_physicsPtr->m_components[pIndex].m_maxVelocity;
 	newVel = newVel + (currAcell * acellRate * dT);
 	newVel = VecUtils::clamp(newVel, maxVel);
+	m_physicsPtr->m_components[pIndex].m_velocity = newVel;
+
+	m_transformPtr->m_components[tIndex].m_position +=
+		m_physicsPtr->m_components[pIndex].m_velocity;
 
 	m_statusPtr->m_components[sIndex].m_collided = false;
 }

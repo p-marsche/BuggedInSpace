@@ -23,6 +23,8 @@ PlayerInputSystem::PlayerInputSystem()
 		(Registry::getInstance().m_componentBlocks.at(ComponentType::Transform));
 
 	m_view = Registry::getInstance().getView(m_requiredComponents);
+
+	std::cout << "test" << std::endl;
 }
 
 void PlayerInputSystem::update(float dT)
@@ -49,11 +51,14 @@ void PlayerInputSystem::update(float dT)
 			turnDirection -= 1;
 		if (InputManager::getInstance().getKeyDown(rightKey))
 			turnDirection += 1;
+
 		newFwd = VecUtils::rotate(newFwd, turnDirection * turnRate * dT);
 		m_transformPtr->m_components[tIndex].m_forward = newFwd;
+		m_transformPtr->m_components[tIndex].m_newRotation = turnDirection * turnRate * dT;
 
 		if (InputManager::getInstance().getKeyDown(forwardKey))
-			m_physicsPtr->m_components[pIndex].m_acceleration = newFwd;
+			m_physicsPtr->m_components[pIndex].m_acceleration = 
+				m_transformPtr->m_components[tIndex].m_forward;
 		else
 			m_physicsPtr->m_components[pIndex].m_acceleration = sf::Vector2f(0.f, 0.f);
 	}

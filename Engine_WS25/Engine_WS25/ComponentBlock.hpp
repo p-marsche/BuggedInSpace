@@ -7,7 +7,12 @@
 struct IComponentBlock
 {
 public:
-	IComponentBlock(int reserveCount) { m_entities.reserve(reserveCount); }
+	IComponentBlock(int reserveCount) 
+	{
+		m_entities = std::vector<int>();
+		m_entities.reserve(reserveCount); 
+		m_entityToIndex = std::unordered_map<int, int>();
+	}
 	virtual ~IComponentBlock() = default;
 
 	virtual bool remove(int ID) { return false; }
@@ -26,6 +31,7 @@ public:
 	ComponentBlock(int reserveCount)
 		: IComponentBlock(reserveCount)
 	{
+		m_components = std::vector<T>();
 		m_components.reserve(reserveCount);
 	}
 

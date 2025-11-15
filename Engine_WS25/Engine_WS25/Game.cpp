@@ -54,12 +54,12 @@ void Game::initialize()
 
 	int playerID = 
 		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f), 
-			sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 20.f,
+			sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
 			inputMap);
 
 	int bgID =
 		EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
-			sf::Vector2f(4.f, 2.f), "Background");
+			sf::Vector2f(2.f, 4.f), "Background");
 
 	std::cout << "Player ID:" << playerID << std::endl;
 	std::cout << "Background ID:" << bgID << std::endl;
