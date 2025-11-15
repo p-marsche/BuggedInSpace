@@ -10,7 +10,8 @@ struct RenderComponent :
     public IComponent
 {
 public:
-    RenderComponent(int entityID, sf::Texture& texture, bool visible, int zIndex);
+    RenderComponent(int entityID, sf::Texture& texture, bool visible,
+        int zIndex, sf::Vector2f scale);
     virtual ~RenderComponent() = default;
 
     virtual ComponentType GetType() override { return m_type; }

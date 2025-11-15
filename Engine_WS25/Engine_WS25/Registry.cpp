@@ -91,7 +91,7 @@ void Registry::createPlayerInputComponent(int entityID,
 }
 
 void Registry::createRenderComponent(int entityID, sf::Texture& texture, 
-	bool visible, int zIndex)
+	bool visible, int zIndex, sf::Vector2f scale)
 {
 	std::shared_ptr block = 
 		std::dynamic_pointer_cast<ComponentBlock<RenderComponent>>
@@ -100,7 +100,7 @@ void Registry::createRenderComponent(int entityID, sf::Texture& texture,
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
-	block->m_components.emplace_back(entityID, texture, visible, zIndex);
+	block->m_components.emplace_back(entityID, texture, visible, zIndex, scale);
 }
 
 void Registry::createStatusComponent(int entityID, bool destructible)

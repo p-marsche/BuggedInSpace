@@ -11,7 +11,8 @@ public:
     void init();
     int createPlayer(sf::Vector2f position, sf::Vector2f scale, sf::Vector2f forward, 
             std::string textureKey, float hitboxScale, float turnRate);
-    int createBackground(sf::Vector2f scale, std::string textureKey);
+    int createBackground(sf::Vector2f position, sf::Vector2f scale,
+        std::string textureKey, sf::Vector2f forward);
 
 private:
     EntityFactory() = default;
