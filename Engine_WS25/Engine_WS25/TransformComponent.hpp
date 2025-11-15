@@ -7,7 +7,8 @@ struct TransformComponent
 	: public IComponent
 {
 public:
-	TransformComponent(int entityID, sf::Vector2f position, sf::Vector2f scale, sf::Vector2f forward);
+	TransformComponent(int entityID, sf::Vector2f position, sf::Vector2f scale, 
+		sf::Vector2f forward);
 
 	virtual ComponentType GetType() override { return m_type; }
 

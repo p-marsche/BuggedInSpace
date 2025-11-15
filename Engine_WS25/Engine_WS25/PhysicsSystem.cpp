@@ -50,5 +50,19 @@ void PhysicsSystem::processAcelleration(unsigned int index, float dT)
 
 void PhysicsSystem::processColissions(unsigned int index, float dT)
 {
+	int pIndex1 = m_view->m_componentVecs.at(ComponentType::Physics)[index];
+	int sIndex1 = m_view->m_componentVecs.at(ComponentType::Status)[index];
+	int tIndex1 = m_view->m_componentVecs.at(ComponentType::Transform)[index];
 
+	for (unsigned int j = 0; j < m_view->m_entities.size(); j++)
+	{
+		if (j == index)
+			continue;
+
+		int pIndex2 = m_view->m_componentVecs.at(ComponentType::Physics)[index];
+		int sIndex2 = m_view->m_componentVecs.at(ComponentType::Status)[index];
+		int tIndex2 = m_view->m_componentVecs.at(ComponentType::Transform)[index];
+
+
+	}
 }
