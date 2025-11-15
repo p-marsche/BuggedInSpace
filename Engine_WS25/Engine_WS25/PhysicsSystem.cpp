@@ -79,7 +79,6 @@ void PhysicsSystem::processColissions(unsigned int index, float dT)
 		{
 			m_statusPtr->m_components[sIndex1].m_collided = true;
 			m_statusPtr->m_components[sIndex2].m_collided = true;
-			std::cout << "test" << std::endl;
 		}
 	}
 }

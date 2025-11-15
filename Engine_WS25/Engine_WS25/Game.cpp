@@ -14,6 +14,8 @@ Game::Game()
 	, TITLE("Engine_WS25")
 	, m_cameraDeadzone(WIDTH/8, HEIGHT/8)
 	, m_playerID(-1)
+	, m_emptyBoxID(-1)
+	, m_stringID(-1)
 {
 	m_clock = sf::Clock();
 	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE);
@@ -48,29 +50,7 @@ void Game::initialize()
 	InputManager::getInstance().init();
 	Registry::getInstance().init(100);
 
-	AssetManager::getInstance().loadTexture("Player", "Player_Ship1.png");
-	AssetManager::getInstance().loadTexture("Background", "Background.png");
-	AssetManager::getInstance().loadTexture("Enemy", "Enemy_Ship1.png");
-
-	auto inputMap = std::unordered_map<InputEnum, sf::Keyboard::Key>();
-	inputMap.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
-	inputMap.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
-	inputMap.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
-
-	m_playerID = 
-		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f), 
-		sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
-		inputMap);
-
-	int bgID = EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
-		sf::Vector2f(12.f, 16.f), "Background");
-
-	int opID = EntityFactory::getInstance().createObstacle(sf::Vector2f(250.f, 250.f),
-		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Enemy", 0.8f);
-
-	std::cout << "PlayerID: " << m_playerID << std::endl;
-	std::cout << "bgID: " << bgID << std::endl;
-	std::cout << "opID: " << opID << std::endl;
+	createEntities();
 
 	SystemManager::getInstance().init();
 }
@@ -175,4 +155,38 @@ void Game::checkCameraDeadzone(sf::Vector2f playerPosition)
 	auto newView = m_window->getView();
 	newView.move(offset);
 	m_window->setView(newView);
+}
+
+void Game::createEntities()
+{
+	AssetManager::getInstance().loadTexture("Player", "Player_Ship1.png");
+	AssetManager::getInstance().loadTexture("Background", "Background.png");
+	AssetManager::getInstance().loadTexture("Filled", "Filled_Console.png");
+	AssetManager::getInstance().loadTexture("Empty", "Empty_Console.png");
+	//AssetManager::getInstance().loadTexture("String", "String.png");
+
+	auto inputMap = std::unordered_map<InputEnum, sf::Keyboard::Key>();
+	inputMap.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
+	inputMap.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
+	inputMap.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
+
+	EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(12.f, 16.f), "Background");
+	m_playerID =
+		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f),
+			sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
+			inputMap);
+	m_emptyBoxID =
+		EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-300.f, 100.f),
+			sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
+	/*m_stringID =
+		EntityFactory::getInstance().createString(sf::Vector2f(-300.f, 100.f),
+			sf::Vector2f(1.f, 1.5), sf::Vector2f(1.f, 0.f), "String", 1.1f);*/
+
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(600.f, -100.f),
+		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1200.f, 0.f),
+		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(700.f, 800.f),
+		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
 }

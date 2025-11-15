@@ -44,7 +44,8 @@ void RenderSystem::render(sf::RenderWindow& window)
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 	{
 		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];
-		window.draw(m_renderPtr->m_components[rIndex].m_sprite);
+		if (m_renderPtr->m_components[rIndex].m_isVisible)
+			window.draw(m_renderPtr->m_components[rIndex].m_sprite);
 	}
 }
 

@@ -18,7 +18,7 @@ private:
 	sf::FloatRect m_viewBorder;
 	sf::FloatRect m_worldBorder;
 	sf::Vector2f m_cameraDeadzone;
-	int m_playerID;
+	int m_playerID, m_emptyBoxID, m_stringID;
 	float m_aspectRatio;
 	sf::Clock m_clock;
 	std::shared_ptr<sf::RenderWindow> m_window;
@@ -27,4 +27,5 @@ private:
 	void initialize();
 	void handleEvents();
 	void checkCameraDeadzone(sf::Vector2f playerPos);
+	void createEntities();
 };

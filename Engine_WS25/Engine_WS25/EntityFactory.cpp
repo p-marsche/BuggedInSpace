@@ -55,12 +55,22 @@ int EntityFactory::createBackground(sf::Vector2f position, sf::Vector2f scale,
 	return entityID;
 }
 
-int EntityFactory::createObstacle(sf::Vector2f position, sf::Vector2f scale,
+int EntityFactory::createFilledConsole(sf::Vector2f position, sf::Vector2f scale,
+	sf::Vector2f forward, std::string textureKey)
+{
+	int entityID = Registry::getInstance().addEntity();
+	sf::Texture& texture = AssetManager::getInstance().getTexture(textureKey);
+	Registry::getInstance().createRenderComponent(entityID, texture, true, 5, scale);
+	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
+	return entityID;
+}
+
+int EntityFactory::createEmptyConsole(sf::Vector2f position, sf::Vector2f scale,
 	sf::Vector2f forward, std::string textureKey, float hitboxScale)
 {
 	int entityID = Registry::getInstance().addEntity();
 	sf::Texture& texture = AssetManager::getInstance().getTexture(textureKey);
-	Registry::getInstance().createRenderComponent(entityID, texture, true, 1, scale);
+	Registry::getInstance().createRenderComponent(entityID, texture, true, 7, scale);
 
 	std::shared_ptr<ComponentBlock<RenderComponent>> m_renderPtr =
 		std::dynamic_pointer_cast<ComponentBlock<RenderComponent>>
@@ -68,10 +78,32 @@ int EntityFactory::createObstacle(sf::Vector2f position, sf::Vector2f scale,
 	int compIndex = m_renderPtr->m_entityToIndex.at(entityID);
 	auto hitbox = m_renderPtr->m_components[compIndex].m_sprite.getGlobalBounds();
 	float colliderRadius = (hitbox.height > hitbox.width) ? hitbox.height : hitbox.width;
-	colliderRadius *= hitboxScale*0.5f;
-	std::cout << colliderRadius << std::endl;
+	colliderRadius *= hitboxScale * 0.5f;
 
-	Registry::getInstance().createPhysicsComponent(entityID, 25, 10, colliderRadius, 100.f);
+	Registry::getInstance().createPhysicsComponent(entityID, 0, 0, colliderRadius, 0);
+	Registry::getInstance().createStatusComponent(entityID, false);
+	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
+
+	return entityID;
+}
+
+int EntityFactory::createString(sf::Vector2f position, sf::Vector2f scale,
+	sf::Vector2f forward, std::string textureKey, float hitboxScale)
+{
+	int entityID = Registry::getInstance().addEntity();
+	sf::Texture& texture = AssetManager::getInstance().getTexture(textureKey);
+	Registry::getInstance().createHealthComponent(entityID, 100, 10);
+	Registry::getInstance().createRenderComponent(entityID, texture, true, 8, scale);
+
+	std::shared_ptr<ComponentBlock<RenderComponent>> m_renderPtr =
+		std::dynamic_pointer_cast<ComponentBlock<RenderComponent>>
+		(Registry::getInstance().m_componentBlocks.at(ComponentType::Render));
+	int compIndex = m_renderPtr->m_entityToIndex.at(entityID);
+	auto hitbox = m_renderPtr->m_components[compIndex].m_sprite.getGlobalBounds();
+	float colliderRadius = (hitbox.height > hitbox.width) ? hitbox.height : hitbox.width;
+	colliderRadius *= hitboxScale * 0.5f;
+
+	Registry::getInstance().createPhysicsComponent(entityID, 0, 0, colliderRadius, 0);
 	Registry::getInstance().createStatusComponent(entityID, false);
 	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
 
