@@ -46,6 +46,8 @@ void PhysicsSystem::processAcelleration(unsigned int index, float dT)
 	float maxVel = m_physicsPtr->m_components[pIndex].m_maxVelocity;
 	newVel = newVel + (currAcell * acellRate * dT);
 	newVel = VecUtils::clamp(newVel, maxVel);
+
+	m_statusPtr->m_components[sIndex].m_collided = false;
 }
 
 void PhysicsSystem::processColissions(unsigned int index, float dT)
@@ -54,15 +56,25 @@ void PhysicsSystem::processColissions(unsigned int index, float dT)
 	int sIndex1 = m_view->m_componentVecs.at(ComponentType::Status)[index];
 	int tIndex1 = m_view->m_componentVecs.at(ComponentType::Transform)[index];
 
-	for (unsigned int j = 0; j < m_view->m_entities.size(); j++)
+	for (unsigned int j = index+1; j < m_view->m_entities.size(); j++)
 	{
-		if (j == index)
-			continue;
-
 		int pIndex2 = m_view->m_componentVecs.at(ComponentType::Physics)[index];
 		int sIndex2 = m_view->m_componentVecs.at(ComponentType::Status)[index];
 		int tIndex2 = m_view->m_componentVecs.at(ComponentType::Transform)[index];
 
+		sf::Vector2f dist =
+			m_transformPtr->m_components[tIndex1].m_position -
+			m_transformPtr->m_components[tIndex2].m_position;
+		float combinedRadiusSquare =
+			m_physicsPtr->m_components[pIndex1].m_colliderRadius +
+			m_physicsPtr->m_components[pIndex2].m_colliderRadius;
+		combinedRadiusSquare *= combinedRadiusSquare;
+		float sqDist = dist.x * dist.x + dist.y * dist.y;
 
+		if (sqDist < combinedRadiusSquare)
+		{
+			m_statusPtr->m_components[sIndex1].m_collided = true;
+			m_statusPtr->m_components[sIndex2].m_collided = true;
+		}
 	}
 }
