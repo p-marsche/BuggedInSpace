@@ -9,18 +9,21 @@
 #include "VectorUtils.hpp"
 
 Game::Game()
-	: WIDTH(1280)
-	, HEIGHT(720)
+	: WIDTH(1920)
+	, HEIGHT(1080)
 	, TITLE("Engine_WS25")
+	, m_cameraDeadzone(WIDTH/8, HEIGHT/8)
 {
 	m_clock = sf::Clock();
 	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE);
 	m_window->setFramerateLimit(60);
 	m_window->setKeyRepeatEnabled(false);
 	m_aspectRatio = static_cast<float>(WIDTH) / static_cast<float>(HEIGHT);
-	sf::View startView = sf::View(sf::Vector2f(0.f, 0.f),
+	m_viewBorder = sf::FloatRect(sf::Vector2f(0.f, 0.f),
 		sf::Vector2f(static_cast<float>(WIDTH), static_cast<float>(HEIGHT)));
-	m_window->setView(startView);
+	m_worldBorder = sf::FloatRect(sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(4.f * static_cast<float>(WIDTH), 4.f * static_cast<float>(HEIGHT)));
+	m_window->setView(sf::View(m_viewBorder));
 }
 
 void Game::run()
@@ -52,17 +55,15 @@ void Game::initialize()
 	inputMap.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
 	inputMap.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
 
-	int playerID = 
+	m_playerID = 
 		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f), 
-			sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
-			inputMap);
+		sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
+		inputMap);
 
-	int bgID =
-		EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
-			sf::Vector2f(2.f, 4.f), "Background");
+	EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(12.f, 16.f), "Background");
 
-	std::cout << "Player ID:" << playerID << std::endl;
-	std::cout << "Background ID:" << bgID << std::endl;
+	//EntityFactory
 
 	SystemManager::getInstance().init();
 }
@@ -94,6 +95,9 @@ void Game::update(float deltaTime)
 {
 	SystemManager::getInstance().update(deltaTime);
 	Registry::getInstance().update();
+
+	sf::Vector2f playerPos = Registry::getInstance().getPlayerPosition(m_playerID);
+	checkCameraDeadzone(playerPos);
 }
 
 void Game::render()
@@ -137,4 +141,31 @@ void Game::resizeWindow(int width, int height)
 	sf::View view = m_window->getView();
 	view.setViewport(sf::FloatRect({ newViewX, newViewY }, { newWidth, newHeight }));
 	m_window->setView(view);
+}
+
+void Game::checkCameraDeadzone(sf::Vector2f playerPosition)
+{
+	auto centerDist = playerPosition - m_window->getView().getCenter();
+	auto offset = sf::Vector2f(centerDist);
+	int centerDistX = std::abs(centerDist.x);
+	int centerDistY = std::abs(centerDist.y);
+
+	if (centerDistX <= m_cameraDeadzone.x && centerDistY <= m_cameraDeadzone.y)
+		return;
+
+	if (centerDistX > m_cameraDeadzone.x)
+		offset.x +=
+		(centerDist.x > 0) ? ((-1.f) * m_cameraDeadzone.x) : m_cameraDeadzone.x;
+	else
+		offset.x = 0.f;
+
+	if (centerDistY > m_cameraDeadzone.y)
+		offset.y +=
+		(centerDist.y > 0) ? ((-1.f) * m_cameraDeadzone.y) : m_cameraDeadzone.y;
+	else
+		offset.y = 0.f;
+
+	auto newView = m_window->getView();
+	newView.move(offset);
+	m_window->setView(newView);
 }

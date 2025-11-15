@@ -125,7 +125,8 @@ void Registry::createTransformComponent(int entityID, sf::Vector2f position,
 	sf::Vector2f scale, sf::Vector2f forward)
 {
 	std::shared_ptr block = 
-		std::dynamic_pointer_cast<ComponentBlock<TransformComponent>>(m_componentBlocks.at(ComponentType::Transform));
+		std::dynamic_pointer_cast<ComponentBlock<TransformComponent>>
+		(m_componentBlocks.at(ComponentType::Transform));
 
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);
@@ -136,6 +137,16 @@ void Registry::createTransformComponent(int entityID, sf::Vector2f position,
 void Registry::removeComponent(int entityID, ComponentType type)
 {
 	m_componentBlocks.at(type)->remove(entityID);
+}
+
+sf::Vector2f Registry::getPlayerPosition(int entityID)
+{
+	auto block =
+		std::dynamic_pointer_cast<ComponentBlock<TransformComponent>>
+		(m_componentBlocks.at(ComponentType::Transform));
+
+	int compIndex = block->m_entityToIndex.at(entityID);
+	return block->m_components[compIndex].m_position;
 }
 
 ComponentType Registry::getShortest(std::vector<ComponentType> types)

@@ -17,6 +17,7 @@ public:
 
     int addEntity();
     void removeEntity(int entityID);
+    sf::Vector2f getPlayerPosition(int entityID);
 
     void createHealthComponent(int entityID, int maxHealth, float regenRate);
     void createPhysicsComponent(int entityID, float maxVel, float acellRate, 
