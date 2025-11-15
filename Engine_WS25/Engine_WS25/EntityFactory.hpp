@@ -14,6 +14,8 @@ public:
             std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap);
     int createBackground(sf::Vector2f position, sf::Vector2f scale,
         std::string textureKey);
+    int createObstacle(sf::Vector2f position, sf::Vector2f scale, sf::Vector2f forward,
+        std::string textureKey, float hitboxScale);
 
 private:
     EntityFactory() = default;

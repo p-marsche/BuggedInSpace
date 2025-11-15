@@ -13,6 +13,7 @@ Game::Game()
 	, HEIGHT(1080)
 	, TITLE("Engine_WS25")
 	, m_cameraDeadzone(WIDTH/8, HEIGHT/8)
+	, m_playerID(-1)
 {
 	m_clock = sf::Clock();
 	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE);
@@ -49,6 +50,7 @@ void Game::initialize()
 
 	AssetManager::getInstance().loadTexture("Player", "Player_Ship1.png");
 	AssetManager::getInstance().loadTexture("Background", "Background.png");
+	AssetManager::getInstance().loadTexture("Enemy", "Enemy_Ship1.png");
 
 	auto inputMap = std::unordered_map<InputEnum, sf::Keyboard::Key>();
 	inputMap.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
@@ -60,10 +62,15 @@ void Game::initialize()
 		sf::Vector2f(1.f, 1.f),sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
 		inputMap);
 
-	EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
+	int bgID = EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
 		sf::Vector2f(12.f, 16.f), "Background");
 
-	//EntityFactory
+	int opID = EntityFactory::getInstance().createObstacle(sf::Vector2f(250.f, 250.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Enemy", 0.8f);
+
+	std::cout << "PlayerID: " << m_playerID << std::endl;
+	std::cout << "bgID: " << bgID << std::endl;
+	std::cout << "opID: " << opID << std::endl;
 
 	SystemManager::getInstance().init();
 }

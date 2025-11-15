@@ -30,12 +30,12 @@ void Registry::init(int reserveCount)
 	m_componentBlocks.emplace(ComponentType::Transform, 
 		std::make_shared<ComponentBlock<TransformComponent>>(reserveCount));
 
-	m_blockIsDirty.emplace(ComponentType::Health, true);
-	m_blockIsDirty.emplace(ComponentType::Physics, true);
-	m_blockIsDirty.emplace(ComponentType::PlayerInput, true);
-	m_blockIsDirty.emplace(ComponentType::Render, true);
-	m_blockIsDirty.emplace(ComponentType::Status, true);
-	m_blockIsDirty.emplace(ComponentType::Transform, true);
+	m_blockIsDirty.emplace(ComponentType::Health, false);
+	m_blockIsDirty.emplace(ComponentType::Physics, false);
+	m_blockIsDirty.emplace(ComponentType::PlayerInput, false);
+	m_blockIsDirty.emplace(ComponentType::Render, false);
+	m_blockIsDirty.emplace(ComponentType::Status, false);
+	m_blockIsDirty.emplace(ComponentType::Transform, false);
 }
 
 void Registry::update()

@@ -62,24 +62,24 @@ void PhysicsSystem::processColissions(unsigned int index, float dT)
 
 	for (unsigned int j = index+1; j < m_view->m_entities.size(); j++)
 	{
-		int pIndex2 = m_view->m_componentVecs.at(ComponentType::Physics)[index];
-		int sIndex2 = m_view->m_componentVecs.at(ComponentType::Status)[index];
-		int tIndex2 = m_view->m_componentVecs.at(ComponentType::Transform)[index];
+		int pIndex2 = m_view->m_componentVecs.at(ComponentType::Physics)[j];
+		int sIndex2 = m_view->m_componentVecs.at(ComponentType::Status)[j];
+		int tIndex2 = m_view->m_componentVecs.at(ComponentType::Transform)[j];
 
 		sf::Vector2f dist =
 			m_transformPtr->m_components[tIndex1].m_position -
 			m_transformPtr->m_components[tIndex2].m_position;
-		float combinedRadiusSquare =
+		float combinedRadius =
 			m_physicsPtr->m_components[pIndex1].m_colliderRadius +
 			m_physicsPtr->m_components[pIndex2].m_colliderRadius;
-		combinedRadiusSquare *= combinedRadiusSquare;
+		float combinedRadiusSquare = combinedRadius * combinedRadius;
 		float sqDist = dist.x * dist.x + dist.y * dist.y;
 
 		if (sqDist < combinedRadiusSquare)
 		{
 			m_statusPtr->m_components[sIndex1].m_collided = true;
 			m_statusPtr->m_components[sIndex2].m_collided = true;
-			std::cout << "Collision detected: " << index << " & " << j << std::endl;
+			std::cout << "test" << std::endl;
 		}
 	}
 }
