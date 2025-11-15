@@ -21,5 +21,14 @@ RenderSystem::RenderSystem()
 
 void RenderSystem::update(float dT)
 {
+	for (int i = 0; i < m_view->m_entities.size(); i++)
+	{
+		int tIndex = m_view->m_componentVecs.at(ComponentType::Transform)[i];
+		int rIndex = m_view->m_componentVecs.at(ComponentType::Render)[i];
 
+		m_renderPtr->m_components[rIndex].m_sprite.setPosition
+		(m_transformPtr->m_components[tIndex].m_position);
+
+
+	}
 }

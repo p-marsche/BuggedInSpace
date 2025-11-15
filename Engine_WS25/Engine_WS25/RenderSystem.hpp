@@ -14,5 +14,7 @@ class RenderSystem :
 private:
     std::shared_ptr<ComponentBlock<RenderComponent>> m_renderPtr;
     std::shared_ptr<ComponentBlock<TransformComponent>> m_transformPtr;
+
+
 };
 

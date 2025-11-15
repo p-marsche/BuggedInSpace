@@ -16,5 +16,5 @@ public:
 	sf::Vector2f m_position;
 	sf::Vector2f m_scale;
 	sf::Vector2f m_forward;
-	// alternative: float for orientation in degree?
+	float m_newRotation;
 };

@@ -7,4 +7,5 @@ TransformComponent::TransformComponent(int entityID, sf::Vector2f position, sf::
 	, m_position(position)
 	, m_scale(scale)
 	, m_forward(forward)
+	, m_newRotation(0)
 { }
