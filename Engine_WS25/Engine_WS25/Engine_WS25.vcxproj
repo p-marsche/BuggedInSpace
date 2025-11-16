@@ -140,6 +140,8 @@
     <ClInclude Include="ComponentType.hpp" />
     <ClInclude Include="ECSView.hpp" />
     <ClInclude Include="HealthSystem.hpp" />
+    <ClInclude Include="Manifold.hpp" />
+    <ClInclude Include="MissionManager.hpp" />
     <ClInclude Include="PhysicsSystem.hpp" />
     <ClInclude Include="PlayerInputSystem.hpp" />
     <ClInclude Include="Registry.hpp" />
@@ -167,6 +169,8 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="HealthSystem.cpp" />
+    <ClCompile Include="Manifold.cpp" />
+    <ClCompile Include="MissionManager.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="PlayerInputSystem.cpp" />
     <ClCompile Include="Registry.cpp" />

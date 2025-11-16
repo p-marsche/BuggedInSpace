@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include "Manifold.hpp"
+#include "MissionManager.hpp"
 #include "Registry.hpp"
 #include "PhysicsSystem.hpp"
 #include "VectorUtils.hpp"
@@ -79,6 +81,18 @@ void PhysicsSystem::processColissions(unsigned int index, float dT)
 		{
 			m_statusPtr->m_components[sIndex1].m_collided = true;
 			m_statusPtr->m_components[sIndex2].m_collided = true;
+			notifyMissionManager(sIndex1, sIndex2);
 		}
 	}
+}
+
+void PhysicsSystem::notifyMissionManager(int sIndex1, int sIndex2)
+{
+	int id1 = m_statusPtr->m_components[sIndex1].m_entityID;
+	int id2 = m_statusPtr->m_components[sIndex2].m_entityID;
+	std::string tag1 = m_statusPtr->m_components[sIndex1].m_tag;
+	std::string tag2 = m_statusPtr->m_components[sIndex2].m_tag;
+
+	auto collManifold = Manifold(id1, id2, tag1, tag2);
+	MissionManager::getInstance().processManifold(collManifold);
 }

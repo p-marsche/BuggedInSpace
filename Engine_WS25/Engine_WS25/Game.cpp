@@ -1,8 +1,10 @@
 #include "pch.h"
 
 #include "AssetManager.hpp"
+#include "MissionManager.hpp"
 #include "InputManager.hpp"
 #include "SystemManager.hpp"
+#include "StatusComponent.hpp"
 #include "Game.hpp"
 #include "EntityFactory.hpp"
 #include "Registry.hpp"
@@ -13,9 +15,12 @@ Game::Game()
 	, HEIGHT(1080)
 	, TITLE("Engine_WS25")
 	, m_cameraDeadzone(WIDTH/8, HEIGHT/8)
+	, m_timerPosition(0, 0)
 	, m_playerID(-1)
-	, m_emptyBoxID(-1)
-	, m_stringID(-1)
+	, m_totalTime("")
+	, m_victoryTime()
+	, m_missionFinished(false)
+	, m_totalTimeElapsed(0)
 {
 	m_clock = sf::Clock();
 	m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(WIDTH, HEIGHT), TITLE);
@@ -51,8 +56,30 @@ void Game::initialize()
 	Registry::getInstance().init(100);
 
 	createEntities();
+	AssetManager::getInstance().loadFont("MainFont", "MainFont.ttf");
+
+	m_victoryTime.setFont(AssetManager::getInstance().getFont("MainFont"));
+	m_victoryTime.setCharacterSize(50);
+	m_victoryTime.setFillColor(sf::Color::Red);
+	m_victoryTime.setOutlineColor(sf::Color::White);
+	m_victoryTime.setOutlineThickness(3.f);
+	auto tempVec =
+		sf::Vector2f(m_victoryTime.getGlobalBounds().width / 2.f,
+			m_victoryTime.getGlobalBounds().height / 2.f);
+	m_victoryTime.setOrigin(tempVec);
 
 	SystemManager::getInstance().init();
+	int missionThreshold = 0;
+	auto tmp =
+		std::dynamic_pointer_cast<ComponentBlock<StatusComponent>>
+		(Registry::getInstance().m_componentBlocks.at(ComponentType::Status))
+		->m_components;
+	for (auto& comp : tmp)
+		if (comp.m_tag == "Empty")
+			missionThreshold++;
+
+	std::cout << missionThreshold << std::endl;
+	MissionManager::getInstance().init(missionThreshold);
 }
 
 void Game::handleEvents()
@@ -70,6 +97,8 @@ void Game::handleEvents()
 				break;
 			case sf::Event::KeyPressed:
 				InputManager::getInstance().onKeyPressed(event.key.code);
+				if (event.key.code == sf::Keyboard::Key::Escape && m_missionFinished)
+					exit();
 				break;
 			case sf::Event::KeyReleased:
 				InputManager::getInstance().onKeyReleased(event.key.code);
@@ -80,9 +109,15 @@ void Game::handleEvents()
 
 void Game::update(float deltaTime)
 {
+	m_missionFinished = MissionManager::getInstance().checkMission();
+	if (!m_missionFinished)
+	{
+		m_totalTimeElapsed += deltaTime;
+		convertTimeToString();
+	}
+
 	SystemManager::getInstance().update(deltaTime);
 	Registry::getInstance().update();
-
 	sf::Vector2f playerPos = Registry::getInstance().getPlayerPosition(m_playerID);
 	checkCameraDeadzone(playerPos);
 }
@@ -90,8 +125,26 @@ void Game::update(float deltaTime)
 void Game::render()
 {
 	m_window->clear(sf::Color::Black);
-
 	SystemManager::getInstance().render(*m_window);
+
+	m_timerPosition = m_window->getView().getCenter();
+	if (m_missionFinished)
+	{
+		m_victoryTime.setCharacterSize(100);
+		auto tempVec =
+			sf::Vector2f(m_victoryTime.getGlobalBounds().width / 2.f,
+				m_victoryTime.getGlobalBounds().height / 2.f);
+		m_victoryTime.setOrigin(tempVec);
+	}
+	else
+	{
+		m_timerPosition +=
+			sf::Vector2f(m_window->getView().getSize().x / 3.2,
+				m_window->getView().getSize().y / 2.5);
+	}
+
+
+	renderTimer(m_timerPosition);
 
 	m_window->display();
 }
@@ -100,6 +153,30 @@ void Game::exit()
 {
 	// safe shutdown implementation here
 	m_window->close();
+}
+
+void Game::convertTimeToString()
+{
+	int secs, mins, hours, tmp;
+	tmp = static_cast<int>(m_totalTimeElapsed);
+	hours = tmp / 3600;
+	tmp -= 3600 * hours;
+	mins = tmp / 60;
+	secs = tmp - 60 * mins;
+
+	std::stringstream temp;
+	temp << std::setw(2) << std::setfill('0') << hours << " : "
+		<< std::setw(2) << std::setfill('0') << mins << " : "
+		<< std::setw(2) << std::setfill('0') << secs;
+
+	m_totalTime = temp.str();
+}
+
+void Game::renderTimer(sf::Vector2f position)
+{
+	m_victoryTime.setString(m_totalTime);
+	m_victoryTime.setPosition(position);
+	m_window->draw(m_victoryTime);
 }
 
 void Game::resizeWindow(int width, int height)
@@ -134,8 +211,8 @@ void Game::checkCameraDeadzone(sf::Vector2f playerPosition)
 {
 	auto centerDist = playerPosition - m_window->getView().getCenter();
 	auto offset = sf::Vector2f(centerDist);
-	int centerDistX = std::abs(centerDist.x);
-	int centerDistY = std::abs(centerDist.y);
+	float centerDistX = std::abs(centerDist.x);
+	float centerDistY = std::abs(centerDist.y);
 
 	if (centerDistX <= m_cameraDeadzone.x && centerDistY <= m_cameraDeadzone.y)
 		return;
@@ -163,30 +240,35 @@ void Game::createEntities()
 	AssetManager::getInstance().loadTexture("Background", "Background.png");
 	AssetManager::getInstance().loadTexture("Filled", "Filled_Console.png");
 	AssetManager::getInstance().loadTexture("Empty", "Empty_Console.png");
-	//AssetManager::getInstance().loadTexture("String", "String.png");
+	AssetManager::getInstance().loadTexture("String", "String.png");
 
 	auto inputMap = std::unordered_map<InputEnum, sf::Keyboard::Key>();
 	inputMap.emplace(InputEnum::Left, sf::Keyboard::Key::Left);
 	inputMap.emplace(InputEnum::Right, sf::Keyboard::Key::Right);
 	inputMap.emplace(InputEnum::Up, sf::Keyboard::Key::Up);
 
-	EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
-		sf::Vector2f(12.f, 16.f), "Background");
+	int bgID = EntityFactory::getInstance().createBackground(sf::Vector2f(0.f, 0.f),
+		sf::Vector2f(4.f, 4.f), "Background");
+
 	m_playerID =
 		EntityFactory::getInstance().createPlayer(sf::Vector2f(0.f, 0.f),
 			sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
 			inputMap);
-	m_emptyBoxID =
-		EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-300.f, 100.f),
-			sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
-	/*m_stringID =
-		EntityFactory::getInstance().createString(sf::Vector2f(-300.f, 100.f),
-			sf::Vector2f(1.f, 1.5), sf::Vector2f(1.f, 0.f), "String", 1.1f);*/
 
-	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(600.f, -100.f),
-		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-300.f, 100.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(1000.f, -1100.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
+
+	EntityFactory::getInstance().createString(sf::Vector2f(-1300.f, 900.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+	EntityFactory::getInstance().createString(sf::Vector2f(-300.f, 700.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(800.f, -700.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
 	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1200.f, 0.f),
-		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
 	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(700.f, 800.f),
-		sf::Vector2f(1.f, 3.f), sf::Vector2f(1.f, 0.f), "Filled");
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
 }

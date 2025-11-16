@@ -26,7 +26,7 @@ public:
         std::unordered_map<InputEnum, sf::Keyboard::Key> inputMap);
     void createRenderComponent(int entityID, sf::Texture& texture, bool visible, 
         int zIndex, sf::Vector2f scale);
-    void createStatusComponent(int entityID, bool destructible);
+    void createStatusComponent(int entityID, bool destructible, std::string tag);
     void createTransformComponent(int entityID, sf::Vector2f position, sf::Vector2f scale, 
         sf::Vector2f forward);
     void removeComponent(int entityID, ComponentType type);

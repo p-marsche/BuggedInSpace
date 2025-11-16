@@ -29,7 +29,7 @@ int EntityFactory::createPlayer(sf::Vector2f position, sf::Vector2f scale,
 	colliderRadius *= hitboxScale*0.5f;
 
 	Registry::getInstance().createPhysicsComponent(entityID, 30, 10, colliderRadius, turnRate);
-	Registry::getInstance().createStatusComponent(entityID, false);
+	Registry::getInstance().createStatusComponent(entityID, false, "Player");
 	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
 	Registry::getInstance().createPlayerInputComponent(entityID, inputMap);
 
@@ -81,7 +81,7 @@ int EntityFactory::createEmptyConsole(sf::Vector2f position, sf::Vector2f scale,
 	colliderRadius *= hitboxScale * 0.5f;
 
 	Registry::getInstance().createPhysicsComponent(entityID, 0, 0, colliderRadius, 0);
-	Registry::getInstance().createStatusComponent(entityID, false);
+	Registry::getInstance().createStatusComponent(entityID, false, "Empty");
 	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
 
 	return entityID;
@@ -104,7 +104,7 @@ int EntityFactory::createString(sf::Vector2f position, sf::Vector2f scale,
 	colliderRadius *= hitboxScale * 0.5f;
 
 	Registry::getInstance().createPhysicsComponent(entityID, 0, 0, colliderRadius, 0);
-	Registry::getInstance().createStatusComponent(entityID, false);
+	Registry::getInstance().createStatusComponent(entityID, false, "String");
 	Registry::getInstance().createTransformComponent(entityID, position, scale, forward);
 
 	return entityID;

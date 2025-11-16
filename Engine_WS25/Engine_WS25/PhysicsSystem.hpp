@@ -21,5 +21,6 @@ private:
 
     void processMovement(unsigned int index, float dT);
     void processColissions(unsigned int index, float dT);
+    void notifyMissionManager(int sIndex1, int sIndex2);
 };
 

@@ -110,7 +110,7 @@ void Registry::createRenderComponent(int entityID, sf::Texture& texture,
 	block->m_components.emplace_back(entityID, texture, visible, zIndex, scale);
 }
 
-void Registry::createStatusComponent(int entityID, bool destructible)
+void Registry::createStatusComponent(int entityID, bool destructible, std::string tag = "Other")
 {
 	std::shared_ptr block = 
 		std::dynamic_pointer_cast<ComponentBlock<StatusComponent>>(m_componentBlocks.at(ComponentType::Status));
@@ -118,7 +118,7 @@ void Registry::createStatusComponent(int entityID, bool destructible)
 	int newIndex = block->m_components.size();
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
-	block->m_components.emplace_back(entityID, destructible);
+	block->m_components.emplace_back(entityID, destructible, tag);
 }
 
 void Registry::createTransformComponent(int entityID, sf::Vector2f position, 

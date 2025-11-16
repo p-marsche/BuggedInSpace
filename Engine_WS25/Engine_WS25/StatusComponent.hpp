@@ -6,7 +6,7 @@ struct StatusComponent :
     public IComponent
 {
 public:
-    StatusComponent(int entityID, bool destructible);
+    StatusComponent(int entityID, bool destructible, std::string tag);
 
     virtual ComponentType GetType() override { return m_type; }
 
@@ -14,4 +14,5 @@ public:
 
     bool m_isDestructible;
     bool m_collided;
+    std::string m_tag;
 };
