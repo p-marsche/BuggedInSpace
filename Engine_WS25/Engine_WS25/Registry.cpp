@@ -56,7 +56,7 @@ void Registry::removeEntity(int ID)
 	for (auto& [type, block] : m_componentBlocks)
 	{
 		bool wasRemoved = block->remove(ID);
-		if (wasRemoved)
+		if (wasRemoved) 
 			m_blockIsDirty.at(type) = true;
 	}
 }
@@ -110,7 +110,7 @@ void Registry::createRenderComponent(int entityID, sf::Texture& texture,
 	block->m_components.emplace_back(entityID, texture, visible, zIndex, scale);
 }
 
-void Registry::createStatusComponent(int entityID, bool destructible, std::string tag = "Other")
+void Registry::createStatusComponent(int entityID, bool destructible, std::string tag)
 {
 	std::shared_ptr block = 
 		std::dynamic_pointer_cast<ComponentBlock<StatusComponent>>(m_componentBlocks.at(ComponentType::Status));
@@ -119,6 +119,8 @@ void Registry::createStatusComponent(int entityID, bool destructible, std::strin
 	block->m_entities.push_back(entityID);
 	block->m_entityToIndex.emplace(entityID, newIndex);
 	block->m_components.emplace_back(entityID, destructible, tag);
+
+	std::cout << block->m_components.at(newIndex).m_tag << std::endl;
 }
 
 void Registry::createTransformComponent(int entityID, sf::Vector2f position, 
@@ -136,7 +138,9 @@ void Registry::createTransformComponent(int entityID, sf::Vector2f position,
 
 void Registry::removeComponent(int entityID, ComponentType type)
 {
-	m_componentBlocks.at(type)->remove(entityID);
+	bool wasRemoved = m_componentBlocks.at(type)->remove(entityID);
+	if (wasRemoved)
+		m_blockIsDirty.at(type) = true;
 }
 
 sf::Vector2f Registry::getPlayerPosition(int entityID)
