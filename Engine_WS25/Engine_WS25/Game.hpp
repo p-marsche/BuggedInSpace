@@ -35,4 +35,7 @@ private:
 	void createEntities();
 	void convertTimeToString();
 	void renderTimer(sf::Vector2f position);
+	void entitySetup1();
+	void entitySetup2();
+	void entitySetup3();
 };

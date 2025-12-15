@@ -23,8 +23,6 @@ PlayerInputSystem::PlayerInputSystem()
 		(Registry::getInstance().m_componentBlocks.at(ComponentType::Transform));
 
 	m_view = Registry::getInstance().getView(m_requiredComponents);
-
-	std::cout << "test" << std::endl;
 }
 
 void PlayerInputSystem::update(float dT)

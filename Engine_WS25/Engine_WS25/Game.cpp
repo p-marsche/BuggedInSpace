@@ -1,5 +1,7 @@
 #include "pch.h"
 
+#include <random>
+
 #include "AssetManager.hpp"
 #include "MissionManager.hpp"
 #include "InputManager.hpp"
@@ -78,7 +80,6 @@ void Game::initialize()
 		if (comp.m_tag == "Empty")
 			missionThreshold++;
 
-	std::cout << missionThreshold << std::endl;
 	MissionManager::getInstance().init(missionThreshold);
 }
 
@@ -255,14 +256,41 @@ void Game::createEntities()
 			sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Player", 0.8f, 200.f,
 			inputMap);
 
+	std::random_device gen;
+	int rng = gen();
+	if (rng < 0)
+		rng = abs(rng);
+	if (rng == 0)
+		rng = 1;
+	int choice = rng % 3;
+	std::cout << choice << std::endl;
+		switch (choice)
+		{
+			case 0:
+				entitySetup1();
+				break;
+			case 1:
+				entitySetup2();
+				break;
+			case 2:
+				entitySetup3();
+				break;
+			default:
+				entitySetup1();
+				break;
+		}
+}
+
+void Game::entitySetup1()
+{
 	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-300.f, 100.f),
-		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
 	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(1000.f, -1100.f),
-		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.1f);
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
 
 	EntityFactory::getInstance().createString(sf::Vector2f(-1300.f, 900.f),
 		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
-	EntityFactory::getInstance().createString(sf::Vector2f(-300.f, 700.f),
+	EntityFactory::getInstance().createString(sf::Vector2f(2100.f, 700.f),
 		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
 
 	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(800.f, -700.f),
@@ -270,5 +298,45 @@ void Game::createEntities()
 	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1200.f, 0.f),
 		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
 	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(700.f, 800.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+}
+
+void Game::entitySetup2()
+{
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-800.f, 100.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(1000.f, -1400.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
+
+	EntityFactory::getInstance().createString(sf::Vector2f(-800.f, 1300.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+	EntityFactory::getInstance().createString(sf::Vector2f(1800.f, -1300.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(800.f, -1700.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1200.f, 0.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1700.f, 800.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+}
+
+void Game::entitySetup3()
+{
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(-1800.f, 600.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
+	EntityFactory::getInstance().createEmptyConsole(sf::Vector2f(1000.f, -1200.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Empty", 1.2f);
+
+	EntityFactory::getInstance().createString(sf::Vector2f(-800.f, 1300.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+	EntityFactory::getInstance().createString(sf::Vector2f(1800.f, -1300.f),
+		sf::Vector2f(3.f, 3.f), sf::Vector2f(1.f, 0.f), "String", 1.1f);
+
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(800.f, -1700.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(-1200.f, 300.f),
+		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
+	EntityFactory::getInstance().createFilledConsole(sf::Vector2f(1700.f, 800.f),
 		sf::Vector2f(1.f, 1.f), sf::Vector2f(1.f, 0.f), "Filled");
 }

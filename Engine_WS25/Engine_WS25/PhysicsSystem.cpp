@@ -32,7 +32,7 @@ void PhysicsSystem::update(float dT)
 	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
 		processMovement(i, dT);
 
-	for (unsigned int i = 0; i < m_view->m_entities.size(); i++)
+	for (unsigned int i = 0; i < m_view->m_entities.size()-1; i++)
 		processColissions(i, dT);
 }
 
@@ -90,6 +90,7 @@ void PhysicsSystem::notifyMissionManager(int sIndex1, int sIndex2)
 {
 	int id1 = m_statusPtr->m_components[sIndex1].m_entityID;
 	int id2 = m_statusPtr->m_components[sIndex2].m_entityID;
+
 	std::string tag1 = m_statusPtr->m_components[sIndex1].m_tag;
 	std::string tag2 = m_statusPtr->m_components[sIndex2].m_tag;
 

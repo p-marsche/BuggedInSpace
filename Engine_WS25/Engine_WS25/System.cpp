@@ -15,8 +15,9 @@ bool System::checkView()
 		areBlocksDirty = areBlocksDirty || flagPtr->second;
 	}
 
-	if (areBlocksDirty)
+	//if (areBlocksDirty)
 		m_view = Registry::getInstance().getView(m_requiredComponents);
+
 
 	return areBlocksDirty;
 }

@@ -18,7 +18,6 @@ void MissionManager::init(int threshold)
 	m_inventoryCounter = 0;
 	m_fillCounter = 0;
 	m_missionThreshold = threshold;
-	std::cout << m_missionThreshold << std::endl;
 }
 
 bool MissionManager::checkMission()
@@ -34,7 +33,10 @@ void MissionManager::processManifold(Manifold manifold)
 			handleEmptyConsole(manifold.m_entityID2);
 
 		else if (manifold.m_tag2 == "String")
+		{
+			std::cout << manifold.m_entityID2 << std::endl;
 			handleString(manifold.m_entityID2);
+		}
 	}
 	else if (manifold.m_tag2 == "Player")
 	{
